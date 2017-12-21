@@ -1,6 +1,5 @@
 // @flow
 import {sinon, sinonTest} from "./sinonWithTest";
-import chai from "chai";
 
 import documentUtil from "./documentUtil";
 
@@ -11,7 +10,7 @@ describe("documentUtil", function () {
 
         let element = documentUtil.getElementOrThrow({id, document});
 
-        chai.expect(element).to.equal(mockElement, "The expected element is not returned");
+        expect(element).toBe(mockElement);
     }));
 
     it("should throw TypeError if the element returned is not an Element", sinonTest(function () {
@@ -20,7 +19,11 @@ describe("documentUtil", function () {
 
         let actionThatShouldThrow = documentUtil.getElementOrThrow.bind(documentUtil, {id, document});
 
-        chai.expect(actionThatShouldThrow).to.throw(TypeError);
+
+        // Possibly a bug in Jest + Flow - this is the suggested syntax in Jest, but Flow is complaining
+        // Ref: https://facebook.github.io/jest/docs/en/expect.html#tothrowerror
+        //$FlowFixMe
+        expect(actionThatShouldThrow).toThrow(TypeError);
     }));
 
     function createMockDocument({withGetElementById}: { withGetElementById: ?Object }) {
