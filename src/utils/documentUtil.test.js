@@ -7,7 +7,7 @@ import documentUtil from "./documentUtil";
 describe("documentUtil", function () {
     it("should get element if the type is correct", sinonTest(function () {
         const id = "anId", mockElement = sinon.createStubInstance(Element);
-        const document = createMockDocument.call(this, id, mockElement);
+        const document = createMockDocument(id, mockElement);
 
         let element = documentUtil.getElementOrThrow({id, document});
 
@@ -16,7 +16,7 @@ describe("documentUtil", function () {
 
     function createMockDocument(id, mockElement) {
         const document = sinon.createStubInstance(Document);
-        document.getElementById = this.stub().withArgs(id).returns(mockElement);
+        document.getElementById = sinon.stub().withArgs(id).returns(mockElement);
         return document;
     }
 });
