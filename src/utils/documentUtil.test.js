@@ -11,7 +11,7 @@ describe("documentUtil", function () {
 
         let element = documentUtil.getElementOrThrow({id, document});
 
-        chai.expect(element).to.equal(mockElement, "The experted element is not returned");
+        chai.expect(element).to.equal(mockElement, "The expected element is not returned");
     }));
 
     it("should throw TypeError if the element returned is not an Element", sinonTest(function () {
