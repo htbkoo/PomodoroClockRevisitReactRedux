@@ -1,5 +1,5 @@
 // @flow
-import {sinon, sinonTest} from "./sinonWithTest";
+import {sinon, sinonTest} from "../testUtils/sinonWithTest";
 
 import documentUtil from "./documentUtil";
 
