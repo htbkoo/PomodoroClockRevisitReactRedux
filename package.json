@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "0.59.x",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-test-renderer": "^16.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,7 +19,6 @@
     "flow": "flow"
   },
   "devDependencies": {
-    "enzyme": "^3.2.0",
     "jest-enzyme": "^4.0.1",
     "sinon": "^4.1.3",
     "sinon-test": "^2.1.2"
