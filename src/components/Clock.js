@@ -6,9 +6,9 @@ type Props = {
     time: number
 }
 
-export default function Clock(props: Props): string {
-    return formatTime(props.time);
-}
+const Clock = (props: Props): React$Element<any> => (<div className="Clock">{formatTime(props.time)}</div>);
+
+export default Clock;
 
 Clock.defaultProps = {
     displayName: 'Clock'
