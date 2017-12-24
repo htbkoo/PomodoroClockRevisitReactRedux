@@ -9,7 +9,7 @@ class App extends Component<Props> {
     render() {
         return (
             <div className="App">
-                <Clock/>
+                <Clock time={0}/>
             </div>
         );
     }
