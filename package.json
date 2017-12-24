@@ -6,6 +6,7 @@
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "0.59.x",
+    "immutable": "^3.8.2",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
