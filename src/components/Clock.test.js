@@ -12,7 +12,7 @@ describe('Clock', function () {
         let clock = shallow(<Clock time={1000}/>);
 
         //    then
-        expect(clock).toIncludeText("00m 01s 000");
+        expect(clock).toHaveText("00m 01s 000");
     });
 
     it('should render props.time=0 as 00m 00s 000', function () {
@@ -21,6 +21,6 @@ describe('Clock', function () {
         let clock = shallow(<Clock time={0}/>);
 
         //    then
-        expect(clock).toIncludeText("00m 00s 000");
+        expect(clock).toHaveText("00m 00s 000");
     });
 });
