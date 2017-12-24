@@ -14,6 +14,6 @@ describe('App', function () {
         let app = shallow(<App/>);
 
         //    then
-        expect(app).toContainReact(<Clock/>);
+        expect(app.find(Clock)).toHaveLength(1);
     });
 });

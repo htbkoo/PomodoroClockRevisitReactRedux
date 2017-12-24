@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import moment from "moment";
 
 type Props = {
     time: number
@@ -14,6 +15,5 @@ Clock.defaultProps = {
 };
 
 function formatTime(time: number): string {
-    let ms = time % 1000, s = time / 1000;
-    return `00m 0${s}s 00${ms}`;
+    return moment(time).format(`mm[m] ss[s] SSS`);
 }
