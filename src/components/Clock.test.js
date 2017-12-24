@@ -1,0 +1,17 @@
+// @flow
+
+import React from "react";
+import {shallow} from "enzyme";
+
+import Clock from "./Clock";
+
+describe('Clock', function () {
+    it('should render props.time=1000 as 00m 01s 000', function () {
+        //    given
+        //    when
+        let clock = shallow(<Clock time={1000}/>);
+
+        //    then
+        expect(clock).toIncludeText("00m 01s 000");
+    });
+});
