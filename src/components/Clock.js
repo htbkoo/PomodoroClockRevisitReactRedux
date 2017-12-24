@@ -15,5 +15,5 @@ Clock.defaultProps = {
 
 function formatTime(time: number): string {
     let ms = time % 1000, s = time / 1000;
-    return `00m 0${s}s 000${ms}`;
+    return `00m 0${s}s 00${ms}`;
 }
