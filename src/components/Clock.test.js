@@ -14,4 +14,13 @@ describe('Clock', function () {
         //    then
         expect(clock).toIncludeText("00m 01s 000");
     });
+
+    it('should render props.time=0 as 00m 00s 000', function () {
+        //    given
+        //    when
+        let clock = shallow(<Clock time={0}/>);
+
+        //    then
+        expect(clock).toIncludeText("00m 00s 000");
+    });
 });
