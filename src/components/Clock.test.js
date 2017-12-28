@@ -3,9 +3,22 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import Clock from "./Clock";
+import {mapStateToProps , ClockComponent} from "./Clock";
 
 describe('Clock', function () {
+    describe("mapStateToProps", function () {
+        it("should mapStateToProps", function () {
+            //    given
+            const state = {session: {time: 1000}};
+
+            //    when
+            let props = mapStateToProps(state);
+
+            //    then
+            expect(props).toEqual({time: 1000});
+        });
+    });
+
     describe("ClockComponent", function () {
         [
             {time: 0, expectedText: "00m 00s 000"},
@@ -25,7 +38,7 @@ describe('Clock', function () {
             it(`should render props.time=${time} as ${expectedText}`, function () {
                 //    given
                 //    when
-                let clock = shallow(<Clock time={time}/>);
+                let clock = shallow(<ClockComponent time={time}/>);
 
                 //    then
                 expect(clock).toHaveText(expectedText);
