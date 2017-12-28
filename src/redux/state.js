@@ -1,4 +1,5 @@
 // @flow
+import {List} from "immutable"
 
 export type Session = {
     +time: number,
@@ -15,5 +16,5 @@ export type Clock = {
 export type State = {
     +isCounting: boolean,
     +session: Session,
-    +clocks: Array<Clock>
+    +clocks: List<Clock>
 };
