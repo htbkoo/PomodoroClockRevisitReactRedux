@@ -18,3 +18,16 @@ export type State = {
     +session: Session,
     +clocks: List<Clock>
 };
+
+export class StateBuilder {
+    build(): State {
+        return {
+            isCounting: false,
+            session:{
+                time: 0,
+                clockId: 0
+            },
+            clocks: List()
+        }
+    }
+}
