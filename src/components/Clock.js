@@ -8,8 +8,6 @@ type Props = {
 
 const ClockComponent = (props: Props): React$Element<any> => (<div id="clock-time" className="Clock">{formatTime(props.time)}</div>);
 
-export default ClockComponent;
-
 ClockComponent.defaultProps = {
     displayName: 'Clock'
 };
@@ -17,3 +15,5 @@ ClockComponent.defaultProps = {
 function formatTime(time: number): string {
     return moment(time).format(`mm[m] ss[s] SSS`);
 }
+
+export default ClockComponent;
