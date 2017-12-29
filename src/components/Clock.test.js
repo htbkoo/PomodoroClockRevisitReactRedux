@@ -4,18 +4,19 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import {mapStateToProps , ClockComponent} from "./Clock";
+import {StateBuilder} from "../redux/state";
 
 describe('Clock', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
-            const state = {session: {time: 1000}};
+            const state = new StateBuilder().withTime(1000).build();
 
             //    when
             let props = mapStateToProps(state);
 
             //    then
-            expect(props).toEqual({time: 1000});
+            expect(props).toEqual({clockId: 0, time: 1000});
         });
     });
 
