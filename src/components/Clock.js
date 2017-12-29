@@ -13,7 +13,8 @@ export const ClockComponent = (props: Props): React$Element<any> => (
     <div id="clock-time" className="Clock">{formatTime(props.time)}</div>
 );
 
-export default connect()(ClockComponent);
+// Untested
+export default connect(mapStateToProps)(ClockComponent);
 
 ClockComponent.defaultProps = {
     displayName: 'Clock'
