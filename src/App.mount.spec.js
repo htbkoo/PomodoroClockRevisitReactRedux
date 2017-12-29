@@ -5,13 +5,16 @@ import React from 'react';
 import {mount} from "enzyme";
 
 import App from './App';
+import {StateBuilder} from "./redux/state";
 
 describe('App - mount test', function () {
     const middlewares = [];
     const createMockStore = configureMockStore(middlewares);
-    const store = createMockStore({session: {time: 1500000}});
 
     it('renders without crashing', () => {
+        const state = new StateBuilder().build();
+        const store = createMockStore(state);
+
         mount(
             <Provider store={store}>
                 <App/>
@@ -21,6 +24,8 @@ describe('App - mount test', function () {
 
     it('should be able to display default time', function () {
         // given
+        const state = new StateBuilder().withTime(1500000).build();
+        const store = createMockStore(state);
         const DEFAULT_TIME = "25m 00s 000";
 
         // when
