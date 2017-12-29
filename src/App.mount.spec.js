@@ -12,8 +12,7 @@ describe('App - mount test', function () {
     const createMockStore = configureMockStore(middlewares);
 
     it('renders without crashing', () => {
-        const state = new StateBuilder().build();
-        const store = createMockStore(state);
+        const store = getDefaultStore();
 
         mount(
             <Provider store={store}>
@@ -26,7 +25,7 @@ describe('App - mount test', function () {
         // given
         const state = new StateBuilder().withTime(1500000).build();
         const store = createMockStore(state);
-        const DEFAULT_TIME = "25m 00s 000";
+        const expectedTime = "25m 00s 000";
 
         // when
         let app = mount(
@@ -37,6 +36,11 @@ describe('App - mount test', function () {
         let clockTime = app.find("#clock-time");
 
         // then
-        expect(clockTime).toIncludeText(DEFAULT_TIME)
+        expect(clockTime).toIncludeText(expectedTime)
     });
+
+    function getDefaultStore() {
+        const state = new StateBuilder().build();
+        return createMockStore(state);
+    }
 });
