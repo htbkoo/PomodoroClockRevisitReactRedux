@@ -12,5 +12,6 @@
     <orderEntry type="library" name="@types/jest" level="application" />
     <orderEntry type="library" name="@types/react" level="application" />
     <orderEntry type="library" name="@types/enzyme" level="application" />
+    <orderEntry type="library" name="@types/redux-mock-store" level="application" />
   </component>
 </module>
