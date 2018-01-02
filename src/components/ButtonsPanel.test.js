@@ -1,16 +1,15 @@
 // @flow
 
 import React from "react";
-import {shallow} from "enzyme";
 
-import {mapStateToProps, ButtonsPanelComponent} from "./ButtonsPanel";
+import {mapStateToProps} from "./ButtonsPanel";
 import {StateBuilder} from "../redux/state";
 
 describe('ButtonsPanel', function () {
     describe('mapStateToProps', function () {
         it('should map state to props', function () {
             //    given
-            const state = new StateBuilder();
+            const state = new StateBuilder().build();
 
             //    when
             let props = mapStateToProps(state);
@@ -18,8 +17,5 @@ describe('ButtonsPanel', function () {
             //    then
             expect(props).toEqual({isCounting: false})
         });
-    });
-
-    describe('ButtonsPanelComponent', function () {
     });
 });
