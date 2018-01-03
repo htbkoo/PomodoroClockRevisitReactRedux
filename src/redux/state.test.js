@@ -18,18 +18,31 @@ describe('state', function () {
                     clocks: List()
                 },
                 stateBuilder: new StateBuilder()
-            }, {
-            testName: "withTime",
-            expectedState: {
-                isCounting: false,
-                session: {
-                    time: 1000,
-                    clockId: 0
-                },
-                clocks: List()
             },
-            stateBuilder: new StateBuilder().withTime(1000)
-        }
+            {
+                testName: "withTime",
+                expectedState: {
+                    isCounting: false,
+                    session: {
+                        time: 1000,
+                        clockId: 0
+                    },
+                    clocks: List()
+                },
+                stateBuilder: new StateBuilder().withTime(1000)
+            },
+            {
+                testName: "withIsCounting",
+                expectedState: {
+                    isCounting: true,
+                    session: {
+                        time: 0,
+                        clockId: 0
+                    },
+                    clocks: List()
+                },
+                stateBuilder: new StateBuilder().withIsCounting(true)
+            }
         ].forEach(({testName, expectedState, stateBuilder}) =>
             it(`should be able to build state - testing ${testName}`, function () {
                 //    given
