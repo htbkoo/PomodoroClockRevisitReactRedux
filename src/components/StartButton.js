@@ -8,7 +8,7 @@ type Props = {
 
 export const mapStateToProps = (state: State): Props => ({});
 export const StartButtonComponent = (props: Props): React$Element<any> => (
-    <div id="start-button">
+    <div id="btn_start">
 
     </div>
 );
