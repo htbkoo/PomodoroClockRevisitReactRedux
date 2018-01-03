@@ -35,5 +35,17 @@ describe('ButtonsPanel', function () {
             expect(buttonsPanel.find(StartButton)).toHaveLength(1);
             expect(buttonsPanel.find(PauseButton)).toHaveLength(0);
         });
+
+        it('should have no <StartButton/> and a <PauseButton/> when props.isCounting=true', function () {
+            //    given
+            const isCounting = true;
+
+            //    when
+            let buttonsPanel = shallow(<ButtonsPanelComponent isCounting={isCounting}/>);
+
+            //    then
+            expect(buttonsPanel.find(StartButton)).toHaveLength(0);
+            expect(buttonsPanel.find(PauseButton)).toHaveLength(1);
+        });
     });
 });
