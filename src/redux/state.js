@@ -22,19 +22,27 @@ export type State = {
 export class StateBuilder {
     withTime: Function;
     getTime: Function;
+    withIsCounting: Function;
+    getIsCounting: Function;
 
     constructor() {
-        let _time = 0;
+        let _time = 0, _isCounting = false;
         this.withTime = time => {
             _time = time;
             return this;
         };
         this.getTime = () => _time;
+
+        this.withIsCounting = isCounting => {
+            _isCounting = isCounting;
+            return this;
+        };
+        this.getIsCounting = () => _isCounting;
     }
 
     build(): State {
         return {
-            isCounting: false,
+            isCounting: this.getIsCounting(),
             session: {
                 time: this.getTime(),
                 clockId: 0
