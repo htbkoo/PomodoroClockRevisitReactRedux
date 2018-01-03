@@ -6,24 +6,29 @@ import {List} from "immutable";
 
 describe('state', function () {
     describe("StateBuilder", function () {
-        it("should be able build state", function () {
-            //    given
-            const defaultState = {
-                isCounting: false,
-                session: {
-                    time: 0,
-                    clockId: 0
+        [
+            {
+                testName: "default for builder",
+                expectedState: {
+                    isCounting: false,
+                    session: {
+                        time: 0,
+                        clockId: 0
+                    },
+                    clocks: List()
                 },
-                clocks: List()
-            };
-            const stateBuilder = new StateBuilder();
+                stateBuilder: new StateBuilder()
+            }
+        ].forEach(({testName, expectedState, stateBuilder}) =>
+            it(`should be able to build state - testing ${testName}`, function () {
+                //    given
+                //    when
+                let state: State = stateBuilder.build();
 
-            //    when
-            let state: State = stateBuilder.build();
-
-            //    then
-            expect(state).toEqual(defaultState);
-        });
+                //    then
+                expect(state).toEqual(expectedState);
+            })
+        );
 
         it("should be able build state", function () {
             //    given
