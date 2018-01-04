@@ -1,10 +1,11 @@
 // @flow
 import React from "react";
 import {connect} from "react-redux";
+import {startCounting} from "../redux/actions";
 
-export const mapDispatchToProps = (dispatch: any) => ({
+export const mapDispatchToProps = (dispatch: Function) => ({
     onStartClick(): void {
-        dispatch();
+        dispatch(startCounting());
     }
 });
 export const StartButtonComponent = (): React$Element<any> => (

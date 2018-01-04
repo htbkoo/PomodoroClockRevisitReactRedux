@@ -3,6 +3,7 @@
 import React from "react";
 
 import StartButton, {mapDispatchToProps} from "./StartButton";
+import {startCounting} from "../redux/actions";
 
 describe('StartButton', function () {
     describe('mapDispatchToProps', function () {
@@ -15,7 +16,7 @@ describe('StartButton', function () {
             props.onStartClick();
 
             //    then
-            expect(spyDispatch).toHaveBeenCalledTimes(1);
+            expect(spyDispatch).toHaveBeenCalledWith(startCounting());
         });
     });
 });
