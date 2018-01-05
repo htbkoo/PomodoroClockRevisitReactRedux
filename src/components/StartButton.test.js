@@ -5,6 +5,7 @@ import {shallow} from "enzyme";
 
 import {StartButtonComponent, mapDispatchToProps} from "./StartButton";
 import {startCounting} from "../redux/actions";
+import {NO_OP} from "../utils/functionUtil";
 
 describe('StartButton', function () {
     describe('mapDispatchToProps', function () {
@@ -25,7 +26,7 @@ describe('StartButton', function () {
         it('should have a <button id="btn_start"/>', function () {
             //    given
             //    when
-            let startButton = shallow(<StartButtonComponent onStartClick={()=>{}}/>);
+            let startButton = shallow(<StartButtonComponent onStartClick={NO_OP}/>);
 
             //    then
             let button = startButton.find("button");
