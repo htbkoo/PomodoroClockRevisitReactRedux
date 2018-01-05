@@ -9,8 +9,8 @@ export const mapDispatchToProps = (dispatch: Function) => ({
     }
 });
 export const StartButtonComponent = (): React$Element<any> => (
-    <div id="btn_start">
-
+    <div>
+        <button id="btn_start"/>
     </div>
 );
 
