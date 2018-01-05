@@ -3,14 +3,18 @@ import React from "react";
 import {connect} from "react-redux";
 import {startCounting} from "../redux/actions";
 
-export const mapDispatchToProps = (dispatch: Function) => ({
+type Props = {
+    +onStartClick: Function
+}
+
+export const mapDispatchToProps = (dispatch: Function): Props => ({
     onStartClick(): void {
         dispatch(startCounting());
     }
 });
-export const StartButtonComponent = (): React$Element<any> => (
+export const StartButtonComponent = (props: Props): React$Element<any> => (
     <div>
-        <button id="btn_start"/>
+        <button id="btn_start" onClick={props.onStartClick}/>
     </div>
 );
 

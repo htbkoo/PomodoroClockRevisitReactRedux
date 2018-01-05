@@ -25,12 +25,25 @@ describe('StartButton', function () {
         it('should have a <button id="btn_start"/>', function () {
             //    given
             //    when
-            let startButton = shallow(<StartButtonComponent/>);
+            let startButton = shallow(<StartButtonComponent onStartClick={()=>{}}/>);
 
             //    then
             let button = startButton.find("button");
             expect(button).toHaveLength(1);
             expect(button).toMatchSelector("#btn_start");
+        });
+
+        it('should call props.onStartClick() when #btn_start.click()', function () {
+            //    given
+            const spyOnStartClick = jest.fn();
+            const startButton = shallow(<StartButtonComponent onStartClick={spyOnStartClick}/>);
+
+            //    when
+            let button = startButton.find("button");
+            button.simulate("click");
+
+            //    then
+            expect(spyOnStartClick).toHaveBeenCalledTimes(1);
         });
     });
 });
