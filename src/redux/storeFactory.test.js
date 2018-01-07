@@ -3,7 +3,6 @@ import {sinonTest} from "../testUtils/sinonWithTest";
 import React from "react";
 import * as redux from "redux";
 
-import * as storeFactory from "./storeFactory";
 import {AppWithStore} from "./storeFactory";
 import reducers from "./reducers";
 import {shallow} from "enzyme";
@@ -19,7 +18,7 @@ describe('storeFactory', function () {
             this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
             //    when
-            let store = storeFactory.newStore(reducers);
+            let store = newStore(reducers);
 
             //    then
             expect(store).toEqual(mockStore);
@@ -31,18 +30,12 @@ describe('storeFactory', function () {
             this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
             //    when
-            let store = storeFactory.newStore();
+            let store = newStore();
 
             //    then
             expect(store).toEqual(mockStore);
         }));
     });
-
-    /*
-            <Provider store={store}>
-                <App/>
-            </Provider>
-    * */
 
     describe("AppWithStore", function () {
         it("should create <AppWithStore/>", sinonTest(function () {
