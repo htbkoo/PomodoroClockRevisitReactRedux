@@ -7,6 +7,20 @@ import * as actions from "./actions";
 import reducers from "./reducers";
 
 describe('reducers', function () {
+    describe('initialState', function () {
+        it('should be able to handle initialState properly', function () {
+            //    given
+            const expectedNextState: State = new StateBuilder().build();
+            expect(expectedNextState.isCounting).toEqual(false);
+
+            //    when
+            // $FlowFixMe - purposely test the ability of reducers to handle undefined action and state case
+            let nextState: State = reducers(undefined, {});
+
+            //    then
+            expect(nextState).toEqual(expectedNextState);
+        });
+    });
     describe('startCounting', function () {
         it('should update state.isCounting to true by action.StartCountingAction', function () {
             //    given
