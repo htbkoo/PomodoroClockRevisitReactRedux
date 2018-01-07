@@ -9,7 +9,7 @@ import type {Action} from "./actions";
 import defaultReducers from "./reducers";
 import App from "../App";
 
-export function newStore(reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
+function newStore(reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     return createStore(reducers);
 }
 
@@ -19,4 +19,4 @@ const AppWithStore = (prop: { store: Store<State, Action> }) => (
     </Provider>
 );
 
-export {AppWithStore};
+export {newStore, AppWithStore};
