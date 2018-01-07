@@ -1,5 +1,4 @@
 // @flow
-import {List} from "immutable"
 
 export type Session = {
     +time: number,
@@ -16,7 +15,9 @@ export type Clock = {
 export type State = {
     +isCounting: boolean,
     +session: Session,
-    +clocks: List<Clock>
+    +clocks: Array<{
+        +clock: Clock
+    }>
 };
 
 export class StateBuilder {
@@ -47,7 +48,7 @@ export class StateBuilder {
                 time: this.getTime(),
                 clockId: 0
             },
-            clocks: List()
+            clocks: []
         }
     }
 }
