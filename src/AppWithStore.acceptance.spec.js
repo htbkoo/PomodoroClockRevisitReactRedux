@@ -5,6 +5,9 @@ import {mount} from "enzyme";
 import ButtonsPanel from "./components/ButtonsPanel";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
+import type {State} from "./redux/state";
+
+jest.useFakeTimers();
 
 describe('AppWithStore - acceptance test', function () {
     it('should be able to render with store without crash', function () {
@@ -37,7 +40,23 @@ describe('AppWithStore - acceptance test', function () {
         expect(getStartButton()).toHaveLength(0);
     });
 
-    xit('should, when state.isCounting=true, count down the time per 100ms', function () {
+    it('should, when state.isCounting=true, count down the time per 100ms', function () {
+        //    given
+        const store = newStore();
+        const app = mount(<AppWithStore store={store}/>);
+        const getState: () => State = store.getState;
+        expect(getState().isCounting).toEqual(false);
+
+        const startTime = getState().session.time;
+
+        //    when
+        app.find("#btn_start").simulate("click");
+        expect(getState().session.time).toEqual(startTime);
+
+        jest.runTimersToTime(100);
+
+        //    then
+        expect(getState().session.time).toEqual(startTime - 100);
     });
 
     xit('should, when state.isCounting=false, not count down the time', function () {

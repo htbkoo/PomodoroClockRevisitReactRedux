@@ -1,6 +1,6 @@
 // @flow
 
-import {mapStateToProps} from "./TimeTicker";
+import {mapStateToProps, mapDispatchToProps} from "./TimeTicker";
 import {StateBuilder} from "../redux/state";
 
 describe('TimeTicker', function () {
@@ -20,5 +20,19 @@ describe('TimeTicker', function () {
                 expect(props).toEqual({isCounting});
             })
         );
+    });
+
+    describe("mapDispatchToProps", function () {
+        it(`should mapDispatchToProps`, function () {
+            //    given
+            const spyDispatch = jest.fn();
+
+            //    when
+            let props = mapDispatchToProps(spyDispatch);
+            props.onTimeTick();
+
+            //    then
+            expect(spyDispatch).toHaveBeenCalledWith();
+        })
     });
 });
