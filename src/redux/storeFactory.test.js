@@ -3,7 +3,7 @@ import {sinonTest} from "../testUtils/sinonWithTest";
 import React from "react";
 import * as redux from "redux";
 
-import {AppWithStore, newStore} from "./storeFactory";
+import {newStore} from "./storeFactory";
 import reducers from "./reducers";
 
 describe('storeFactory', function () {
