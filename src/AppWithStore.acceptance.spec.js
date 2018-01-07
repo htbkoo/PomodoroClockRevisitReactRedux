@@ -6,7 +6,7 @@ import ButtonsPanel from "./components/ButtonsPanel";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 
-describe('App - acceptance test', function () {
+describe('AppWithStore - acceptance test', function () {
     it('should be able to render with store without crash', function () {
         // given
         const store = newStore();
