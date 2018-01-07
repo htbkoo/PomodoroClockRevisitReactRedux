@@ -5,16 +5,20 @@ import {StateBuilder} from "../redux/state";
 
 describe('TimeTicker', function () {
     describe("mapStateToProps", function () {
-        it("should mapStateToProps", function () {
-            //    given
-            const isCounting = true;
-            const state = new StateBuilder().withIsCounting(isCounting).build();
+        [
+            true,
+            false
+        ].forEach(isCounting =>
+            it(`should mapStateToProps which props={isCounting: ${String(isCounting)}}`, function () {
+                //    given
+                const state = new StateBuilder().withIsCounting(isCounting).build();
 
-            //    when
-            let props = mapStateToProps(state);
+                //    when
+                let props = mapStateToProps(state);
 
-            //    then
-            expect(props).toEqual({isCounting});
-        });
+                //    then
+                expect(props).toEqual({isCounting});
+            })
+        );
     });
 });
