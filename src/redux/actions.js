@@ -1,15 +1,22 @@
 // @flow
-export const StartCountingAction = {type: "StartCounting"};
-export type TickTimeAction = { type: "TickTime" };
+// Unfortunately flow type canNOT refer to variable, even if they are constants, so duplication is inevitable
+// Reference: https://stackoverflow.com/a/42202467
+export type StartCountingAction = { type: "StartCounting" };
+export type TickTimeAction = { type: "TickTime", lapse: number };
 
 export type Action =
-    | typeof StartCountingAction
+    | StartCountingAction
     | TickTimeAction;
 
-export function startCounting(): typeof StartCountingAction {
-    return StartCountingAction;
+export const actionTypes = {
+    StartCounting: "StartCounting",
+    TickTime: "TickTime"
+};
+
+export function startCounting(): StartCountingAction {
+    return {type: actionTypes.StartCounting};
 }
 
 export function tickTime(lapse: number): TickTimeAction {
-    return {type: "TickTime", lapse};
+    return {type: actionTypes.TickTime, lapse};
 }
