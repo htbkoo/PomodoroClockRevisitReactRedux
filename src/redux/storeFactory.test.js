@@ -1,14 +1,13 @@
 // @flow
 import {sinonTest} from "../testUtils/sinonWithTest";
+import {shallow} from "enzyme";
+import {Provider} from "react-redux";
 import React from "react";
 import * as redux from "redux";
 
-import {AppWithStore} from "./storeFactory";
+import {AppWithStore, newStore} from "./storeFactory";
 import reducers from "./reducers";
-import {shallow} from "enzyme";
-import {Provider} from "react-redux";
 import App from "../App";
-import {newStore} from "./storeFactory";
 
 describe('storeFactory', function () {
     describe("newStore", function () {
