@@ -1,7 +1,7 @@
 // @flow
 type StartCountingAction = { type: "StartCounting" };
 
-type Action =
+export type Action =
     | StartCountingAction;
 
 export function startCounting(): StartCountingAction {
