@@ -1,9 +1,9 @@
 // @flow
-type StartCountingAction = { type: "StartCounting" };
+export const StartCountingAction = { type: "StartCounting" };
 
 export type Action =
-    | StartCountingAction;
+    | typeof StartCountingAction;
 
-export function startCounting(): StartCountingAction {
-    return {type: "StartCounting"};
+export function startCounting(): typeof StartCountingAction {
+    return StartCountingAction;
 }
