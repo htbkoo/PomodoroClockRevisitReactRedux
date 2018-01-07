@@ -6,27 +6,29 @@ import * as storeFactory from "./storeFactory";
 import reducers from "./reducers";
 
 describe('storeFactory', function () {
-    it('should create a store', sinonTest(function () {
-        //    given
-        const mockStore = Symbol("mockStore");
-        this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
+    describe("newStore", function () {
+        it('should create a store', sinonTest(function () {
+            //    given
+            const mockStore = Symbol("mockStore");
+            this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
-        //    when
-        let store = storeFactory.newStore(reducers);
+            //    when
+            let store = storeFactory.newStore(reducers);
 
-        //    then
-        expect(store).toEqual(mockStore);
-    }));
+            //    then
+            expect(store).toEqual(mockStore);
+        }));
 
-    it('should create default store using default reducers if no reducers parameter is provided', sinonTest(function () {
-        //    given
-        const mockStore = Symbol("mockStore");
-        this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
+        it('should create default store using default reducers if no reducers parameter is provided', sinonTest(function () {
+            //    given
+            const mockStore = Symbol("mockStore");
+            this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
-        //    when
-        let store = storeFactory.newStore();
+            //    when
+            let store = storeFactory.newStore();
 
-        //    then
-        expect(store).toEqual(mockStore);
-    }));
+            //    then
+            expect(store).toEqual(mockStore);
+        }));
+    });
 });
