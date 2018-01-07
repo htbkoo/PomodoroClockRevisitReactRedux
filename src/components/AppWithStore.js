@@ -7,11 +7,20 @@ import App from "../App";
 import type {State} from "../redux/state";
 import type {Action} from "../redux/actions";
 import type {Store} from "redux";
+import {newStore} from "../redux/storeFactory";
 
-const AppWithStore = (prop: { store: Store<State, Action> }) => (
-    <Provider store={prop.store}>
+type Props = {
+    +store: Store<State, Action>
+};
+
+const AppWithStore = (props: Props) => (
+    <Provider store={props.store}>
         <App/>
     </Provider>
 );
+
+AppWithStore.defaultProps = {
+    store: newStore()
+};
 
 export default AppWithStore;

@@ -3,28 +3,55 @@
 import React from "react";
 import {shallow} from "enzyme";
 import {sinonTest} from "../testUtils/sinonWithTest";
-import * as redux from "redux";
 import {Provider} from "react-redux";
 
-import AppWithStore from "./AppWithStore";
-
 import App from "../App";
-import {newStore} from "../redux/storeFactory";
-import reducers from "../redux/reducers";
 import {getDefaultStore} from "../testUtils/mockStoreFactory";
 
 describe("AppWithStore", function () {
+    const mockStore = getDefaultStore();
+
+    beforeEach(function () {
+        jest.mock("../redux/storeFactory", () => ({
+            newStore() {
+                // if (arg === reducers) {
+                return mockStore;
+                // }
+            }
+        }));
+    });
+
+    afterEach(function () {
+        jest.unmock("../redux/storeFactory");
+    });
+
     it("should create <AppWithStore/>", function () {
         //    given
-        const mockStore = getDefaultStore();
+        const AppWithStore = require("./AppWithStore").default;
+
+        const store = getDefaultStore();
 
         //    when
-        let appWithStore = shallow(<AppWithStore store={mockStore}/>);
+        let appWithStore = shallow(<AppWithStore store={store}/>);
+
+        //    then
+        let provider = appWithStore.find(Provider);
+        expect(provider).toHaveLength(1);
+        expect(provider.prop("store")).toBe(store);
+        expect(provider.find(App)).toHaveLength(1);
+    });
+
+    it("should create <AppWithStore/> using default store if no store parameter is provided ", sinonTest(function () {
+        //    given
+        const AppWithStore = require("./AppWithStore").default;
+
+        //    when
+        let appWithStore = shallow(<AppWithStore/>);
 
         //    then
         let provider = appWithStore.find(Provider);
         expect(provider).toHaveLength(1);
         expect(provider.prop("store")).toBe(mockStore);
         expect(provider.find(App)).toHaveLength(1);
-    });
+    }));
 });
