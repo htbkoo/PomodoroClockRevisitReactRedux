@@ -2,7 +2,6 @@
 
 import React from "react";
 import {shallow} from "enzyme";
-import {sinonTest} from "../testUtils/sinonWithTest";
 import {Provider} from "react-redux";
 
 import App from "../App";
@@ -14,9 +13,7 @@ describe("AppWithStore", function () {
     beforeEach(function () {
         jest.mock("../redux/storeFactory", () => ({
             newStore() {
-                // if (arg === reducers) {
                 return mockStore;
-                // }
             }
         }));
     });
@@ -41,7 +38,7 @@ describe("AppWithStore", function () {
         expect(provider.find(App)).toHaveLength(1);
     });
 
-    it("should create <AppWithStore/> using default store if no store parameter is provided ", sinonTest(function () {
+    it("should create <AppWithStore/> using default store if no store parameter is provided ", function () {
         //    given
         const AppWithStore = require("./AppWithStore").default;
 
@@ -53,5 +50,5 @@ describe("AppWithStore", function () {
         expect(provider).toHaveLength(1);
         expect(provider.prop("store")).toBe(mockStore);
         expect(provider.find(App)).toHaveLength(1);
-    }));
+    });
 });
