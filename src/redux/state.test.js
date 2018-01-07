@@ -2,7 +2,6 @@
 
 import type {State} from "./state";
 import {StateBuilder} from "./state";
-import {List} from "immutable";
 
 describe('state', function () {
     describe("StateBuilder", function () {
@@ -15,7 +14,7 @@ describe('state', function () {
                         time: 0,
                         clockId: 0
                     },
-                    clocks: List()
+                    clocks: []
                 },
                 stateBuilder: new StateBuilder()
             },
@@ -27,7 +26,7 @@ describe('state', function () {
                         time: 1000,
                         clockId: 0
                     },
-                    clocks: List()
+                    clocks: []
                 },
                 stateBuilder: new StateBuilder().withTime(1000)
             },
@@ -39,7 +38,7 @@ describe('state', function () {
                         time: 0,
                         clockId: 0
                     },
-                    clocks: List()
+                    clocks: []
                 },
                 stateBuilder: new StateBuilder().withIsCounting(true)
             }
