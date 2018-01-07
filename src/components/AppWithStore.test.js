@@ -11,11 +11,12 @@ import AppWithStore from "./AppWithStore";
 import App from "../App";
 import {newStore} from "../redux/storeFactory";
 import reducers from "../redux/reducers";
+import {getDefaultStore} from "../testUtils/mockStoreFactory";
 
 describe("AppWithStore", function () {
     it("should create <AppWithStore/>", sinonTest(function () {
         //    given
-        const mockStore = Symbol("mockStore");
+        const mockStore = getDefaultStore();
         this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
         //    when
