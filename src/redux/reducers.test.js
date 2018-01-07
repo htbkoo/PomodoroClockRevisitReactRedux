@@ -20,7 +20,7 @@ describe('reducers', function () {
 
             //    then
             expect(nextState).toEqual(expectedNextState);
-            expect(state.isCounting).toEqual(false); // ensure immutablility
+            expect(state.isCounting).toEqual(false); // ensure immutability
         });
     });
 });
