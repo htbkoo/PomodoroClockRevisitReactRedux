@@ -2,13 +2,14 @@
 
 import React from "react";
 import {shallow} from "enzyme";
-
-import AppWithStore from "./AppWithStore";
-import App from "../App";
-import {newStore} from "../redux/storeFactory";
 import {sinonTest} from "../testUtils/sinonWithTest";
 import * as redux from "redux";
 import {Provider} from "react-redux";
+
+import AppWithStore from "./AppWithStore";
+
+import App from "../App";
+import {newStore} from "../redux/storeFactory";
 import reducers from "../redux/reducers";
 
 describe("AppWithStore", function () {
