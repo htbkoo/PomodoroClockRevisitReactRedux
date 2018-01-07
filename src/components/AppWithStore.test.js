@@ -25,7 +25,6 @@ describe("AppWithStore", function () {
     it("should create <AppWithStore/>", function () {
         //    given
         const AppWithStore = require("./AppWithStore").default;
-
         const store = getDefaultStore();
 
         //    when

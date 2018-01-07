@@ -13,6 +13,8 @@ type Props = {
     +store: Store<State, Action>
 };
 
+// It is being exported, but IntelliJ failed to notice this
+// noinspection JSUnusedGlobalSymbols
 const AppWithStore = (props: Props) => (
     <Provider store={props.store}>
         <App/>
@@ -23,4 +25,6 @@ AppWithStore.defaultProps = {
     store: newStore()
 };
 
+// It is in use by require(), but IntelliJ failed to spot this
+// noinspection JSUnusedGlobalSymbols
 export default AppWithStore;
