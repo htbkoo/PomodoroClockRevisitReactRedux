@@ -1,16 +1,13 @@
 // @flow
-import configureMockStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import React from 'react';
 import {mount} from "enzyme";
 
 import App from './App';
 import {StateBuilder} from "./redux/state";
+import {createMockStore, getDefaultStore} from "./testUtils/mockStoreFactory";
 
 describe('App - mount test', function () {
-    const middlewares = [];
-    const createMockStore = configureMockStore(middlewares);
-
     it('renders without crashing', () => {
         const store = getDefaultStore();
 
@@ -38,9 +35,4 @@ describe('App - mount test', function () {
         // then
         expect(clockTime).toIncludeText(expectedTime)
     });
-
-    function getDefaultStore() {
-        const state = new StateBuilder().build();
-        return createMockStore(state);
-    }
 });
