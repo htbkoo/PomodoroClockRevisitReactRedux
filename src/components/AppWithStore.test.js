@@ -14,18 +14,17 @@ import reducers from "../redux/reducers";
 import {getDefaultStore} from "../testUtils/mockStoreFactory";
 
 describe("AppWithStore", function () {
-    it("should create <AppWithStore/>", sinonTest(function () {
+    it("should create <AppWithStore/>", function () {
         //    given
         const mockStore = getDefaultStore();
-        this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
 
         //    when
-        let appWithStore = shallow(<AppWithStore store={newStore()}/>);
+        let appWithStore = shallow(<AppWithStore store={mockStore}/>);
 
         //    then
         let provider = appWithStore.find(Provider);
         expect(provider).toHaveLength(1);
         expect(provider.prop("store")).toBe(mockStore);
         expect(provider.find(App)).toHaveLength(1);
-    }));
+    });
 });
