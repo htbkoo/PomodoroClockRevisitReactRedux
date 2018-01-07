@@ -10,7 +10,7 @@ describe('reducers', function () {
     describe('initialState', function () {
         it('should be able to handle initialState properly', function () {
             //    given
-            const expectedNextState: State = new StateBuilder().build();
+            const expectedNextState: State = new StateBuilder().withTime(1500000).build();
             expect(expectedNextState.isCounting).toEqual(false);
 
             //    when
