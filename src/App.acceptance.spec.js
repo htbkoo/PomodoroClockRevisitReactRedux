@@ -7,6 +7,14 @@ import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 
 describe('App - acceptance test', function () {
+    it('should be able to render with store without crash', function () {
+        // given
+        const store = newStore();
+
+        // when
+        mount(<AppWithStore store={store}/>);
+    });
+
     it('should be able to click start then change state.isCounting to true', function () {
         // given
         const store = newStore();
