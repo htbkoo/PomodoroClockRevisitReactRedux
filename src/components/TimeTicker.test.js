@@ -34,6 +34,6 @@ describe('TimeTicker', function () {
 
             //    then
             expect(spyDispatch).toHaveBeenCalledWith(tickTime(someLapse));
-        })
+        });
     });
 });
