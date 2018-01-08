@@ -7,6 +7,7 @@ import App from "./App";
 
 import Clock from "./components/Clock";
 import ButtonsPanel from "./components/ButtonsPanel";
+import TimeTicker from "./components/TimeTicker";
 
 describe('App', function () {
     it('should have a <Clock/> when rendered', function () {
@@ -25,5 +26,14 @@ describe('App', function () {
 
         //    then
         expect(app.find(ButtonsPanel)).toHaveLength(1);
+    });
+
+    it('should have a <TimeTicker/> when rendered', function () {
+        //    given
+        //    when
+        let app = shallow(<App/>);
+
+        //    then
+        expect(app.find(TimeTicker)).toHaveLength(1);
     });
 });
