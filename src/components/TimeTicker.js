@@ -1,9 +1,10 @@
 // @flow
 import type {State} from "../redux/state";
+import {tickTime} from "../redux/actions";
 
-type Props = {
-    +isCounting: boolean,
-}
-
-export const mapStateToProps = (state: State): Props => ({isCounting: state.isCounting});
-export const mapDispatchToProps = (dispatch: Function) => ({});
+export const mapStateToProps = (state: State) => ({isCounting: state.isCounting});
+export const mapDispatchToProps = (dispatch: Function) => ({
+    onTimeTick(lapse: number) {
+        dispatch(tickTime(lapse));
+    }
+});
