@@ -26,12 +26,13 @@ export class TimeTickerComponent extends Component<Props> {
         const interval = this.props.interval;
         const intervalId = setInterval(this.props.onTimeTick.bind(this, interval), interval);
 
+        // Untested
         this.getIntervalId = () => intervalId;
     }
 
     // Untested
     componentWillUnmount() {
-
+        clearInterval(this.getIntervalId());
     }
 
     render() {
