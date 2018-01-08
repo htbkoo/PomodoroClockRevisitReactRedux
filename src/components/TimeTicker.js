@@ -24,7 +24,12 @@ export class TimeTickerComponent extends Component<Props> {
 
     componentDidMount() {
         const interval = this.props.interval;
-        const intervalId = setInterval(this.props.onTimeTick.bind(this, interval), interval);
+        // TODO: improve performance?
+        const intervalId = setInterval(() => {
+            if (this.props.isCounting) {
+                this.props.onTimeTick(interval)
+            }
+        }, interval);
 
         // Untested
         this.getIntervalId = () => intervalId;
