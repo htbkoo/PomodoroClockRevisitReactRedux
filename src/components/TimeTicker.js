@@ -7,10 +7,11 @@ import {tickTime} from "../redux/actions";
 
 type Props = {
     +isCounting: boolean,
+    +interval: number,
     +onTimeTick: (lapse: number) => void,
 }
 
-export const mapStateToProps = (state: State) => ({isCounting: state.isCounting});
+export const mapStateToProps = (state: State) => ({isCounting: state.isCounting, interval: state.interval});
 export const mapDispatchToProps = (dispatch: Function) => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));

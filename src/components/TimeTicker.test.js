@@ -12,13 +12,14 @@ describe('TimeTicker', function () {
         ].forEach(isCounting =>
             it(`should mapStateToProps which props={isCounting: ${String(isCounting)}}`, function () {
                 //    given
-                const state = new StateBuilder().withIsCounting(isCounting).build();
+                const interval = 100;
+                const state = new StateBuilder().withIsCounting(isCounting).withInterval(interval).build();
 
                 //    when
                 let props = mapStateToProps(state);
 
                 //    then
-                expect(props).toEqual({isCounting});
+                expect(props).toEqual({isCounting, interval});
             })
         );
     });
