@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Clock from "./components/Clock";
 import ButtonsPanel from "./components/ButtonsPanel";
+import TimeTicker from "./components/TimeTicker";
 
 const DEFAULT_TIME = 1500000;
 
@@ -13,6 +14,7 @@ class App extends Component<Props> {
         return (
             <div className="App">
                 <Clock time={DEFAULT_TIME}/>
+                <TimeTicker/>
                 <ButtonsPanel/>
             </div>
         );
