@@ -22,12 +22,12 @@ export type State = {
 };
 
 export class StateBuilder {
-    withTime: Function;
-    getTime: Function;
-    withIsCounting: Function;
-    getIsCounting: Function;
-    withInterval: (interval: number) => StateBuilder;
-    getInterval: () => number;
+    +withTime: Function;
+    +getTime: Function;
+    +withIsCounting: Function;
+    +getIsCounting: Function;
+    +withInterval: (interval: number) => StateBuilder;
+    +getInterval: () => number;
 
     constructor() {
         let _time = 0, _isCounting = false, _interval: number = 0;
