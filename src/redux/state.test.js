@@ -58,7 +58,7 @@ describe('state', function () {
                 },
                 stateBuilder: new StateBuilder().withInterval(100)
             }
-        ].forEach(({testName, expectedState, stateBuilder}) =>
+        ].forEach(({testName, expectedState, stateBuilder}: { testName: string, expectedState: State, stateBuilder: StateBuilder }) =>
             it(`should be able to build state - testing ${testName}`, function () {
                 //    given
                 //    when
