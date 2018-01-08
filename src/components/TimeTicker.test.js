@@ -2,6 +2,7 @@
 
 import {mapStateToProps, mapDispatchToProps} from "./TimeTicker";
 import {StateBuilder} from "../redux/state";
+import {tickTime} from "../redux/actions";
 
 describe('TimeTicker', function () {
     describe("mapStateToProps", function () {
@@ -25,14 +26,14 @@ describe('TimeTicker', function () {
     describe("mapDispatchToProps", function () {
         it(`should mapDispatchToProps`, function () {
             //    given
-            const spyDispatch = jest.fn();
+            const spyDispatch = jest.fn(), someLapse = 100;
 
             //    when
             let props = mapDispatchToProps(spyDispatch);
-            props.onTimeTick();
+            props.onTimeTick(someLapse);
 
             //    then
-            expect(spyDispatch).toHaveBeenCalledWith();
+            expect(spyDispatch).toHaveBeenCalledWith(tickTime(someLapse));
         })
     });
 });
