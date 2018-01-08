@@ -4,7 +4,7 @@ import {StateBuilder} from "./state";
 import type {Action} from "./actions";
 import {actionTypes} from "./actions";
 
-const initialState: State = new StateBuilder().withTime(1500000).build();
+const initialState: State = new StateBuilder().withTime(1500000).withInterval(100).build();
 
 export default function reducers(state: State = initialState, action: Action): State {
     switch (action.type) {
