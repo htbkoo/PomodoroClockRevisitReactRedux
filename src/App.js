@@ -5,15 +5,13 @@ import Clock from "./components/Clock";
 import ButtonsPanel from "./components/ButtonsPanel";
 import TimeTicker from "./components/TimeTicker";
 
-const DEFAULT_TIME = 1500000;
-
 type Props = {};
 
 class App extends Component<Props> {
     render() {
         return (
             <div className="App">
-                <Clock time={DEFAULT_TIME}/>
+                <Clock/>
                 <TimeTicker/>
                 <ButtonsPanel/>
             </div>
