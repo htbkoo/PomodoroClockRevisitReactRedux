@@ -14,6 +14,7 @@ export type Clock = {
 
 export type State = {
     +isCounting: boolean,
+    +interval: number,
     +session: Session,
     +clocks: Array<{
         +clock: Clock
@@ -25,9 +26,11 @@ export class StateBuilder {
     getTime: Function;
     withIsCounting: Function;
     getIsCounting: Function;
+    withInterval: (interval: number) => StateBuilder;
+    getInterval: () => number;
 
     constructor() {
-        let _time = 0, _isCounting = false;
+        let _time = 0, _isCounting = false, _interval: number = 0;
         this.withTime = time => {
             _time = time;
             return this;
@@ -39,10 +42,17 @@ export class StateBuilder {
             return this;
         };
         this.getIsCounting = () => _isCounting;
+
+        this.withInterval = interval => {
+            _interval = interval;
+            return this;
+        };
+        this.getInterval = () => _interval;
     }
 
     build(): State {
         return {
+            interval: this.getInterval(),
             isCounting: this.getIsCounting(),
             session: {
                 time: this.getTime(),
