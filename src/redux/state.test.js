@@ -9,6 +9,7 @@ describe('state', function () {
             {
                 testName: "default for builder",
                 expectedState: {
+                    interval: 0,
                     isCounting: false,
                     session: {
                         time: 0,
@@ -21,6 +22,7 @@ describe('state', function () {
             {
                 testName: "withTime",
                 expectedState: {
+                    interval: 0,
                     isCounting: false,
                     session: {
                         time: 1000,
@@ -33,6 +35,7 @@ describe('state', function () {
             {
                 testName: "withIsCounting",
                 expectedState: {
+                    interval: 0,
                     isCounting: true,
                     session: {
                         time: 0,
@@ -41,6 +44,19 @@ describe('state', function () {
                     clocks: []
                 },
                 stateBuilder: new StateBuilder().withIsCounting(true)
+            },
+            {
+                testName: "withInterval",
+                expectedState: {
+                    interval: 100,
+                    isCounting: false,
+                    session: {
+                        time: 0,
+                        clockId: 0
+                    },
+                    clocks: []
+                },
+                stateBuilder: new StateBuilder().withInterval(100)
             }
         ].forEach(({testName, expectedState, stateBuilder}) =>
             it(`should be able to build state - testing ${testName}`, function () {
