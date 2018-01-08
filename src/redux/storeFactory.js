@@ -1,5 +1,4 @@
 // @flow
-import React from "react";
 import type {Reducer, Store} from "redux";
 import {createStore} from "redux";
 
