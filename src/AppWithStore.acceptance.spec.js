@@ -23,8 +23,7 @@ describe('AppWithStore - acceptance test', function () {
         const app = mount(<AppWithStore store={store}/>);
         const getStartButton = () => app.find("#btn_start");
 
-        expect("isCounting" in store.getState()).toEqual(true);
-        expect(store.getState().isCounting).toEqual(false);
+        assertStoreState(store).toHave("isCounting", false);
         expect(getStartButton()).toHaveLength(1);
 
         // when
@@ -70,4 +69,15 @@ describe('AppWithStore - acceptance test', function () {
         //    then
         expect(getState().session.time).toEqual(startTime);
     });
+
+    function assertStoreState(store) {
+        const state = store.getState();
+
+        return {
+            toHave(key, value) {
+                expect(key in state).toEqual(true);
+                expect(state.isCounting).toEqual(value);
+            }
+        }
+    }
 });
