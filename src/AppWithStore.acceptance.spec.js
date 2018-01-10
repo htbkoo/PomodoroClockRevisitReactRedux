@@ -59,6 +59,19 @@ describe('AppWithStore - acceptance test', function () {
         expect(getState().session.time).toEqual(startTime - 100);
     });
 
-    xit('should, when state.isCounting=false, not count down the time', function () {
+    it('should, when state.isCounting=false, not count down the time', function () {
+        //    given
+        const store = newStore();
+        mount(<AppWithStore store={store}/>);
+        const getState: () => State = store.getState;
+        expect(getState().isCounting).toEqual(false);
+
+        const startTime = getState().session.time;
+
+        //    when
+        jest.runTimersToTime(100);
+
+        //    then
+        expect(getState().session.time).toEqual(startTime);
     });
 });
