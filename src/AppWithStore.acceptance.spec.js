@@ -2,7 +2,6 @@
 import React from 'react';
 import {mount} from "enzyme";
 
-import ButtonsPanel from "./components/ButtonsPanel";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
@@ -22,10 +21,7 @@ describe('AppWithStore - acceptance test', function () {
         // given
         const store = newStore();
         const app = mount(<AppWithStore store={store}/>);
-        const getButtonsPanel = () => app.find(ButtonsPanel);
         const getStartButton = () => app.find("#btn_start");
-
-        expect(getButtonsPanel()).toHaveLength(1);
 
         expect("isCounting" in store.getState()).toEqual(true);
         expect(store.getState().isCounting).toEqual(false);
