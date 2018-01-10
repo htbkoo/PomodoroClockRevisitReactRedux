@@ -39,7 +39,7 @@ describe('Clock', function () {
             it(`should render props.time=${time} as ${expectedText}`, function () {
                 //    given
                 //    when
-                let clock = shallow(<ClockComponent time={time}/>);
+                let clock = shallow(<ClockComponent time={time} clockId={0}/>);
 
                 //    then
                 expect(clock).toHaveText(expectedText);
