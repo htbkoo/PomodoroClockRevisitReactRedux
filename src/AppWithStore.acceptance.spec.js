@@ -20,8 +20,8 @@ describe('AppWithStore - acceptance test', function () {
     it('should be able to click start then change state.isCounting to true', function () {
         // given
         const {store, app} = getStoreAndApp();
-
         const getStartButton = () => app.find("#btn_start");
+
         expect(getStartButton()).toHaveLength(1);
 
         // when
