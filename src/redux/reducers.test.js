@@ -21,6 +21,7 @@ describe('reducers', function () {
             expect(nextState).toEqual(expectedNextState);
         });
     });
+
     describe('startCounting', function () {
         it('should update state.isCounting to true by action.StartCountingAction', function () {
             //    given
@@ -35,6 +36,24 @@ describe('reducers', function () {
             //    then
             expect(nextState).toEqual(expectedNextState);
             expect(state.isCounting).toEqual(false); // ensure immutability
+        });
+    });
+
+    describe('tickTIme', function () {
+        it('should subtract state.session.time by lapse when action.TickTimeAction(lapse)', function () {
+            //    given
+            const startTime = 1000, lapse = 100, expectedTIme = 900;
+            const action: Action = actions.tickTime(lapse);
+            const state: State = new StateBuilder().withTime(startTime).build();
+            const expectedNextState: State = new StateBuilder().withTime(expectedTIme).build();
+            expect(state.session.time).toEqual(startTime);
+
+            //    when
+            let nextState: State = reducers(state, action);
+
+            //    then
+            expect(nextState).toEqual(expectedNextState);
+            expect(state.session.time).toEqual(startTime); // ensure immutability
         });
     });
 });
