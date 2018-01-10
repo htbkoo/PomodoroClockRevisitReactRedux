@@ -19,9 +19,7 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should be able to click start then change state.isCounting to true', function () {
         // given
-        const store = newStore();
-        const app = mount(<AppWithStore store={store}/>);
-        assertStoreState(store).toHave("isCounting", false);
+        const {store, app} = getStoreAndApp();
 
         const getStartButton = () => app.find("#btn_start");
         expect(getStartButton()).toHaveLength(1);
@@ -36,9 +34,7 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should, when state.isCounting=true, count down the time per 100ms', function () {
         //    given
-        const store = newStore();
-        const app = mount(<AppWithStore store={store}/>);
-        assertStoreState(store).toHave("isCounting", false);
+        const {store, app} = getStoreAndApp();
 
         const getState: () => State = store.getState;
 
@@ -56,9 +52,7 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should, when state.isCounting=false, not count down the time', function () {
         //    given
-        const store = newStore();
-        mount(<AppWithStore store={store}/>);
-        assertStoreState(store).toHave("isCounting", false);
+        const {store} = getStoreAndApp();
 
         const getState: () => State = store.getState;
 
@@ -70,6 +64,13 @@ describe('AppWithStore - acceptance test', function () {
         //    then
         expect(getState().session.time).toEqual(startTime);
     });
+
+    function getStoreAndApp() {
+        const store = newStore();
+        const app = mount(<AppWithStore store={store}/>);
+        assertStoreState(store).toHave("isCounting", false);
+        return {store, app};
+    }
 
     function assertStoreState(store) {
         const state = store.getState();
