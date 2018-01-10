@@ -4,9 +4,7 @@ import moment from "moment";
 import {connect} from "react-redux";
 import type {Session, State} from "../redux/state";
 
-type Props = {
-    time: number
-}
+type Props = Session;
 
 export const mapStateToProps = (state: State): Session => state.session;
 export const ClockComponent = (props: Props): React$Element<any> => (
