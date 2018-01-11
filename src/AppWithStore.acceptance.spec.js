@@ -5,7 +5,6 @@ import jsonpath from "jsonpath";
 
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
-import type {State} from "./redux/state";
 
 jest.useFakeTimers();
 
@@ -40,6 +39,7 @@ describe('AppWithStore - acceptance test', function () {
 
         //    when
         app.find("#btn_start").simulate("click");
+        assertStoreState(store).toHave("isCounting", true);
         expect(getTime(store)).toEqual(startTime);
 
         jest.runTimersToTime(100);
@@ -50,17 +50,17 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should, when state.isCounting=false, not count down the time', function () {
         //    given
-        const {store} = getStoreAndApp();
+        const store = newStore();
+        mount(<AppWithStore store={store}/>);
 
-        const getState: () => State = store.getState;
-
-        const startTime = getState().session.time;
+        assertStoreState(store).toHave("isCounting", false);
+        const startTime = getTime(store);
 
         //    when
         jest.runTimersToTime(100);
 
         //    then
-        expect(getState().session.time).toEqual(startTime);
+        expect(getTime(store)).toEqual(startTime);
     });
 
     function getStoreAndApp() {
@@ -81,7 +81,7 @@ describe('AppWithStore - acceptance test', function () {
         }
     }
 
-    function getTime(store){
+    function getTime(store) {
         return jsonpath.value(store.getState(), "$.session.time");
     }
 });
