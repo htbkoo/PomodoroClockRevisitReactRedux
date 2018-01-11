@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import {connect} from "react-redux";
+import {pauseCounting} from "../redux/actions";
 
 type Props = {
 }
