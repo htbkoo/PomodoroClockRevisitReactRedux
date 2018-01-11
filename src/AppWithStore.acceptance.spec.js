@@ -62,6 +62,19 @@ describe('AppWithStore - acceptance test', function () {
         expect(getTime(store)).toEqual(startTime);
     });
 
+    it('should update state.isCounting to false when clicking pause button', function () {
+        //    given
+        const {store, app} = getStoreAndApp();
+        clickStartButton(app);
+        assertStoreState(store).toHave("isCounting", true);
+
+        //    when
+        app.find("#btn_pause").simulate("click");
+
+        //    then
+        assertStoreState(store).toHave("isCounting", false);
+    });
+
     function getStoreAndApp() {
         const store = newStore();
         const app = mount(<AppWithStore store={store}/>);

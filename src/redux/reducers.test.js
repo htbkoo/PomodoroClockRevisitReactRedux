@@ -39,6 +39,22 @@ describe('reducers', function () {
         });
     });
 
+    describe('pauseCounting', function () {
+        it('should update state.isCounting to false by action.PauseCountingAction', function () {
+            //    given
+            const action: Action = actions.pauseCounting();
+            const state: State = new StateBuilder().withIsCounting(true).build();
+            const expectedNextState: State = new StateBuilder().withIsCounting(false).build();
+
+            //    when
+            let nextState: State = reducers(state, action);
+
+            //    then
+            expect(nextState).toEqual(expectedNextState);
+            expect(state.isCounting).toEqual(true); // ensure immutability
+        });
+    });
+
     describe('tickTIme', function () {
         it('should subtract state.session.time by lapse when action.TickTimeAction(lapse)', function () {
             //    given
