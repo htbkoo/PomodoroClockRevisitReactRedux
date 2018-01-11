@@ -10,6 +10,8 @@ export default function reducers(state: State = initialState, action: Action): S
     switch (action.type) {
         case actionTypes.StartCounting:
             return Object.assign({}, state, {isCounting: true});
+        case actionTypes.PauseCounting:
+            return Object.assign({}, state, {isCounting: false});
         case actionTypes.TickTime:
             let time = state.session.time - action.lapse;
             let session = Object.assign({}, state.session, {time});
