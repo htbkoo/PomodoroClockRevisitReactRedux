@@ -32,5 +32,18 @@ describe('PauseButton', function () {
             let button = pauseButton.find("#btn_pause");
             expect(button).toHaveLength(1);
         });
+
+        it('should call props.onPauseClick() when #btn_pause.click()', function () {
+            //    given
+            const spyOnPauseClick = jest.fn();
+            const pauseButton = shallow(<PauseButtonComponent onPauseClick={spyOnPauseClick}/>);
+
+            //    when
+            let button = pauseButton.find("#btn_pause");
+            button.simulate("click");
+
+            //    then
+            expect(spyOnPauseClick).toHaveBeenCalledTimes(1);
+        });
     });
 });
