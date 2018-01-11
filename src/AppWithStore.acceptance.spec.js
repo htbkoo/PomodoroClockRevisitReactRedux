@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import {mount} from "enzyme";
+import jsonpath from "jsonpath";
 
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
@@ -35,19 +36,16 @@ describe('AppWithStore - acceptance test', function () {
     it('should, when state.isCounting=true, count down the time per 100ms', function () {
         //    given
         const {store, app} = getStoreAndApp();
-
-        const getState: () => State = store.getState;
-
-        const startTime = getState().session.time;
+        const startTime = getTime(store);
 
         //    when
         app.find("#btn_start").simulate("click");
-        expect(getState().session.time).toEqual(startTime);
+        expect(getTime(store)).toEqual(startTime);
 
         jest.runTimersToTime(100);
 
         //    then
-        expect(getState().session.time).toEqual(startTime - 100);
+        expect(getTime(store)).toEqual(startTime - 100);
     });
 
     it('should, when state.isCounting=false, not count down the time', function () {
@@ -81,5 +79,9 @@ describe('AppWithStore - acceptance test', function () {
                 expect(state.isCounting).toEqual(value);
             }
         }
+    }
+
+    function getTime(store){
+        return jsonpath.value(store.getState(), "$.session.time");
     }
 });
