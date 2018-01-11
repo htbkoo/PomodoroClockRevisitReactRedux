@@ -36,12 +36,11 @@ describe('AppWithStore - acceptance test', function () {
         //    given
         const {store, app} = getStoreAndApp();
         const startTime = getTime(store);
-
-        //    when
-        app.find("#btn_start").simulate("click");
+        clickStartButton(app);
         assertStoreState(store).toHave("isCounting", true);
         expect(getTime(store)).toEqual(startTime);
 
+        //    when
         jest.runTimersToTime(100);
 
         //    then
@@ -79,6 +78,10 @@ describe('AppWithStore - acceptance test', function () {
                 expect(state.isCounting).toEqual(value);
             }
         }
+    }
+
+    function clickStartButton(app) {
+        app.find("#btn_start").simulate("click");
     }
 
     function getTime(store) {
