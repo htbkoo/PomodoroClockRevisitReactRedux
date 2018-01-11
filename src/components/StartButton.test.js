@@ -29,9 +29,8 @@ describe('StartButton', function () {
             let startButton = shallow(<StartButtonComponent onStartClick={NO_OP}/>);
 
             //    then
-            let button = startButton.find("button");
+            let button = startButton.find("#btn_start");
             expect(button).toHaveLength(1);
-            expect(button).toMatchSelector("#btn_start");
         });
 
         it('should call props.onStartClick() when #btn_start.click()', function () {
@@ -40,7 +39,7 @@ describe('StartButton', function () {
             const startButton = shallow(<StartButtonComponent onStartClick={spyOnStartClick}/>);
 
             //    when
-            let button = startButton.find("button");
+            let button = startButton.find("#btn_start");
             button.simulate("click");
 
             //    then
