@@ -3,8 +3,10 @@ import React from 'react';
 import {mount} from "enzyme";
 import jsonpath from "jsonpath";
 
-import {newStore} from "./redux/storeFactory";
+import {newStore, newStoreWithPredefinedState} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
+import type {State} from "./redux/state";
+import {StateBuilder} from "./redux/state";
 
 jest.useFakeTimers();
 
@@ -64,7 +66,10 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should update state.isCounting to false when clicking pause button', function () {
         //    given
-        const {store, app} = getStoreAndAppThatIsCounting();
+        const state = new StateBuilder().withIsCounting(true).build();
+        const store = getStore(state);
+        const app = mount(<AppWithStore store={store}/>);
+        assertStoreState(store).toHave("isCounting", true);
 
         //    when
         app.find("#btn_pause").simulate("click");
@@ -74,17 +79,16 @@ describe('AppWithStore - acceptance test', function () {
     });
 
     function getStoreAndApp() {
-        const store = newStore();
+        const store = getStore();
         const app = mount(<AppWithStore store={store}/>);
         assertStoreState(store).toHave("isCounting", false);
         return {store, app};
     }
 
-    function getStoreAndAppThatIsCounting() {
-        const {store, app} = getStoreAndApp();
-        clickStartButton(app);
-        assertStoreState(store).toHave("isCounting", true);
-        return {store, app};
+    function getStore(predefinedState: ?State) {
+        return ((typeof predefinedState === "undefined") || (predefinedState === null))
+            ? newStore()
+            : newStoreWithPredefinedState(predefinedState);
     }
 
     function assertStoreState(store) {
