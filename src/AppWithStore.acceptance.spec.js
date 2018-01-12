@@ -11,6 +11,8 @@ import {StateBuilder} from "./redux/state";
 jest.useFakeTimers();
 
 describe('AppWithStore - acceptance test', function () {
+    const isCountingState = new StateBuilder().withIsCounting(true).build();
+
     it('should be able to render with store without crash', function () {
         // given
         const store = newStore();
@@ -66,8 +68,7 @@ describe('AppWithStore - acceptance test', function () {
 
     it('should update state.isCounting to false when clicking pause button', function () {
         //    given
-        const state = new StateBuilder().withIsCounting(true).build();
-        const store = getStore(state);
+        const store = getStore(isCountingState);
         const app = mount(<AppWithStore store={store}/>);
         assertStoreState(store).toHave("isCounting", true);
 
