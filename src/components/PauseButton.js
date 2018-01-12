@@ -14,7 +14,7 @@ export const mapDispatchToProps = (dispatch: Function): Props => ({
 });
 
 export const PauseButtonComponent = (props: Props): React$Element<any> => (
-    <div id="btn_pause" onClick={props.onPauseClick}/>
+    <div className="buttons-panel-buttons" id="btn_pause" onClick={props.onPauseClick}/>
 );
 
 // Untested
