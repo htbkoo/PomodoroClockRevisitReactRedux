@@ -15,7 +15,7 @@ export const mapDispatchToProps = (dispatch: Function): Props => ({
 export const StartButtonComponent = (props: Props): React$Element<any> => (
     <div>
         {/*<button id="btn_start" onClick={props.onStartClick}/>*/}
-        <div id="btn_start" onClick={props.onStartClick}/>
+        <div className="buttons-panel-buttons" id="btn_start" onClick={props.onStartClick}/>
     </div>
 );
 
