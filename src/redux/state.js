@@ -24,8 +24,8 @@ export type State = {
 export class StateBuilder {
     +withTime: (time: number) => StateBuilder;
     +getTime: () => number;
-    +withIsCounting: Function;
-    +getIsCounting: Function;
+    +withIsCounting: (isCounting: boolean) => StateBuilder;
+    +getIsCounting: () => boolean;
     +withInterval: (interval: number) => StateBuilder;
     +getInterval: () => number;
 
