@@ -10,4 +10,8 @@ function newStore(reducers: Reducer<State, Action> = defaultReducers): Store<Sta
     return createStore(reducers);
 }
 
-export {newStore};
+function newStoreWithPredefinedState(reducers: Reducer<State, Action> = defaultReducers, predefinedState: State): Store<State, Action> {
+    return createStore(reducers, predefinedState);
+}
+
+export {newStore, newStoreWithPredefinedState};
