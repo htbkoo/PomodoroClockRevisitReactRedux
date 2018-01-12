@@ -42,7 +42,7 @@ describe('storeFactory', function () {
             this.stub(redux, "createStore").withArgs(reducers, state).returns(mockStore);
 
             //    when
-            let store = newStoreWithPredefinedState(reducers, state);
+            let store = newStoreWithPredefinedState(state, reducers);
 
             //    then
             expect(store).toEqual(mockStore);
