@@ -1,13 +1,21 @@
 // @flow
 
 import * as objectUtil from "./objectUtil";
+import {NO_OP} from "./functionUtil";
 
 describe("objectUtil", function () {
     describe("isDefined", function () {
         [
-            {expected: true, value: "someString"}
+            {value: "someString", expected: true},
+            {value: 1, expected: true},
+            {value: {}, expected: true},
+            {value: [], expected: true},
+            {value: NO_OP, expected: true},
+            {value: true, expected: true},
+            {value: false, expected: true},
+            {value: undefined, expected: false}
         ].forEach(({expected, value}) =>
-            it(`should return ${expected.toString()} for "${value}"`, function () {
+            it(`should return ${expected.toString()} for "${String(value)}"`, function () {
                 //    given
                 //    when
                 let actual = objectUtil.isDefined(value);
