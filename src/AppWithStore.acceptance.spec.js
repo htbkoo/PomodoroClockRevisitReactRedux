@@ -6,12 +6,12 @@ import jsonpath from "jsonpath";
 import {newStore, newStoreWithPredefinedState} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
-import {StateBuilder} from "./redux/state";
+import {getInitialStateBuilder} from "./redux/reducers";
 
 jest.useFakeTimers();
 
 describe('AppWithStore - acceptance test', function () {
-    const isCountingState = new StateBuilder().withIsCounting(true).build();
+    const isCountingState = getInitialStateBuilder().withIsCounting(true).build();
 
     describe("features", function () {
         it('should be able to render with store without crash', function () {
@@ -39,11 +39,8 @@ describe('AppWithStore - acceptance test', function () {
 
         it('should, when state.isCounting=true, count down the time per 100ms', function () {
             //    given
-            const {store, app} = getStoreAndApp();
+            const {store} = getStoreAndApp(isCountingState);
             const startTime = getTime(store);
-            clickStartButton(app);
-            assertStoreState(store).toHave("isCounting", true);
-            expect(getTime(store)).toEqual(startTime);
 
             //    when
             jest.runTimersToTime(100);
@@ -124,10 +121,6 @@ describe('AppWithStore - acceptance test', function () {
                 expect(state.isCounting).toEqual(value);
             }
         }
-    }
-
-    function clickStartButton(app) {
-        app.find("#btn_start").simulate("click");
     }
 
     function getTime(store) {
