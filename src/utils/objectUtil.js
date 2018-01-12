@@ -1,5 +1,5 @@
 // @flow
 
-export function isDefined(value: any) {
-    return typeof value !== "undefined";
+export function isDefinedAndNotNull(value: any) {
+    return (typeof value !== "undefined") && (value !== null);
 }
