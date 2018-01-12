@@ -79,6 +79,32 @@ describe('AppWithStore - acceptance test', function () {
         assertStoreState(store).toHave("isCounting", false);
     });
 
+    describe("store state", function () {
+        it("should have state.isCounting=false for getStore()", function () {
+            // given
+            const store = getStore();
+            assertStoreState(store).toHave("isCounting", false);
+
+            // when
+            mount(<AppWithStore store={store}/>);
+
+            // then
+            assertStoreState(store).toHave("isCounting", false);
+        });
+
+        it("should have state.isCounting=true for getStore(isCountingState)", function () {
+            // given
+            const store = getStore(isCountingState);
+            assertStoreState(store).toHave("isCounting", true);
+
+            // when
+            mount(<AppWithStore store={store}/>);
+
+            // then
+            assertStoreState(store).toHave("isCounting", true);
+        });
+    });
+
     function getStoreAndApp() {
         const store = getStore();
         const app = mount(<AppWithStore store={store}/>);
