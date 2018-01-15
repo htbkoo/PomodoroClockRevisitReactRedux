@@ -10,6 +10,8 @@ export type Action =
     | PauseCountingAction
     | TickTimeAction;
 
+export type Dispatch = (Action) => void;
+
 export const actionTypes = {
     StartCounting: "StartCounting",
     PauseCounting: "PauseCounting",
