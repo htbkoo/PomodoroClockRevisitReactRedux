@@ -14,6 +14,7 @@ export const ClockComponent = (props: Props): React$Element<any> => (
 // Untested
 export default connect(mapStateToProps)(ClockComponent);
 
+// Untested
 ClockComponent.defaultProps = {
     displayName: 'Clock'
 };
