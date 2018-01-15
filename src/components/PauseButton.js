@@ -1,21 +1,11 @@
 // @flow
+
 import React from "react";
-import {connect} from "react-redux";
 import {pauseCounting} from "../redux/actions";
 
-type Props = {
-    onPauseClick: () => void
-}
-
-export const mapDispatchToProps = (dispatch: Function): Props => ({
-    onPauseClick() {
-        dispatch(pauseCounting());
-    }
-});
-
-export const PauseButtonComponent = (props: Props): React$Element<any> => (
-    <div className="buttons-panel-buttons" id="btn_pause" onClick={props.onPauseClick}/>
-);
+import SimpleButton from "./highOrderComponents/SimpleButton";
 
 // Untested
-export default connect(null, mapDispatchToProps)(PauseButtonComponent);
+export default (): React$Element<any> => (
+    <SimpleButton action={pauseCounting()} buttonId="btn_pause"/>
+);
