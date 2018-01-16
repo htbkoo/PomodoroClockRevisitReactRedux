@@ -2,11 +2,13 @@
 import React from "react";
 import moment from "moment";
 import {connect} from "react-redux";
-import type {Session, State} from "../redux/state";
+import type {State} from "../redux/state";
 
-type Props = Session;
+type Props = {
+    time: number
+};
 
-export const mapStateToProps = (state: State): Session => state.session;
+export const mapStateToProps = (state: State): Props => ({time: state.session.time});
 export const ClockComponent = (props: Props): React$Element<any> => (
     <div id="clock-time" className="Clock">{formatTime(props.time)}</div>
 );
