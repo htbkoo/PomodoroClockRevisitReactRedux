@@ -132,7 +132,7 @@ describe('AppWithStore - acceptance test', function () {
     function assertStoreState(store) {
         const state = store.getState();
         const andHave = {};
-        const assertion = {
+        const assertionObj = {
             have(key, value) {
                 let path = `$.${key}`;
                 expect(jsonpath.query(state, path, 1).length).toBeGreaterThanOrEqual(1);
@@ -140,8 +140,8 @@ describe('AppWithStore - acceptance test', function () {
                 return andHave;
             }
         };
-        andHave.and = assertion;
-        return {to: assertion};
+        andHave.and = assertionObj;
+        return {to: assertionObj};
     }
 
     function getTime(store) {
