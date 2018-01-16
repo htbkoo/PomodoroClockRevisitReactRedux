@@ -2,6 +2,7 @@
 
 export type Session = {
     +time: number,
+    +originalTime: number,
     +clockId: number
 };
 
