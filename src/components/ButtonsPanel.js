@@ -12,10 +12,11 @@ type Props = {
 
 export const mapStateToProps = (state: State): Props => ({isCounting: state.isCounting});
 export const ButtonsPanelComponent = (props: Props): React$Element<any> => {
-    let button = props.isCounting ? <div><PauseButton/><StopButton/></div> : <StartButton/>;
+    let startOrPauseButton = props.isCounting ? <PauseButton/> : <StartButton/>;
     return (
         <div id="buttons-panel">
-            {button}
+            {startOrPauseButton}
+            <StopButton/>
         </div>
     )
 };

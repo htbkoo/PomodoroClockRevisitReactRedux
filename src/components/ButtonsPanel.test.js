@@ -25,7 +25,7 @@ describe('ButtonsPanel', function () {
     });
 
     describe('ButtonsPanelComponent', function () {
-        it('should have a <StartButton/> and no <PauseButton/> nor <StopButton/> when props.isCounting=false', function () {
+        it('should have a <StartButton/> and a <StopButton/>  but no <PauseButton/> when props.isCounting=false', function () {
             //    given
             const isCounting = false;
 
@@ -35,7 +35,7 @@ describe('ButtonsPanel', function () {
             //    then
             expect(buttonsPanel.find(StartButton)).toHaveLength(1);
             expect(buttonsPanel.find(PauseButton)).toHaveLength(0);
-            expect(buttonsPanel.find(StopButton)).toHaveLength(0);
+            expect(buttonsPanel.find(StopButton)).toHaveLength(1);
         });
 
         it('should have no <StartButton/> but a <PauseButton/> and a <StopButton/> when props.isCounting=true', function () {
