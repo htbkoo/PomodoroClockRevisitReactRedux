@@ -11,7 +11,7 @@ type Props = {
     +onTimeTick: (lapse: number) => void,
 }
 
-export const mapStateToProps = (state: State) => ({isCounting: state.isCounting, interval: state.interval});
+export const mapStateToProps = (state: State) => ({isCounting: state.session.isCounting, interval: state.interval});
 export const mapDispatchToProps = (dispatch: Function) => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));

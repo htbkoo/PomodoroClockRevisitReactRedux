@@ -11,14 +11,21 @@ export {getInitialStateBuilder};
 
 export default function reducers(state: State = initialState, action: Action): State {
     switch (action.type) {
-        case actionTypes.StartCounting:
-            return Object.assign({}, state, {isCounting: true});
-        case actionTypes.PauseCounting:
-            return Object.assign({}, state, {isCounting: false});
+        case actionTypes.StartCounting:{
+            let isCounting = true;
+            let session = Object.assign({}, state.session, {isCounting});
+            return Object.assign({}, state, {session});
+        }
+        case actionTypes.PauseCounting: {
+            let isCounting = false;
+            let session = Object.assign({}, state.session, {isCounting});
+            return Object.assign({}, state, {session});
+        }
         case actionTypes.StopCounting: {
             let time = state.session.originalTime;
-            let session = Object.assign({}, state.session, {time});
-            return Object.assign({}, state, {isCounting: false, session});
+            let isCounting= false;
+            let session = Object.assign({}, state.session, {time, isCounting});
+            return Object.assign({}, state, {session});
         }
         case actionTypes.TickTime: {
             let time = state.session.time - action.lapse;

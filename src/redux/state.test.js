@@ -10,8 +10,8 @@ describe('state', function () {
                 testName: "default for builder",
                 expectedState: {
                     interval: 0,
-                    isCounting: false,
                     session: {
+                        isCounting: false,
                         time: 0,
                         originalTime: 0,
                         clockId: 0
@@ -24,8 +24,8 @@ describe('state', function () {
                 testName: "withTime",
                 expectedState: {
                     interval: 0,
-                    isCounting: false,
                     session: {
+                        isCounting: false,
                         time: 1000,
                         originalTime: 0,
                         clockId: 0
@@ -38,8 +38,8 @@ describe('state', function () {
                 testName: "withIsCounting",
                 expectedState: {
                     interval: 0,
-                    isCounting: true,
                     session: {
+                        isCounting: true,
                         time: 0,
                         originalTime: 0,
                         clockId: 0
@@ -52,8 +52,8 @@ describe('state', function () {
                 testName: "withInterval",
                 expectedState: {
                     interval: 100,
-                    isCounting: false,
                     session: {
+                        isCounting: false,
                         time: 0,
                         originalTime: 0,
                         clockId: 0
@@ -66,8 +66,8 @@ describe('state', function () {
                 testName: "withOriginalTime",
                 expectedState: {
                     interval: 0,
-                    isCounting: false,
                     session: {
+                        isCounting: false,
                         time: 0,
                         originalTime: 100,
                         clockId: 0
