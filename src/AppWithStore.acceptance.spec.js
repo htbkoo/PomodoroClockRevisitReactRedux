@@ -46,7 +46,7 @@ describe('AppWithStore - acceptance test', function () {
             jest.runTimersToTime(100);
 
             //    then
-            expect(getTime(store)).toEqual(startTime - 100);
+            assertStoreState(store).toHave("session.time", startTime - 100);
         });
 
         it('should, when state.isCounting=false, not count down the time', function () {
@@ -59,7 +59,7 @@ describe('AppWithStore - acceptance test', function () {
             jest.runTimersToTime(100);
 
             //    then
-            expect(getTime(store)).toEqual(startTime);
+            assertStoreState(store).toHave("session.time", startTime);
         });
 
         it('should update state.isCounting to false when clicking pause button', function () {
@@ -79,14 +79,14 @@ describe('AppWithStore - acceptance test', function () {
             const interval = store.getState().interval;
             const startTime = getTime(store);
             jest.runTimersToTime(interval);
-            expect(getTime(store)).toEqual(startTime - interval);
+            assertStoreState(store).toHave("session.time", startTime - interval);
 
             //    when
             app.find("#btn_stop").simulate("click");
 
             //    then
             assertStoreState(store).toHave("session.isCounting", false);
-            expect(getTime(store)).toEqual(startTime);
+            assertStoreState(store).toHave("session.time", startTime);
         });
     });
 
