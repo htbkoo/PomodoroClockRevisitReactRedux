@@ -33,7 +33,7 @@ describe('AppWithStore - acceptance test', function () {
             getStartButton().simulate("click");
 
             // then
-            assertStoreState(store).toHave("isCounting", true);
+            assertStoreState(store).toHave("session.isCounting", true);
             expect(getStartButton()).toHaveLength(0);
         });
 
@@ -70,7 +70,7 @@ describe('AppWithStore - acceptance test', function () {
             app.find("#btn_pause").simulate("click");
 
             //    then
-            assertStoreState(store).toHave("isCounting", false);
+            assertStoreState(store).toHave("session.isCounting", false);
         });
 
         it('should update state.isCounting to false and reset time when clicking stop button', function () {
@@ -85,7 +85,7 @@ describe('AppWithStore - acceptance test', function () {
             app.find("#btn_stop").simulate("click");
 
             //    then
-            assertStoreState(store).toHave("isCounting", false);
+            assertStoreState(store).toHave("session.isCounting", false);
             expect(getTime(store)).toEqual(startTime);
         });
     });
@@ -94,25 +94,25 @@ describe('AppWithStore - acceptance test', function () {
         it("should have state.isCounting=false for getStore()", function () {
             // given
             const store = getStore();
-            assertStoreState(store).toHave("isCounting", false);
+            assertStoreState(store).toHave("session.isCounting", false);
 
             // when
             mount(<AppWithStore store={store}/>);
 
             // then
-            assertStoreState(store).toHave("isCounting", false);
+            assertStoreState(store).toHave("session.isCounting", false);
         });
 
         it("should have state.isCounting=true for getStore(isCountingState)", function () {
             // given
             const store = getStore(isCountingState);
-            assertStoreState(store).toHave("isCounting", true);
+            assertStoreState(store).toHave("session.isCounting", true);
 
             // when
             mount(<AppWithStore store={store}/>);
 
             // then
-            assertStoreState(store).toHave("isCounting", true);
+            assertStoreState(store).toHave("session.isCounting", true);
         });
     });
 
@@ -133,9 +133,9 @@ describe('AppWithStore - acceptance test', function () {
 
         return {
             toHave(key, value) {
-                // TODO: to improve
-                // expect(key in state).toEqual(true);
-                expect(state.session.isCounting).toEqual(value);
+                let path = `$.${key}`;
+                expect(jsonpath.query(state, path, 1).length).toBeGreaterThanOrEqual(1);
+                expect(jsonpath.value(state, path)).toEqual(value);
             }
         }
     }
