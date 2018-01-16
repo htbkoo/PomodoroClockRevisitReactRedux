@@ -85,8 +85,9 @@ describe('AppWithStore - acceptance test', function () {
             app.find("#btn_stop").simulate("click");
 
             //    then
-            assertStoreState(store).to.have("session.isCounting", false);
-            assertStoreState(store).to.have("session.time", startTime);
+            assertStoreState(store)
+                .to.have("session.isCounting", false)
+                .and.have("session.time", startTime);
         });
     });
 
@@ -130,17 +131,17 @@ describe('AppWithStore - acceptance test', function () {
 
     function assertStoreState(store) {
         const state = store.getState();
-        const to = {
+        const andHave = {};
+        const assertion = {
             have(key, value) {
                 let path = `$.${key}`;
                 expect(jsonpath.query(state, path, 1).length).toBeGreaterThanOrEqual(1);
                 expect(jsonpath.value(state, path)).toEqual(value);
+                return andHave;
             }
         };
-
-        return {
-            to
-        }
+        andHave.and = assertion;
+        return {to: assertion};
     }
 
     function getTime(store) {
