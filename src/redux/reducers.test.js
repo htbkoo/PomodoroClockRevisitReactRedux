@@ -7,7 +7,7 @@ import * as actions from "./actions";
 import reducers, {getInitialStateBuilder} from "./reducers";
 
 describe('reducers', function () {
-    const expectedInitialState: State = new StateBuilder().withTime(1500000).withInterval(100).build();
+    const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
 
     describe('initialState', function () {
         it('should be able to handle initialState properly', function () {
@@ -59,6 +59,22 @@ describe('reducers', function () {
             const action: Action = actions.pauseCounting();
             const state: State = new StateBuilder().withIsCounting(true).build();
             const expectedNextState: State = new StateBuilder().withIsCounting(false).build();
+
+            //    when
+            let nextState: State = reducers(state, action);
+
+            //    then
+            expect(nextState).toEqual(expectedNextState);
+            expect(state.isCounting).toEqual(true); // ensure immutability
+        });
+    });
+
+    describe('stopCounting', function () {
+        it('should update state.isCounting to false and reset state.session.time by action.StopCountingAction', function () {
+            //    given
+            const action: Action = actions.stopCounting();
+            const state: State = new StateBuilder().withIsCounting(true).withOriginalTime(1000).build();
+            const expectedNextState: State = new StateBuilder().withIsCounting(false).withOriginalTime(1000).withTime(1000).build();
 
             //    when
             let nextState: State = reducers(state, action);

@@ -4,7 +4,7 @@ import {StateBuilder} from "./state";
 import type {Action} from "./actions";
 import {actionTypes} from "./actions";
 
-const getInitialStateBuilder = (): StateBuilder => new StateBuilder().withTime(1500000).withInterval(100);
+const getInitialStateBuilder = (): StateBuilder => new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100);
 const initialState: State = getInitialStateBuilder().build();
 
 export {getInitialStateBuilder};
@@ -15,10 +15,16 @@ export default function reducers(state: State = initialState, action: Action): S
             return Object.assign({}, state, {isCounting: true});
         case actionTypes.PauseCounting:
             return Object.assign({}, state, {isCounting: false});
-        case actionTypes.TickTime:
+        case actionTypes.StopCounting: {
+            let time = state.session.originalTime;
+            let session = Object.assign({}, state.session, {time});
+            return Object.assign({}, state, {isCounting: false, session});
+        }
+        case actionTypes.TickTime: {
             let time = state.session.time - action.lapse;
             let session = Object.assign({}, state.session, {time});
             return Object.assign({}, state, {session});
+        }
         default:
             return state;
     }

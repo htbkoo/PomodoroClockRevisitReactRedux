@@ -72,6 +72,22 @@ describe('AppWithStore - acceptance test', function () {
             //    then
             assertStoreState(store).toHave("isCounting", false);
         });
+
+        it('should update state.isCounting to false and reset time when clicking stop button', function () {
+            //    given
+            const {store, app} = getStoreAndApp(isCountingState);
+            const interval = store.getState().interval;
+            const startTime = getTime(store);
+            jest.runTimersToTime(interval);
+            expect(getTime(store)).toEqual(startTime - interval);
+
+            //    when
+            app.find("#btn_stop").simulate("click");
+
+            //    then
+            assertStoreState(store).toHave("isCounting", false);
+            expect(getTime(store)).toEqual(startTime);
+        });
     });
 
     describe("store state", function () {
