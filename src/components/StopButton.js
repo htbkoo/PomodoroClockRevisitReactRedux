@@ -7,4 +7,3 @@ import SimpleButton from "./highOrderComponents/SimpleButton";
 export default (): React$Element<any> => (
     <SimpleButton action={stopCounting()} buttonId="btn_stop"/>
 );
-
