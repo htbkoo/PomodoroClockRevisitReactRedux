@@ -10,7 +10,7 @@ type Props = {
     +isCounting: boolean
 }
 
-export const mapStateToProps = (state: State): Props => ({isCounting: state.isCounting});
+export const mapStateToProps = (state: State): Props => ({isCounting: state.session.isCounting});
 export const ButtonsPanelComponent = (props: Props): React$Element<any> => {
     let startOrPauseButton = props.isCounting ? <PauseButton/> : <StartButton/>;
     return (

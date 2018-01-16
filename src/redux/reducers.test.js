@@ -12,7 +12,7 @@ describe('reducers', function () {
     describe('initialState', function () {
         it('should be able to handle initialState properly', function () {
             //    given
-            expect(expectedInitialState.isCounting).toEqual(false);
+            expect(expectedInitialState.session.isCounting).toEqual(false);
 
             //    when
             // $FlowFixMe - purposely test the ability of reducers to handle undefined action and state case
@@ -37,24 +37,24 @@ describe('reducers', function () {
     });
 
     describe('startCounting', function () {
-        it('should update state.isCounting to true by action.StartCountingAction', function () {
+        it('should update state.session.isCounting to true by action.StartCountingAction', function () {
             //    given
             const action: Action = actions.startCounting();
             const state: State = new StateBuilder().build();
             const expectedNextState: State = new StateBuilder().withIsCounting(true).build();
-            expect(state.isCounting).toEqual(false);
+            expect(state.session.isCounting).toEqual(false);
 
             //    when
             let nextState: State = reducers(state, action);
 
             //    then
             expect(nextState).toEqual(expectedNextState);
-            expect(state.isCounting).toEqual(false); // ensure immutability
+            expect(state.session.isCounting).toEqual(false); // ensure immutability
         });
     });
 
     describe('pauseCounting', function () {
-        it('should update state.isCounting to false by action.PauseCountingAction', function () {
+        it('should update state.session.isCounting to false by action.PauseCountingAction', function () {
             //    given
             const action: Action = actions.pauseCounting();
             const state: State = new StateBuilder().withIsCounting(true).build();
@@ -65,12 +65,12 @@ describe('reducers', function () {
 
             //    then
             expect(nextState).toEqual(expectedNextState);
-            expect(state.isCounting).toEqual(true); // ensure immutability
+            expect(state.session.isCounting).toEqual(true); // ensure immutability
         });
     });
 
     describe('stopCounting', function () {
-        it('should update state.isCounting to false and reset state.session.time by action.StopCountingAction', function () {
+        it('should update state.session.isCounting to false and reset state.session.time by action.StopCountingAction', function () {
             //    given
             const action: Action = actions.stopCounting();
             const state: State = new StateBuilder().withIsCounting(true).withOriginalTime(1000).build();
@@ -81,7 +81,7 @@ describe('reducers', function () {
 
             //    then
             expect(nextState).toEqual(expectedNextState);
-            expect(state.isCounting).toEqual(true); // ensure immutability
+            expect(state.session.isCounting).toEqual(true); // ensure immutability
         });
     });
 

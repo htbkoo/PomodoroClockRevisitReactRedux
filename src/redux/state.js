@@ -3,7 +3,8 @@
 export type Session = {
     +time: number,
     +originalTime: number,
-    +clockId: number
+    +clockId: number,
+    +isCounting: boolean,
 };
 
 export type Clock = {
@@ -14,7 +15,6 @@ export type Clock = {
 };
 
 export type State = {
-    +isCounting: boolean,
     +interval: number,
     +session: Session,
     +clocks: Array<{
@@ -62,8 +62,8 @@ export class StateBuilder {
     build(): State {
         return {
             interval: this.getInterval(),
-            isCounting: this.getIsCounting(),
             session: {
+                isCounting: this.getIsCounting(),
                 time: this.getTime(),
                 originalTime: this.getOriginalTime(),
                 clockId: 0
