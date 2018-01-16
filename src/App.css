@@ -40,6 +40,10 @@
     flex-direction: row;
 }
 
+#clock-time{
+    font-size: xx-large;
+}
+
 .buttons-panel-buttons {
     background-repeat: no-repeat;
     background-position: left;
