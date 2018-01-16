@@ -33,7 +33,7 @@ describe('AppWithStore - acceptance test', function () {
             getStartButton().simulate("click");
 
             // then
-            assertStoreState(store).toHave("session.isCounting", true);
+            assertStoreState(store).to.have("session.isCounting", true);
             expect(getStartButton()).toHaveLength(0);
         });
 
@@ -46,7 +46,7 @@ describe('AppWithStore - acceptance test', function () {
             jest.runTimersToTime(100);
 
             //    then
-            assertStoreState(store).toHave("session.time", startTime - 100);
+            assertStoreState(store).to.have("session.time", startTime - 100);
         });
 
         it('should, when state.isCounting=false, not count down the time', function () {
@@ -59,7 +59,7 @@ describe('AppWithStore - acceptance test', function () {
             jest.runTimersToTime(100);
 
             //    then
-            assertStoreState(store).toHave("session.time", startTime);
+            assertStoreState(store).to.have("session.time", startTime);
         });
 
         it('should update state.isCounting to false when clicking pause button', function () {
@@ -70,7 +70,7 @@ describe('AppWithStore - acceptance test', function () {
             app.find("#btn_pause").simulate("click");
 
             //    then
-            assertStoreState(store).toHave("session.isCounting", false);
+            assertStoreState(store).to.have("session.isCounting", false);
         });
 
         it('should update state.isCounting to false and reset time when clicking stop button', function () {
@@ -79,14 +79,14 @@ describe('AppWithStore - acceptance test', function () {
             const interval = store.getState().interval;
             const startTime = getTime(store);
             jest.runTimersToTime(interval);
-            assertStoreState(store).toHave("session.time", startTime - interval);
+            assertStoreState(store).to.have("session.time", startTime - interval);
 
             //    when
             app.find("#btn_stop").simulate("click");
 
             //    then
-            assertStoreState(store).toHave("session.isCounting", false);
-            assertStoreState(store).toHave("session.time", startTime);
+            assertStoreState(store).to.have("session.isCounting", false);
+            assertStoreState(store).to.have("session.time", startTime);
         });
     });
 
@@ -94,25 +94,25 @@ describe('AppWithStore - acceptance test', function () {
         it("should have state.isCounting=false for getStore()", function () {
             // given
             const store = getStore();
-            assertStoreState(store).toHave("session.isCounting", false);
+            assertStoreState(store).to.have("session.isCounting", false);
 
             // when
             mount(<AppWithStore store={store}/>);
 
             // then
-            assertStoreState(store).toHave("session.isCounting", false);
+            assertStoreState(store).to.have("session.isCounting", false);
         });
 
         it("should have state.isCounting=true for getStore(isCountingState)", function () {
             // given
             const store = getStore(isCountingState);
-            assertStoreState(store).toHave("session.isCounting", true);
+            assertStoreState(store).to.have("session.isCounting", true);
 
             // when
             mount(<AppWithStore store={store}/>);
 
             // then
-            assertStoreState(store).toHave("session.isCounting", true);
+            assertStoreState(store).to.have("session.isCounting", true);
         });
     });
 
@@ -130,13 +130,16 @@ describe('AppWithStore - acceptance test', function () {
 
     function assertStoreState(store) {
         const state = store.getState();
-
-        return {
-            toHave(key, value) {
+        const to = {
+            have(key, value) {
                 let path = `$.${key}`;
                 expect(jsonpath.query(state, path, 1).length).toBeGreaterThanOrEqual(1);
                 expect(jsonpath.value(state, path)).toEqual(value);
             }
+        };
+
+        return {
+            to
         }
     }
 
