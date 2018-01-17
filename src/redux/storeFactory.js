@@ -8,8 +8,8 @@ import defaultReducers, {getInitialStateBuilder} from "./reducers";
 
 const defaultInitialState = getInitialStateBuilder().build();
 
-function newStoreWithPredefinedState(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
+function newStore(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     return createStore(reducers, predefinedState);
 }
 
-export {newStoreWithPredefinedState};
+export {newStore};
