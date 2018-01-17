@@ -6,12 +6,12 @@ import jsonpath from "jsonpath";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
-import {getInitialStateBuilder} from "./redux/state";
+import {newInitialStateBuilder} from "./redux/state";
 
 jest.useFakeTimers();
 
 describe('AppWithStore - acceptance test', function () {
-    const isCountingState = getInitialStateBuilder().withIsCounting(true).build();
+    const isCountingState = newInitialStateBuilder().withIsCounting(true).build();
 
     describe("features", function () {
         it('should be able to render with store without crash', function () {
