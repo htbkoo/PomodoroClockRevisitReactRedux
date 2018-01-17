@@ -7,7 +7,7 @@ import App from "../App";
 import type {State} from "../redux/state";
 import type {Action} from "../redux/actions";
 import type {Store} from "redux";
-import {newStore} from "../redux/storeFactory";
+import {newStoreWithPredefinedState} from "../redux/storeFactory";
 
 type Props = {
     +store: Store<State, Action>
@@ -22,7 +22,7 @@ const AppWithStore = (props: Props) => (
 );
 
 AppWithStore.defaultProps = {
-    store: newStore()
+    store: newStoreWithPredefinedState()
 };
 
 // It is in use by require(), but IntelliJ failed to spot this
