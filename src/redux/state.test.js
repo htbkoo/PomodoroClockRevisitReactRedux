@@ -1,7 +1,7 @@
 // @flow
 
 import type {State} from "./state";
-import {StateBuilder} from "./state";
+import {getInitialStateBuilder, StateBuilder} from "./state";
 
 describe('state', function () {
     describe("StateBuilder", function () {
@@ -86,5 +86,19 @@ describe('state', function () {
                 expect(state).toEqual(expectedState);
             })
         );
+    });
+
+    describe('getInitialStateBuilder', function () {
+        it('should expose getInitialStateBuilder as the supplier to the initialStateBuilder', function () {
+            //    given
+            const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
+            const initialStateBuilder = getInitialStateBuilder();
+
+            //    when
+            let nextState: State = initialStateBuilder.build();
+
+            //    then
+            expect(nextState).toEqual(expectedInitialState);
+        });
     });
 });

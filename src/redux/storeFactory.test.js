@@ -4,9 +4,9 @@ import React from "react";
 import * as redux from "redux";
 
 import {newStore} from "./storeFactory";
-import reducers, {getInitialStateBuilder} from "./reducers";
+import reducers from "./reducers";
 import type {State} from "./state";
-import {StateBuilder} from "./state";
+import {getInitialStateBuilder, StateBuilder} from "./state";
 
 describe('storeFactory', function () {
     describe("newStoreWithState", function () {

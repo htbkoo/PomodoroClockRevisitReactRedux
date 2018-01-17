@@ -4,7 +4,8 @@ import {createStore} from "redux";
 
 import type {State} from "./state";
 import type {Action} from "./actions";
-import defaultReducers, {getInitialStateBuilder} from "./reducers";
+import defaultReducers from "./reducers";
+import {getInitialStateBuilder} from "./state";
 
 const defaultInitialState = getInitialStateBuilder().build();
 
