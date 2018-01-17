@@ -1,7 +1,7 @@
 // @flow
 
 import type {State} from "./state";
-import {getInitialStateBuilder, StateBuilder} from "./state";
+import {newInitialStateBuilder, StateBuilder} from "./state";
 
 describe('state', function () {
     describe("StateBuilder", function () {
@@ -92,7 +92,7 @@ describe('state', function () {
         it('should expose getInitialStateBuilder as the supplier to the initialStateBuilder', function () {
             //    given
             const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
-            const initialStateBuilder = getInitialStateBuilder();
+            const initialStateBuilder = newInitialStateBuilder();
 
             //    when
             let nextState: State = initialStateBuilder.build();
