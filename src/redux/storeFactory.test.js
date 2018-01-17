@@ -3,38 +3,12 @@ import {sinon, sinonTest} from "../testUtils/sinonWithTest";
 import React from "react";
 import * as redux from "redux";
 
-import {newStore, newStoreWithPredefinedState} from "./storeFactory";
+import {newStoreWithPredefinedState} from "./storeFactory";
 import reducers, {getInitialStateBuilder} from "./reducers";
 import type {State} from "./state";
 import {StateBuilder} from "./state";
 
 describe('storeFactory', function () {
-    describe("newStore", function () {
-        it('should create a store', sinonTest(function () {
-            //    given
-            const mockStore = Symbol("mockStore");
-            this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
-
-            //    when
-            let store = newStore(reducers);
-
-            //    then
-            expect(store).toEqual(mockStore);
-        }));
-
-        it('should create default store using default reducers if no reducers parameter is provided', sinonTest(function () {
-            //    given
-            const mockStore = Symbol("mockStore");
-            this.stub(redux, "createStore").withArgs(reducers).returns(mockStore);
-
-            //    when
-            let store = newStore();
-
-            //    then
-            expect(store).toEqual(mockStore);
-        }));
-    });
-
     describe("newStoreWithState", function () {
         it('should create a store with a predefined state', sinonTest(function () {
             //    given
