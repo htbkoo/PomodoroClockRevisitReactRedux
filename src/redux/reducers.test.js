@@ -4,38 +4,9 @@ import {StateBuilder} from "./state";
 import type {Action} from "./actions";
 import * as actions from "./actions";
 
-import reducers, {getInitialStateBuilder} from "./reducers";
+import reducers from "./reducers";
 
 describe('reducers', function () {
-    const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
-
-    describe('initialState', function () {
-        it('should be able to handle initialState properly', function () {
-            //    given
-            expect(expectedInitialState.session.isCounting).toEqual(false);
-
-            //    when
-            // $FlowFixMe - purposely test the ability of reducers to handle undefined action and state case
-            let nextState: State = reducers(undefined, {});
-
-            //    then
-            expect(nextState).toEqual(expectedInitialState);
-        });
-    });
-
-    describe('getInitialStateBuilder', function () {
-        it('should expose getInitialStateBuilder as the supplier to the initialStateBuilder', function () {
-            //    given
-            const initialStateBuilder = getInitialStateBuilder();
-
-            //    when
-            let nextState: State = initialStateBuilder.build();
-
-            //    then
-            expect(nextState).toEqual(expectedInitialState);
-        });
-    });
-
     describe('startCounting', function () {
         it('should update state.session.isCounting to true by action.StartCountingAction', function () {
             //    given

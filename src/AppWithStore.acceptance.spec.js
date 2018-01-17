@@ -6,7 +6,7 @@ import jsonpath from "jsonpath";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
-import {getInitialStateBuilder} from "./redux/reducers";
+import {getInitialStateBuilder} from "./redux/state";
 
 jest.useFakeTimers();
 
