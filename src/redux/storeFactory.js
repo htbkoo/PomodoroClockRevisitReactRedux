@@ -4,13 +4,15 @@ import {createStore} from "redux";
 
 import type {State} from "./state";
 import type {Action} from "./actions";
-import defaultReducers from "./reducers";
+import defaultReducers, {getInitialStateBuilder} from "./reducers";
+
+const defaultInitialState = getInitialStateBuilder().build();
 
 function newStore(reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     return createStore(reducers);
 }
 
-function newStoreWithPredefinedState(predefinedState: State, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
+function newStoreWithPredefinedState(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     return createStore(reducers, predefinedState);
 }
 
