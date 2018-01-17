@@ -14,12 +14,14 @@ export type Clock = {
     +colour: string
 };
 
+export type Clocks = Array<{
+    +clock: Clock
+}>;
+
 export type State = {
     +interval: number,
     +session: Session,
-    +clocks: Array<{
-        +clock: Clock
-    }>
+    +clocks: Clocks
 };
 
 export class StateBuilder {
