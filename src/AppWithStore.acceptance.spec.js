@@ -3,7 +3,7 @@ import React from 'react';
 import {mount} from "enzyme";
 import jsonpath from "jsonpath";
 
-import {newStore, newStoreWithPredefinedState} from "./redux/storeFactory";
+import {newStoreWithPredefinedState} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
 import {getInitialStateBuilder} from "./redux/reducers";
@@ -16,7 +16,7 @@ describe('AppWithStore - acceptance test', function () {
     describe("features", function () {
         it('should be able to render with store without crash', function () {
             // given
-            const store = newStore();
+            const store = newStoreWithPredefinedState();
 
             // when
             mount(<AppWithStore store={store}/>);
@@ -51,7 +51,7 @@ describe('AppWithStore - acceptance test', function () {
 
         it('should, when state.isCounting=false, not count down the time', function () {
             //    given
-            const store = newStore();
+            const store = newStoreWithPredefinedState();
             mount(<AppWithStore store={store}/>);
             const startTime = getTime(store);
 
@@ -125,7 +125,7 @@ describe('AppWithStore - acceptance test', function () {
 
     function getStore(predefinedState: ?State) {
         return ((typeof predefinedState === "undefined") || (predefinedState === null))
-            ? newStore()
+            ? newStoreWithPredefinedState()
             : newStoreWithPredefinedState(predefinedState);
     }
 
