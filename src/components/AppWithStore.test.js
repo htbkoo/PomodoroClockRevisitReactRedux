@@ -12,7 +12,7 @@ describe("AppWithStore", function () {
 
     beforeEach(function () {
         jest.mock("../redux/storeFactory", () => ({
-            newStoreWithPredefinedState() {
+            newStore() {
                 return mockStore;
             }
         }));

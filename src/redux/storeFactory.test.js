@@ -3,7 +3,7 @@ import {sinon, sinonTest} from "../testUtils/sinonWithTest";
 import React from "react";
 import * as redux from "redux";
 
-import {newStoreWithPredefinedState} from "./storeFactory";
+import {newStore} from "./storeFactory";
 import reducers, {getInitialStateBuilder} from "./reducers";
 import type {State} from "./state";
 import {StateBuilder} from "./state";
@@ -16,7 +16,7 @@ describe('storeFactory', function () {
             this.stub(redux, "createStore").withArgs(reducers, state).returns(mockStore);
 
             //    when
-            let store = newStoreWithPredefinedState(state, reducers);
+            let store = newStore(state, reducers);
 
             //    then
             expect(store).toEqual(mockStore);
@@ -29,7 +29,7 @@ describe('storeFactory', function () {
             this.stub(redux, "createStore").withArgs(reducers, sinon.match(defaultInitialState)).returns(mockStore);
 
             //    when
-            let store = newStoreWithPredefinedState();
+            let store = newStore();
 
             //    then
             expect(store).toEqual(mockStore);
