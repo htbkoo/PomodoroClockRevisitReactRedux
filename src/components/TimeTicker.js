@@ -8,6 +8,7 @@ import {tickTime, timesUp} from "../redux/actions";
 type Props = {
     +isCounting: boolean,
     +interval: number,
+    +time: number,
     +onTimeTick: (lapse: number) => void,
     +onTimesup: () => void,
 }
