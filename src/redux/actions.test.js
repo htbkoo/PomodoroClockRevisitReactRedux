@@ -2,16 +2,17 @@
 import {startCounting, pauseCounting, stopCounting, tickTime, timesUp} from "./actions";
 
 describe('actions', function () {
-    it('should create an action to start counting', function () {
-        //    given
-        const expectedAction = {type: "StartCounting"};
-
-        //    when
-        let actualAction = startCounting();
-
-        //    then
-        expect(actualAction).toEqual(expectedAction);
-    });
+    [
+        {
+            testPurpose: "to start counting",
+            expectedAction: {type: "StartCounting"},
+            actualAction: startCounting()
+        }
+    ].forEach(({testPurpose, expectedAction, actualAction}) =>
+        it(`should create an action ${testPurpose}`, function () {
+            expect(actualAction).toEqual(expectedAction);
+        })
+    );
 
     it('should create an action to pause counting', function () {
         //    given
