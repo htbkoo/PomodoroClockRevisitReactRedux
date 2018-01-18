@@ -3,10 +3,15 @@ html {
     padding: 10%;
     background-color: black;
     overflow-y: hidden;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 body {
     height: 70%;
+    width: 70%;
 
     background: darkgray;
 
