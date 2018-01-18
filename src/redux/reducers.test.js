@@ -73,4 +73,22 @@ describe('reducers', function () {
             expect(state.session.time).toEqual(startTime); // ensure immutability
         });
     });
+
+    describe('timesUp', function () {
+        it('should set state.session.time to 0 and state.session.isCounting to false when action.TimesUpAction()', function () {
+            //    given
+            const startTime = 1000, expectedTIme = 0;
+            const action: Action = actions.timesUp();
+            const state: State = new StateBuilder().withTime(startTime).build();
+            const expectedNextState: State = new StateBuilder().withTime(expectedTIme).build();
+            expect(state.session.time).toEqual(startTime);
+
+            //    when
+            let nextState: State = reducers(state, action);
+
+            //    then
+            expect(nextState).toEqual(expectedNextState);
+            expect(state.session.time).toEqual(startTime); // ensure immutability
+        });
+    });
 });

@@ -34,6 +34,11 @@ function session(state: Session = defaultInitialState.session, action: Action): 
             let time = state.time - action.lapse;
             return Object.assign({}, state, {time});
         }
+        case actionTypes.TimesUp: {
+            let time = 0;
+            let isCounting = false;
+            return Object.assign({}, state, {time, isCounting});
+        }
         default:
             return state;
     }

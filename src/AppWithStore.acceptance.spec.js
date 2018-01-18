@@ -89,6 +89,24 @@ describe('AppWithStore - acceptance test', function () {
                 .to.have("session.isCounting", false)
                 .and.have("session.time", startTime);
         });
+
+        it('should update state.isCounting to false when time = 0', function () {
+            //    given
+            const interval = 100,
+                predefinedState = newInitialStateBuilder().withOriginalTime(interval).withTime(interval).withInterval(interval).withIsCounting(true).build();
+            const {store} = getStoreAndApp(predefinedState);
+            assertStoreState(store)
+                .to.have("session.isCounting", true)
+                .and.have("session.time", interval);
+
+            //    when
+            jest.runTimersToTime(interval);
+
+            //    then
+            assertStoreState(store)
+                .to.have("session.isCounting", false)
+                .and.have("session.time", 0);
+        });
     });
 
     describe("store state", function () {
