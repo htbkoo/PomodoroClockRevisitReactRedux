@@ -4,57 +4,33 @@ import {startCounting, pauseCounting, stopCounting, tickTime, timesUp} from "./a
 describe('actions', function () {
     [
         {
-            testPurpose: "to start counting",
+            testPurpose: "an action to start counting",
             expectedAction: {type: "StartCounting"},
             actualAction: startCounting()
+        },
+        {
+            testPurpose: "an action to pause counting",
+            expectedAction: {type: "PauseCounting"},
+            actualAction: pauseCounting()
+        },
+        {
+            testPurpose: "an action to stop counting",
+            expectedAction: {type: "StopCounting"},
+            actualAction: stopCounting()
+        },
+        {
+            testPurpose: "an action to tick Time",
+            expectedAction: {type: "TickTime", lapse: 100},
+            actualAction: tickTime(100)
+        },
+        {
+            testPurpose: "an action for times up",
+            expectedAction: {type: "TimesUp"},
+            actualAction: timesUp()
         }
     ].forEach(({testPurpose, expectedAction, actualAction}) =>
-        it(`should create an action ${testPurpose}`, function () {
+        it(`should create ${testPurpose}`, function () {
             expect(actualAction).toEqual(expectedAction);
         })
     );
-
-    it('should create an action to pause counting', function () {
-        //    given
-        const expectedAction = {type: "PauseCounting"};
-
-        //    when
-        let actualAction = pauseCounting();
-
-        //    then
-        expect(actualAction).toEqual(expectedAction);
-    });
-
-    it('should create an action to stop counting', function () {
-        //    given
-        const expectedAction = {type: "StopCounting"};
-
-        //    when
-        let actualAction = stopCounting();
-
-        //    then
-        expect(actualAction).toEqual(expectedAction);
-    });
-
-    it('should create an action to tick Time', function () {
-        //    given
-        const lapse = 100, expectedAction = {type: "TickTime", lapse};
-
-        //    when
-        let actualAction = tickTime(lapse);
-
-        //    then
-        expect(actualAction).toEqual(expectedAction);
-    });
-
-    it('should create an action for times up', function () {
-        //    given
-        const expectedAction = {type: "TimesUp"};
-
-        //    when
-        let actualAction = timesUp();
-
-        //    then
-        expect(actualAction).toEqual(expectedAction);
-    });
 });
