@@ -1,5 +1,5 @@
 // @flow
-import {startCounting, pauseCounting, stopCounting, tickTime} from "./actions";
+import {startCounting, pauseCounting, stopCounting, tickTime, timesUp} from "./actions";
 
 describe('actions', function () {
     it('should create an action to start counting', function () {
@@ -41,6 +41,17 @@ describe('actions', function () {
 
         //    when
         let actualAction = tickTime(lapse);
+
+        //    then
+        expect(actualAction).toEqual(expectedAction);
+    });
+
+    it('should create an action for times up', function () {
+        //    given
+        const expectedAction = {type: "TimesUp"};
+
+        //    when
+        let actualAction = timesUp();
 
         //    then
         expect(actualAction).toEqual(expectedAction);
