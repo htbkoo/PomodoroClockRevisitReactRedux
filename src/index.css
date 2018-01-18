@@ -25,3 +25,9 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+#root{
+    padding: 10%;
+    border: aliceblue 5px solid;
+    border-radius: 10%;
+}
