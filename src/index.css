@@ -13,9 +13,10 @@ body {
     height: 70%;
     width: 70%;
 
+    border: darkgray 5px solid;
     border-radius: 10%;
 
-    background: darkgray;
+    background: aliceblue;
 
     margin: 0;
     padding: 0;
@@ -28,6 +29,8 @@ body {
 
 #root{
     padding: 10%;
-    border: aliceblue 5px solid;
+    border: darkgray 5px solid;
     border-radius: 10%;
+
+    background-color: white;
 }
