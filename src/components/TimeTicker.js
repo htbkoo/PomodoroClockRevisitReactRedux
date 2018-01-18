@@ -10,10 +10,15 @@ type Props = {
     +interval: number,
     +time: number,
     +onTimeTick: (lapse: number) => void,
-    +onTimesup: () => void,
+    +onTimesUp: () => void,
 }
 
-export const mapStateToProps = (state: State) => ({isCounting: state.session.isCounting, interval: state.interval, time: state.session.time});
+export const mapStateToProps = (state: State) => ({
+    isCounting: state.session.isCounting,
+    interval: state.interval,
+    time: state.session.time
+});
+
 export const mapDispatchToProps = (dispatch: Function) => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));
@@ -23,7 +28,6 @@ export const mapDispatchToProps = (dispatch: Function) => ({
     },
 });
 
-
 export class TimeTickerComponent extends Component<Props> {
     getIntervalId: () => number;
 
@@ -32,7 +36,11 @@ export class TimeTickerComponent extends Component<Props> {
         // TODO: improve performance?
         const intervalId = setInterval(() => {
             if (this.props.isCounting) {
-                this.props.onTimeTick(interval)
+                if (willTimeUp(this.props)) {
+                    this.props.onTimesUp();
+                } else {
+                    this.props.onTimeTick(interval)
+                }
             }
         }, interval);
 
@@ -52,3 +60,7 @@ export class TimeTickerComponent extends Component<Props> {
 
 // Untested
 export default connect(mapStateToProps, mapDispatchToProps)(TimeTickerComponent);
+
+function willTimeUp(props: Props): boolean {
+    return props.interval >= props.time;
+}
