@@ -5,21 +5,26 @@ import {connect} from "react-redux";
 import type {State} from "../redux/state";
 import {tickTime, timesUp} from "../redux/actions";
 
-type Props = {
+type Props = StateProps & DispatchProps;
+
+type StateProps = {
     +isCounting: boolean,
     +interval: number,
     +time: number,
+}
+
+type DispatchProps = {
     +onTimeTick: (lapse: number) => void,
     +onTimesUp: () => void,
 }
 
-export const mapStateToProps = (state: State) => ({
+export const mapStateToProps = (state: State): StateProps => ({
     isCounting: state.session.isCounting,
     interval: state.interval,
     time: state.session.time
 });
 
-export const mapDispatchToProps = (dispatch: Function) => ({
+export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));
     },
