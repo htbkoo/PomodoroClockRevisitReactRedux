@@ -3,7 +3,9 @@
 ### What is this repository for? ###
 
 * This is the repository of pomodoro_clock_revisit_react_redux, a revisit of the "pomodoro_clock" project under [FreeCodeCamp "Front End Development Certification" - "Advanced Front End Development Projects"](https://www.freecodecamp.org/challenges/build-a-pomodoro-clock)
-* An instance is deployed to GitHub page: 
+* An instance is deployed to Heroku: https://pomodoro-clock-redux-hey.herokuapp.com/
+* ~~An instance is deployed to GitHub page~~:
+    * WIP for deploying to github pages, now encountering the "bad objects" problem 
 * This project is bootstrapped with [Create-React-App (CRA)](https://github.com/facebookincubator/create-react-app) 
 
 ### How do I get set up? ###
