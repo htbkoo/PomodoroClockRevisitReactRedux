@@ -10,7 +10,16 @@ import {newInitialStateBuilder} from "./state";
 const defaultInitialState = newInitialStateBuilder().build();
 
 function newStore(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
-    return createStore(reducers, predefinedState);
+    if (typeof window !== 'undefined') {
+        return newStoreWithReduxDevtoolsExtension(predefinedState, reducers);
+    } else {
+        return createStore(reducers, predefinedState);
+    }
+}
+
+// untested
+function newStoreWithReduxDevtoolsExtension(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
+    return createStore(reducers, predefinedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 }
 
 export {newStore};
