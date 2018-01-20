@@ -14,98 +14,100 @@ describe('AppWithStore - acceptance test', function () {
     const isCountingState = newInitialStateBuilder().withIsCounting(true).build();
 
     describe("features", function () {
-        it('should be able to render with store without crash', function () {
-            // given
-            const store = newStore();
+        describe("session", function () {
+            it('should be able to render with store without crash', function () {
+                // given
+                const store = newStore();
 
-            // when
-            mount(<AppWithStore store={store}/>);
-        });
+                // when
+                mount(<AppWithStore store={store}/>);
+            });
 
-        it('should be able to click start then change state.isCounting to true', function () {
-            // given
-            const {store, app} = getStoreAndApp();
-            const getStartButton = () => app.find("#btn_start");
+            it('should be able to click start then change state.isCounting to true', function () {
+                // given
+                const {store, app} = getStoreAndApp();
+                const getStartButton = () => app.find("#btn_start");
 
-            expect(getStartButton()).toHaveLength(1);
+                expect(getStartButton()).toHaveLength(1);
 
-            // when
-            getStartButton().simulate("click");
+                // when
+                getStartButton().simulate("click");
 
-            // then
-            assertStoreState(store).to.have("session.isCounting", true);
-            expect(getStartButton()).toHaveLength(0);
-        });
+                // then
+                assertStoreState(store).to.have("session.isCounting", true);
+                expect(getStartButton()).toHaveLength(0);
+            });
 
-        it('should, when state.isCounting=true, count down the time per 100ms', function () {
-            //    given
-            const {store} = getStoreAndApp(isCountingState);
-            const startTime = getTime(store);
+            it('should, when state.isCounting=true, count down the time per 100ms', function () {
+                //    given
+                const {store} = getStoreAndApp(isCountingState);
+                const startTime = getTime(store);
 
-            //    when
-            jest.runTimersToTime(100);
+                //    when
+                jest.runTimersToTime(100);
 
-            //    then
-            assertStoreState(store).to.have("session.time", startTime - 100);
-        });
+                //    then
+                assertStoreState(store).to.have("session.time", startTime - 100);
+            });
 
-        it('should, when state.isCounting=false, not count down the time', function () {
-            //    given
-            const store = newStore();
-            mount(<AppWithStore store={store}/>);
-            const startTime = getTime(store);
+            it('should, when state.isCounting=false, not count down the time', function () {
+                //    given
+                const store = newStore();
+                mount(<AppWithStore store={store}/>);
+                const startTime = getTime(store);
 
-            //    when
-            jest.runTimersToTime(100);
+                //    when
+                jest.runTimersToTime(100);
 
-            //    then
-            assertStoreState(store).to.have("session.time", startTime);
-        });
+                //    then
+                assertStoreState(store).to.have("session.time", startTime);
+            });
 
-        it('should update state.isCounting to false when clicking pause button', function () {
-            //    given
-            const {store, app} = getStoreAndApp(isCountingState);
+            it('should update state.isCounting to false when clicking pause button', function () {
+                //    given
+                const {store, app} = getStoreAndApp(isCountingState);
 
-            //    when
-            app.find("#btn_pause").simulate("click");
+                //    when
+                app.find("#btn_pause").simulate("click");
 
-            //    then
-            assertStoreState(store).to.have("session.isCounting", false);
-        });
+                //    then
+                assertStoreState(store).to.have("session.isCounting", false);
+            });
 
-        it('should update state.isCounting to false and reset time when clicking stop button', function () {
-            //    given
-            const {store, app} = getStoreAndApp(isCountingState);
-            const interval = store.getState().interval;
-            const startTime = getTime(store);
-            jest.runTimersToTime(interval);
-            assertStoreState(store).to.have("session.time", startTime - interval);
+            it('should update state.isCounting to false and reset time when clicking stop button', function () {
+                //    given
+                const {store, app} = getStoreAndApp(isCountingState);
+                const interval = store.getState().interval;
+                const startTime = getTime(store);
+                jest.runTimersToTime(interval);
+                assertStoreState(store).to.have("session.time", startTime - interval);
 
-            //    when
-            app.find("#btn_stop").simulate("click");
+                //    when
+                app.find("#btn_stop").simulate("click");
 
-            //    then
-            assertStoreState(store)
-                .to.have("session.isCounting", false)
-                .and.have("session.time", startTime);
-        });
+                //    then
+                assertStoreState(store)
+                    .to.have("session.isCounting", false)
+                    .and.have("session.time", startTime);
+            });
 
-        it('should update state.isCounting to false when time = 0', function () {
-            //    given
-            const interval = 100,
-                predefinedState = newInitialStateBuilder().withOriginalTime(interval).withTime(interval).withInterval(interval).withIsCounting(true).build();
-            const {store} = getStoreAndApp(predefinedState);
-            assertStoreState(store)
-                .to.have("session.isCounting", true)
-                .and.have("session.time", interval);
+            it('should update state.isCounting to false when time = 0', function () {
+                //    given
+                const interval = 100,
+                    predefinedState = newInitialStateBuilder().withOriginalTime(interval).withTime(interval).withInterval(interval).withIsCounting(true).build();
+                const {store} = getStoreAndApp(predefinedState);
+                assertStoreState(store)
+                    .to.have("session.isCounting", true)
+                    .and.have("session.time", interval);
 
-            //    when
-            jest.runTimersToTime(interval);
+                //    when
+                jest.runTimersToTime(interval);
 
-            //    then
-            assertStoreState(store)
-                .to.have("session.isCounting", false)
-                .and.have("session.time", 0);
+                //    then
+                assertStoreState(store)
+                    .to.have("session.isCounting", false)
+                    .and.have("session.time", 0);
+            });
         });
     });
 
