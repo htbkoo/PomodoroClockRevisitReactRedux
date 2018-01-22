@@ -11,9 +11,11 @@ class App extends Component<Props> {
     render() {
         return (
             <div className="App">
-                <Timer/>
-                <TimeTicker/>
-                <ButtonsPanel/>
+                <div className="Session">
+                    <Timer/>
+                    <TimeTicker/>
+                    <ButtonsPanel/>
+                </div>
             </div>
         );
     }
