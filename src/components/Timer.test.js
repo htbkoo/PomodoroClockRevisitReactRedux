@@ -3,10 +3,10 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {ClockComponent, mapStateToProps} from "./Clock";
+import {TimerComponent, mapStateToProps} from "./Timer";
 import {StateBuilder} from "../redux/state";
 
-describe('Clock', function () {
+describe('Timer', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
@@ -21,7 +21,7 @@ describe('Clock', function () {
         });
     });
 
-    describe("ClockComponent", function () {
+    describe("TimerComponent", function () {
         [
             {time: 0, expectedText: "00m 00s 000"},
             {time: 99, expectedText: "00m 00s 099"},
@@ -40,7 +40,7 @@ describe('Clock', function () {
             it(`should render props.time=${time} as ${expectedText}`, function () {
                 //    given
                 //    when
-                let clock = shallow(<ClockComponent time={time} clockId={0}/>);
+                let clock = shallow(<TimerComponent time={time} clockId={0}/>);
 
                 //    then
                 expect(clock).toHaveText(expectedText);
