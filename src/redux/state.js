@@ -1,26 +1,26 @@
 // @flow
 
-export type Session = {
+export type Session = $ReadOnly<{
     +time: number,
     +originalTime: number,
     +clockId: number,
     +isCounting: boolean,
-};
+}>;
 
-export type Clock = {
+export type Clock = $ReadOnly<{
     +id: number,
     +duration: number,
     +name: string,
     +colour: string
-};
+}>;
 
 export type Clocks = $ReadOnlyArray<Clock>;
 
-export type State = {
+export type State = $ReadOnly<{
     +interval: number,
     +session: Session,
     +clocks: Clocks
-};
+}>;
 
 export class StateBuilder {
     +withTime: (time: number) => StateBuilder;
