@@ -31,9 +31,11 @@ export class StateBuilder {
     +getInterval: () => number;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
+    +addClock: (clock: Clock) => StateBuilder;
+    +getClocks: () => $ReadOnlyArray<Clock>;
 
     constructor() {
-        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0;
+        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _clocks = [];
         this.withTime = time => {
             _time = time;
             return this;
@@ -57,6 +59,12 @@ export class StateBuilder {
             return this;
         };
         this.getOriginalTime = () => _originalTime;
+
+        this.addClock = clock => {
+            _clocks.push(clock);
+            return this;
+        };
+        this.getClocks = () => _clocks;
     }
 
     build(): State {
@@ -68,7 +76,7 @@ export class StateBuilder {
                 originalTime: this.getOriginalTime(),
                 clockId: 0
             },
-            clocks: []
+            clocks: this.getClocks()
         }
     }
 }
