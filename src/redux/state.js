@@ -14,9 +14,7 @@ export type Clock = {
     +colour: string
 };
 
-export type Clocks = Array<{
-    +clock: Clock
-}>;
+export type Clocks = $ReadOnlyArray<Clock>;
 
 export type State = {
     +interval: number,
