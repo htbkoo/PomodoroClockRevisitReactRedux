@@ -31,7 +31,7 @@ export class StateBuilder {
     +getInterval: () => number;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
-    +addClock: (clock: Clock) => StateBuilder;
+    +addClock: (clock: any) => StateBuilder;
     +getClocks: () => $ReadOnlyArray<Clock>;
 
     constructor() {
