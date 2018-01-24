@@ -42,6 +42,21 @@ describe('ClocksList', function () {
                 expect(clocks.at(index)).toHaveProp("clock", clock)
             );
         });
+
+        it("should render List of <Clock/> in the same order in state.clocks", function () {
+            //    given
+            const clocksProps: Clocks = [mockClock("Clock2"), mockClock("Clock1")];
+
+            //    when
+            let clocksList = shallow(<ClocksListComponent clocks={clocksProps}/>);
+
+            //    then
+            let clocks = clocksList.find(Clock);
+            expect(clocks.length).toEqual(clocksProps.length);
+            clocksProps.forEach((clock, index) =>
+                expect(clocks.at(index)).toHaveProp("clock", clock)
+            );
+        });
     });
 
     // Simple mock clock so need to fake the flow type
