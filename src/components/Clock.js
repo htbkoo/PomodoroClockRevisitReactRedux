@@ -5,7 +5,7 @@ import type {Clock} from "../redux/state";
 
 // export const mapDispatchToProps = (state: State): DispatchProps => ({});
 export const ClockComponent = (): React$Element<any> => (
-    <div id="clocks-list" className="Clock">{clocks}</div>
+    <div/>
 );
 
 // Untested
