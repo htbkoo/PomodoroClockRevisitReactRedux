@@ -108,6 +108,27 @@ describe('state', function () {
                 //    then
                 expect(state).toEqual(expectedState);
             });
+
+            it("should be able to build state with 2 clocks by addClock twice", function () {
+                //    given
+                const dummyClock = Symbol("dummyClock"), dummyClock2 = Symbol("dummyClock2");
+                const expectedState = {
+                    interval: 0,
+                    session: {
+                        isCounting: false,
+                        time: 0,
+                        originalTime: 0,
+                        clockId: 0
+                    },
+                    clocks: [dummyClock2, dummyClock]
+                };
+
+                //    when
+                let state: State = new StateBuilder().addClock(dummyClock2).addClock(dummyClock).build();
+
+                //    then
+                expect(state).toEqual(expectedState);
+            });
         });
     });
 
