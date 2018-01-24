@@ -3,7 +3,7 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {ClocksListComponent, mapStateToProps} from "./ClocksList";
+import {ClocksListComponent} from "./ClocksList";
 import type {Clock as ClockState, Clocks} from "../redux/state";
 
 import Clock from "./Clock";
@@ -12,7 +12,7 @@ describe('ClocksList', function () {
     describe("ClocksListComponent", function () {
         it("should have a List of <Clock/> according to state.clocks", function () {
             //    given
-            const clocksProps: Clocks = [dummyClock("Clock1"), dummyClock("Clock2")];
+            const clocksProps: Clocks = [mockClock("Clock1"), mockClock("Clock2")];
 
             //    when
             let clocksList = shallow(<ClocksListComponent clocks={clocksProps}/>);
@@ -26,9 +26,9 @@ describe('ClocksList', function () {
         });
     });
 
+    // Simple mock clock so need to fake the flow type
     //$FlowFixMe
-    function dummyClock(description): ClockState {
-        // return Symbol(description);
-        return description;
+    function mockClock(id): ClockState {
+        return {id: id,};
     }
 });
