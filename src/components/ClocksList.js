@@ -1,8 +1,10 @@
 // @flow
 import React from "react";
-import Clock from "./Clock";
+import {connect} from "react-redux";
 
 import type {Clock as ClockState, Clocks, State} from "../redux/state";
+
+import Clock from "./Clock";
 
 type StateProps = {
     +clocks: Clocks
@@ -18,6 +20,9 @@ export const ClocksListComponent = (props: Props): React$Element<any> => {
         <div id="clocks-list" className="ClocksList">{clocks}</div>
     )
 };
+
+// Untested
+export default connect(mapStateToProps)(ClocksListComponent);
 
 // Untested
 ClocksListComponent.defaultProps = {
