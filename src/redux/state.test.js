@@ -95,6 +95,25 @@ describe('state', function () {
             },
             // addClock
             {
+                testName: "addClock",
+                expectedState: {
+                    interval: 0,
+                    session: {
+                        isCounting: false,
+                        time: 0,
+                        originalTime: 0,
+                        clockId: 0
+                    },
+                    clocks: {
+                        byId: {
+                            "dummyClock": dummyClock
+                        },
+                        allIds: ["dummyClock"]
+                    }
+                },
+                stateBuilder:  new StateBuilder().addClock(dummyClock)
+            },
+            {
                 testName: "addClock twice for 2 clocks",
                 expectedState: {
                     interval: 0,
@@ -124,34 +143,6 @@ describe('state', function () {
                 expect(state).toEqual(expectedState);
             })
         );
-
-        describe("addClock", function () {
-            it("should be able to build state with 1 clock by addClock", function () {
-                //    given
-                const dummyClock: WithClockId = {id: "1"};
-
-                //    when
-                let state: State = new StateBuilder().addClock(dummyClock).build();
-
-                //    then
-                const expectedState = {
-                    interval: 0,
-                    session: {
-                        isCounting: false,
-                        time: 0,
-                        originalTime: 0,
-                        clockId: 0
-                    },
-                    clocks: {
-                        byId: {
-                            "1": dummyClock
-                        },
-                        allIds: ["1"]
-                    }
-                };
-                expect(state).toEqual(expectedState);
-            });
-        });
     });
 
     describe('getInitialStateBuilder', function () {
