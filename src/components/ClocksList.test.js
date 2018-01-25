@@ -45,24 +45,24 @@ describe('ClocksList', function () {
         [
             {
                 testName: "should have a List of <Clock/> according to state.clocks",
-                clocksProps: new StateBuilder().addClock(mockClock1).addClock(mockClock2).build().clocks,
+                clocks: new StateBuilder().addClock(mockClock1).addClock(mockClock2).build().clocks,
                 expectedClocksPropsPassed: [mockClock1, mockClock2],
             },
             {
                 testName: "should render List of <Clock/> in the same order in state.clocks",
-                clocksProps: new StateBuilder().addClock(mockClock2).addClock(mockClock1).build().clocks,
+                clocks: new StateBuilder().addClock(mockClock2).addClock(mockClock1).build().clocks,
                 expectedClocksPropsPassed: [mockClock2, mockClock1],
             }
-        ].forEach(({testName, clocksProps, expectedClocksPropsPassed})=>
+        ].forEach(({testName, clocks, expectedClocksPropsPassed})=>
             it(testName, function () {
                 //    when
-                let clocksList = shallow(<ClocksListComponent clocks={clocksProps}/>);
+                let clocksList = shallow(<ClocksListComponent clocks={clocks}/>);
 
                 //    then
-                let clocks = clocksList.find(Clock);
-                expect(clocks.length).toEqual(expectedClocksPropsPassed.length);
+                let clockComponents = clocksList.find(Clock);
+                expect(clockComponents.length).toEqual(expectedClocksPropsPassed.length);
                 expectedClocksPropsPassed.forEach((clock, index) =>
-                    expect(clocks.at(index)).toHaveProp("clock", clock)
+                    expect(clockComponents.at(index)).toHaveProp("clock", clock)
                 );
             })
         );
