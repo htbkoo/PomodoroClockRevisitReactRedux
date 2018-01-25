@@ -53,16 +53,16 @@ describe('ClocksList', function () {
                 clocksProps: new StateBuilder().addClock(mockClock2).addClock(mockClock1).build().clocks,
                 expectedClocksPropsPassed: [mockClock2, mockClock1],
             }
-        ].forEach(({testName, clocksProps})=>
+        ].forEach(({testName, clocksProps, expectedClocksPropsPassed})=>
             it(testName, function () {
                 //    when
                 let clocksList = shallow(<ClocksListComponent clocks={clocksProps}/>);
 
                 //    then
                 let clocks = clocksList.find(Clock);
-                expect(clocks.length).toEqual(clocksProps.allIds.length);
-                clocksProps.allIds.forEach((clockId, index) =>
-                    expect(clocks.at(index)).toHaveProp("clock", clocksProps.byId[clockId])
+                expect(clocks.length).toEqual(expectedClocksPropsPassed.length);
+                expectedClocksPropsPassed.forEach((clock, index) =>
+                    expect(clocks.at(index)).toHaveProp("clock", clock)
                 );
             })
         );
