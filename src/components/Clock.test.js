@@ -15,7 +15,7 @@ describe('Clock', function () {
                 colour,
                 duration,
                 name,
-                id: 1
+                id: "1"
             };
 
             //    when
