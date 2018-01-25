@@ -16,8 +16,10 @@ export type Clock = $ReadOnly<{
 
 export type Clocks = $ReadOnlyArray<Clock>;
 
+type Interval = number;
+
 export type State = $ReadOnly<{
-    +interval: number,
+    +interval: Interval,
     +session: Session,
     +clocks: Clocks
 }>;
@@ -27,8 +29,8 @@ export class StateBuilder {
     +getTime: () => number;
     +withIsCounting: (isCounting: boolean) => StateBuilder;
     +getIsCounting: () => boolean;
-    +withInterval: (interval: number) => StateBuilder;
-    +getInterval: () => number;
+    +withInterval: (interval: Interval) => StateBuilder;
+    +getInterval: () => Interval;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
     +addClock: (clock: any) => StateBuilder;
