@@ -12,10 +12,10 @@ class App extends Component<Props> {
     render() {
         return (
             <div className="App">
-                <div className="ClocksList">
+                <div className="container-clocksList">
                     <ClocksList/>
                 </div>
-                <div className="Session">
+                <div className="container-session">
                     <Timer/>
                     <TimeTicker/>
                     <ButtonsPanel/>
