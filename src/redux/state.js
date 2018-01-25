@@ -7,7 +7,7 @@ export type Session = $ReadOnly<{
     +isCounting: boolean,
 }>;
 
-type ClockId = string;
+export type ClockId = string;
 
 export type WithClockId = {
     +id: ClockId
