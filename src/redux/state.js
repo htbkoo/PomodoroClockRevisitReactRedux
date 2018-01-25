@@ -7,8 +7,10 @@ export type Session = $ReadOnly<{
     +isCounting: boolean,
 }>;
 
+type ClockId = number;
+
 export type Clock = $ReadOnly<{
-    +id: number,
+    +id: ClockId,
     +duration: number,
     +name: string,
     +colour: string
