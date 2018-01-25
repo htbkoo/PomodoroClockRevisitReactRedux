@@ -26,11 +26,3 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-#root{
-    padding: 10%;
-    border: darkgray 5px solid;
-    border-radius: 10%;
-
-    background-color: white;
-}
