@@ -7,6 +7,8 @@ import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
 import {newInitialStateBuilder} from "./redux/state";
+import ClocksList from "./components/ClocksList";
+import Clock from "./components/Clock";
 
 jest.useFakeTimers();
 
@@ -107,6 +109,21 @@ describe('AppWithStore - acceptance test', function () {
                 assertStoreState(store)
                     .to.have("session.isCounting", false)
                     .and.have("session.time", 0);
+            });
+        });
+
+        describe("clocks", function () {
+            it('should have a list of two clocks with one for "pomodoro session" and one for "short break" by default', function () {
+                // given
+                const {store, app} = getStoreAndApp();
+
+                // when
+                let clocksList = app.find(ClocksList);
+
+                // then
+                expect(clocksList).toHaveLength(1);
+                let clocks = clocksList.find(Clock);
+                expect(clocks).toHaveLength(2);
             });
         });
     });
