@@ -106,6 +106,11 @@ describe('state', function () {
             it("should be able to build state with 1 clock by addClock", function () {
                 //    given
                 const dummyClock: WithClockId = {id: "1"};
+
+                //    when
+                let state: State = new StateBuilder().addClock(dummyClock).build();
+
+                //    then
                 const expectedState = {
                     interval: 0,
                     session: {
@@ -121,17 +126,17 @@ describe('state', function () {
                         allIds: ["1"]
                     }
                 };
-
-                //    when
-                let state: State = new StateBuilder().addClock(dummyClock).build();
-
-                //    then
                 expect(state).toEqual(expectedState);
             });
 
             it("should be able to build state with 2 clocks by addClock twice", function () {
                 //    given
                 const dummyClock: WithClockId = {id: "dummyClock"}, dummyClock2: WithClockId = {id: "dummyClock2"};
+
+                //    when
+                let state: State = new StateBuilder().addClock(dummyClock2).addClock(dummyClock).build();
+
+                //    then
                 const expectedState = {
                     interval: 0,
                     session: {
@@ -148,11 +153,6 @@ describe('state', function () {
                         allIds: ["dummyClock2", "dummyClock"]
                     }
                 };
-
-                //    when
-                let state: State = new StateBuilder().addClock(dummyClock2).addClock(dummyClock).build();
-
-                //    then
                 expect(state).toEqual(expectedState);
             });
         });
@@ -161,13 +161,13 @@ describe('state', function () {
     describe('getInitialStateBuilder', function () {
         it('should expose getInitialStateBuilder as the supplier to the initialStateBuilder', function () {
             //    given
-            const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
             const initialStateBuilder = newInitialStateBuilder();
 
             //    when
             let nextState: State = initialStateBuilder.build();
 
             //    then
+            const expectedInitialState: State = new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100).build();
             expect(nextState).toEqual(expectedInitialState);
         });
     });
