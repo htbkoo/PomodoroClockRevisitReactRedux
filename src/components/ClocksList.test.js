@@ -13,13 +13,7 @@ describe('ClocksList', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
-            const clocks: Clocks = {
-                byId:{
-                    "clock1": mockClock("clock1"),
-                    "clock2": mockClock("clock2")
-                },
-                allIds:["clock1", "clock2"]
-            };
+            const clocks: Clocks = new StateBuilder().addClock(mockClock("clock1")).addClock(mockClock("clock2")).build().clocks;
             const state = {
                 interval: 0,
                 session: {
@@ -29,11 +23,11 @@ describe('ClocksList', function () {
                     clockId: 0
                 },
                 clocks: {
-                    byId:{
+                    byId: {
                         "clock1": mockClock("clock1"),
                         "clock2": mockClock("clock2")
                     },
-                    allIds:["clock1", "clock2"]
+                    allIds: ["clock1", "clock2"]
                 }
             };
 
@@ -44,20 +38,20 @@ describe('ClocksList', function () {
             expect(props).toEqual({clocks});
         });
     });
-    
+
     describe("ClocksListComponent", function () {
         it("should have a List of <Clock/> according to state.clocks", function () {
             //    given
-            const clocksProps: Clocks = [mockClock("Clock1"), mockClock("Clock2")];
+            const clocksProps: Clocks = new StateBuilder().addClock(mockClock("clock1")).addClock(mockClock("clock2")).build().clocks;
 
             //    when
             let clocksList = shallow(<ClocksListComponent clocks={clocksProps}/>);
 
             //    then
             let clocks = clocksList.find(Clock);
-            expect(clocks.length).toEqual(clocksProps.length);
-            clocksProps.forEach((clock, index) =>
-                expect(clocks.at(index)).toHaveProp("clock", clock)
+            expect(clocks.length).toEqual(clocksProps.allIds.length);
+            clocksProps.allIds.forEach((clockId, index) =>
+                expect(clocks.at(index)).toHaveProp("clock", clocksProps.byId[clockId])
             );
         });
 
