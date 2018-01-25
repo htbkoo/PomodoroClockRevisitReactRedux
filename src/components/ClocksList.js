@@ -2,7 +2,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import type {Clock as ClockState, ClockId, Clocks, State} from "../redux/state";
+import type {ClockId, Clocks, State} from "../redux/state";
 
 import Clock from "./Clock";
 
