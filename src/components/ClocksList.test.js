@@ -50,10 +50,10 @@ describe('ClocksList', function () {
             },
             {
                 testName: "should render List of <Clock/> in the same order in state.clocks",
-                clocks: new StateBuilder().addClock(mockClock2).addClock(mockClock1).build().clocks,
+                clocks: clocks(mockClock2, mockClock1),
                 expectedClocksPropsPassed: [mockClock2, mockClock1],
             }
-        ].forEach(({testName, clocks, expectedClocksPropsPassed})=>
+        ].forEach(({testName, clocks, expectedClocksPropsPassed}) =>
             it(testName, function () {
                 //    when
                 let clocksList = shallow(<ClocksListComponent clocks={clocks}/>);
@@ -72,5 +72,9 @@ describe('ClocksList', function () {
     //$FlowFixMe
     function mockClock(id): ClockState {
         return {id: id,};
+    }
+
+    function clocks(...mockClocks) {
+        return mockClocks.reduce((builder, mockClock) => builder.addClock(mockClock), new StateBuilder()).build().clocks
     }
 });
