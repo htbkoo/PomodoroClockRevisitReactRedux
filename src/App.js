@@ -1,9 +1,10 @@
 // @flow
 import React, {Component} from 'react';
 import './App.css';
-import Clock from "./components/Clock";
+import Timer from "./components/Timer";
 import ButtonsPanel from "./components/ButtonsPanel";
 import TimeTicker from "./components/TimeTicker";
+import ClocksList from "./components/ClocksList";
 
 type Props = {};
 
@@ -11,9 +12,14 @@ class App extends Component<Props> {
     render() {
         return (
             <div className="App">
-                <Clock/>
-                <TimeTicker/>
-                <ButtonsPanel/>
+                <div className="ClocksList">
+                    <ClocksList/>
+                </div>
+                <div className="Session">
+                    <Timer/>
+                    <TimeTicker/>
+                    <ButtonsPanel/>
+                </div>
             </div>
         );
     }

@@ -1,41 +1,54 @@
 // @flow
 
-export type Session = {
+export type Session = $ReadOnly<{
     +time: number,
     +originalTime: number,
     +clockId: number,
     +isCounting: boolean,
+}>;
+
+export type ClockId = string;
+
+export type WithClockId = {
+    +id: ClockId
 };
 
-export type Clock = {
-    +id: number,
+export type Clock = $ReadOnly<{
+    +id: ClockId,
     +duration: number,
     +name: string,
     +colour: string
-};
-
-export type Clocks = Array<{
-    +clock: Clock
 }>;
 
-export type State = {
-    +interval: number,
+export type Clocks = $ReadOnly<{
+    +byId: $ReadOnly<{
+        [ClockId]: Clock
+    }>,
+    allIds: $ReadOnlyArray<ClockId>
+}>;
+
+type Interval = number;
+
+export type State = $ReadOnly<{
+    +interval: Interval,
     +session: Session,
     +clocks: Clocks
-};
+}>;
 
 export class StateBuilder {
     +withTime: (time: number) => StateBuilder;
     +getTime: () => number;
     +withIsCounting: (isCounting: boolean) => StateBuilder;
     +getIsCounting: () => boolean;
-    +withInterval: (interval: number) => StateBuilder;
-    +getInterval: () => number;
+    +withInterval: (interval: Interval) => StateBuilder;
+    +getInterval: () => Interval;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
+    +addClock: (clock: WithClockId) => StateBuilder;
+    +getClocks: () => Clocks;
 
     constructor() {
-        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0;
+        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _clocks = {byId: {}, allIds: []};
         this.withTime = time => {
             _time = time;
             return this;
@@ -59,6 +72,13 @@ export class StateBuilder {
             return this;
         };
         this.getOriginalTime = () => _originalTime;
+
+        this.addClock = clock => {
+            _clocks.byId[clock.id] = clock;
+            _clocks.allIds.push(clock.id);
+            return this;
+        };
+        this.getClocks = () => _clocks;
     }
 
     build(): State {
@@ -70,7 +90,7 @@ export class StateBuilder {
                 originalTime: this.getOriginalTime(),
                 clockId: 0
             },
-            clocks: []
+            clocks: this.getClocks()
         }
     }
 }
