@@ -5,9 +5,9 @@ import {shallow} from "enzyme";
 
 import {ClocksListComponent, mapStateToProps} from "./ClocksList";
 import type {Clock as ClockState, Clocks} from "../redux/state";
+import {StateBuilder} from "../redux/state";
 
 import Clock from "./Clock";
-import {StateBuilder} from "../redux/state";
 
 describe('ClocksList', function () {
     const mockClock1 = mockClock("clock1"), mockClock2 = mockClock("clock2");
@@ -15,7 +15,6 @@ describe('ClocksList', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
-            const clocks: Clocks = new StateBuilder().addClock(mockClock1).addClock(mockClock2).build().clocks;
             const state = {
                 interval: 0,
                 session: {
@@ -37,7 +36,16 @@ describe('ClocksList', function () {
             let props = mapStateToProps(state);
 
             //    then
-            expect(props).toEqual({clocks});
+            const expectedProps: { +clocks: Clocks } = {
+                clocks: {
+                    byId: {
+                        "clock1": mockClock1,
+                        "clock2": mockClock2
+                    },
+                    allIds: ["clock1", "clock2"]
+                }
+            };
+            expect(props).toEqual(expectedProps);
         });
     });
 
