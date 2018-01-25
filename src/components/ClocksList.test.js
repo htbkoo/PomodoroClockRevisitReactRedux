@@ -45,7 +45,7 @@ describe('ClocksList', function () {
         [
             {
                 testName: "should have a List of <Clock/> according to state.clocks",
-                clocks: new StateBuilder().addClock(mockClock1).addClock(mockClock2).build().clocks,
+                clocks: clocks(mockClock1, mockClock2),
                 expectedClocksPropsPassed: [mockClock1, mockClock2],
             },
             {
@@ -75,6 +75,9 @@ describe('ClocksList', function () {
     }
 
     function clocks(...mockClocks) {
-        return mockClocks.reduce((builder, mockClock) => builder.addClock(mockClock), new StateBuilder()).build().clocks
+        const startWithNewBuilder = new StateBuilder();
+        return mockClocks.reduce((builder, mockClock) => builder.addClock(mockClock), startWithNewBuilder)
+            .build()
+            .clocks;
     }
 });
