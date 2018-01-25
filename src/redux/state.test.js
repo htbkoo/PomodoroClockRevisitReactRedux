@@ -1,6 +1,6 @@
 // @flow
 
-import type {State} from "./state";
+import type {State, WithClockId} from "./state";
 import {newInitialStateBuilder, StateBuilder} from "./state";
 
 describe('state', function () {
@@ -16,7 +16,10 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: []
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
                 },
                 stateBuilder: new StateBuilder()
             },
@@ -30,7 +33,10 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: []
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
                 },
                 stateBuilder: new StateBuilder().withTime(1000)
             },
@@ -44,7 +50,10 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: []
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
                 },
                 stateBuilder: new StateBuilder().withIsCounting(true)
             },
@@ -58,7 +67,10 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: []
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
                 },
                 stateBuilder: new StateBuilder().withInterval(100)
             },
@@ -72,7 +84,10 @@ describe('state', function () {
                         originalTime: 100,
                         clockId: 0
                     },
-                    clocks: []
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
                 },
                 stateBuilder: new StateBuilder().withOriginalTime(100)
             }
@@ -90,7 +105,7 @@ describe('state', function () {
         describe("addClock", function () {
             it("should be able to build state with 1 clock by addClock", function () {
                 //    given
-                const dummyClock = Symbol("dummyClock");
+                const dummyClock: WithClockId = {id: "1"};
                 const expectedState = {
                     interval: 0,
                     session: {
@@ -99,7 +114,12 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: [dummyClock]
+                    clocks: {
+                        byId: {
+                            "1": dummyClock
+                        },
+                        allIds: ["1"]
+                    }
                 };
 
                 //    when
@@ -111,7 +131,7 @@ describe('state', function () {
 
             it("should be able to build state with 2 clocks by addClock twice", function () {
                 //    given
-                const dummyClock = Symbol("dummyClock"), dummyClock2 = Symbol("dummyClock2");
+                const dummyClock: WithClockId = {id: "dummyClock"}, dummyClock2: WithClockId = {id: "dummyClock2"};
                 const expectedState = {
                     interval: 0,
                     session: {
@@ -120,7 +140,13 @@ describe('state', function () {
                         originalTime: 0,
                         clockId: 0
                     },
-                    clocks: [dummyClock2, dummyClock]
+                    clocks: {
+                        byId: {
+                            "dummyClock2": dummyClock2,
+                            "dummyClock": dummyClock
+                        },
+                        allIds: ["dummyClock2", "dummyClock"]
+                    }
                 };
 
                 //    when

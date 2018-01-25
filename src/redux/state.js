@@ -7,7 +7,11 @@ export type Session = $ReadOnly<{
     +isCounting: boolean,
 }>;
 
-type ClockId = number;
+type ClockId = string;
+
+export type WithClockId = {
+    +id: ClockId
+};
 
 export type Clock = $ReadOnly<{
     +id: ClockId,
@@ -16,7 +20,12 @@ export type Clock = $ReadOnly<{
     +colour: string
 }>;
 
-export type Clocks = $ReadOnlyArray<Clock>;
+export type Clocks = $ReadOnly<{
+    +byId: $ReadOnly<{
+        [ClockId]: Clock
+    }>,
+    allIds: $ReadOnlyArray<ClockId>
+}>;
 
 type Interval = number;
 
@@ -35,11 +44,11 @@ export class StateBuilder {
     +getInterval: () => Interval;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
-    +addClock: (clock: any) => StateBuilder;
-    +getClocks: () => $ReadOnlyArray<Clock>;
+    +addClock: (clock: WithClockId) => StateBuilder;
+    +getClocks: () => Clocks;
 
     constructor() {
-        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _clocks = [];
+        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _clocks = {byId: {}, allIds: []};
         this.withTime = time => {
             _time = time;
             return this;
@@ -65,7 +74,8 @@ export class StateBuilder {
         this.getOriginalTime = () => _originalTime;
 
         this.addClock = clock => {
-            _clocks.push(clock);
+            _clocks.byId[clock.id] = clock;
+            _clocks.allIds.push(clock.id);
             return this;
         };
         this.getClocks = () => _clocks;
