@@ -5,6 +5,8 @@ import {newInitialStateBuilder, StateBuilder} from "./state";
 
 describe('state', function () {
     describe("StateBuilder", function () {
+        const dummyClock: WithClockId = {id: "dummyClock"}, dummyClock2: WithClockId = {id: "dummyClock2"};
+
         [
             {
                 testName: "default for builder",
@@ -90,6 +92,27 @@ describe('state', function () {
                     }
                 },
                 stateBuilder: new StateBuilder().withOriginalTime(100)
+            },
+            // addClock
+            {
+                testName: "addClock twice for 2 clocks",
+                expectedState: {
+                    interval: 0,
+                    session: {
+                        isCounting: false,
+                        time: 0,
+                        originalTime: 0,
+                        clockId: 0
+                    },
+                    clocks: {
+                        byId: {
+                            "dummyClock2": dummyClock2,
+                            "dummyClock": dummyClock
+                        },
+                        allIds: ["dummyClock2", "dummyClock"]
+                    }
+                },
+                stateBuilder: new StateBuilder().addClock(dummyClock2).addClock(dummyClock)
             }
         ].forEach(({testName, expectedState, stateBuilder}: { testName: string, expectedState: State, stateBuilder: StateBuilder }) =>
             it(`should be able to build state - testing ${testName}`, function () {
@@ -124,33 +147,6 @@ describe('state', function () {
                             "1": dummyClock
                         },
                         allIds: ["1"]
-                    }
-                };
-                expect(state).toEqual(expectedState);
-            });
-
-            it("should be able to build state with 2 clocks by addClock twice", function () {
-                //    given
-                const dummyClock: WithClockId = {id: "dummyClock"}, dummyClock2: WithClockId = {id: "dummyClock2"};
-
-                //    when
-                let state: State = new StateBuilder().addClock(dummyClock2).addClock(dummyClock).build();
-
-                //    then
-                const expectedState = {
-                    interval: 0,
-                    session: {
-                        isCounting: false,
-                        time: 0,
-                        originalTime: 0,
-                        clockId: 0
-                    },
-                    clocks: {
-                        byId: {
-                            "dummyClock2": dummyClock2,
-                            "dummyClock": dummyClock
-                        },
-                        allIds: ["dummyClock2", "dummyClock"]
                     }
                 };
                 expect(state).toEqual(expectedState);
