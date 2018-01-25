@@ -2,7 +2,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import type {Clock as ClockState, Clocks, State} from "../redux/state";
+import type {Clock as ClockState, ClockId, Clocks, State} from "../redux/state";
 
 import Clock from "./Clock";
 
@@ -15,7 +15,7 @@ type Props = StateProps;
 export const mapStateToProps = (state: State): StateProps => ({clocks: state.clocks});
 
 export const ClocksListComponent = (props: Props): React$Element<any> => {
-    let clocks = props.clocks.map((clock: ClockState) => <Clock key={clock.id} clock={clock}/>);
+    let clocks = props.clocks.allIds.map((id: ClockId) => <Clock key={id} clock={props.clocks.byId[id]}/>);
     return (
         <div id="clocks-list" className="ClocksList">{clocks}</div>
     )

@@ -13,11 +13,29 @@ describe('ClocksList', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
-            const clocks: Clocks = [mockClock("Clock1"), mockClock("Clock2")];
-            const state = clocks.reduce((builder: StateBuilder, clock: ClockState) => {
-                builder.addClock(clock);
-                return builder;
-            }, new StateBuilder()).build();
+            const clocks: Clocks = {
+                byId:{
+                    "clock1": mockClock("clock1"),
+                    "clock2": mockClock("clock2")
+                },
+                allIds:["clock1", "clock2"]
+            };
+            const state = {
+                interval: 0,
+                session: {
+                    isCounting: true,
+                    time: 0,
+                    originalTime: 0,
+                    clockId: 0
+                },
+                clocks: {
+                    byId:{
+                        "clock1": mockClock("clock1"),
+                        "clock2": mockClock("clock2")
+                    },
+                    allIds:["clock1", "clock2"]
+                }
+            };
 
             //    when
             let props = mapStateToProps(state);
