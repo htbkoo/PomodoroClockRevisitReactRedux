@@ -10,7 +10,7 @@ type Props = {
 
 export const mapStateToProps = (state: State): Props => ({time: state.session.time});
 export const TimerComponent = (props: Props): React$Element<any> => (
-    <div id="clock-time" className="Clock">{formatTime(props.time)}</div>
+    <div id="clock-time" className="Timer">{formatTime(props.time)}</div>
 );
 
 // Untested
