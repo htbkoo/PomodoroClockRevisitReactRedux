@@ -1,11 +1,11 @@
 // @flow
 
-import type {State, WithClockId} from "./state";
+import type {Clock, State} from "./state";
 import {newInitialStateBuilder, StateBuilder} from "./state";
 
 describe('state', function () {
     describe("StateBuilder", function () {
-        const dummyClock: WithClockId = {id: "dummyClock"}, dummyClock2: WithClockId = {id: "dummyClock2"};
+        const dummyClock: Clock = mockClock("dummyClock"), dummyClock2: Clock = mockClock("dummyClock2");
 
         [
             {
@@ -111,7 +111,7 @@ describe('state', function () {
                         allIds: ["dummyClock"]
                     }
                 },
-                stateBuilder:  new StateBuilder().addClock(dummyClock)
+                stateBuilder: new StateBuilder().addClock(dummyClock)
             },
             {
                 testName: "addClock twice for 2 clocks",
@@ -143,6 +143,12 @@ describe('state', function () {
                 expect(state).toEqual(expectedState);
             })
         );
+
+        // Simple mock clock so need to fake the flow type
+        //$FlowFixMe
+        function mockClock(id): Clock {
+            return {id};
+        }
     });
 
     describe('getInitialStateBuilder', function () {
