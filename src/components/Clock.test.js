@@ -2,6 +2,7 @@
 
 import React from "react";
 import {shallow} from "enzyme";
+import {FormControl} from "react-bootstrap";
 
 import Clock, {ClockComponent} from "./Clock";
 import type {Clock as ClockState} from "../redux/state";
@@ -22,9 +23,14 @@ describe('Clock', function () {
             let clock = shallow(<ClockComponent clock={clockProps}/>);
 
             //    then
-            expect(clock).toIncludeText(colour);
-            expect(clock).toIncludeText(duration.toString());
-            expect(clock).toIncludeText(name);
+            let formControls = clock.find(FormControl);
+            [
+                name,
+                duration,
+                colour,
+            ].forEach((value, index) =>
+                expect(formControls.at(index)).toHaveProp("value", value)
+            );
         });
     });
 });
