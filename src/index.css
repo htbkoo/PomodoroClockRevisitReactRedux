@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    padding: 10%;
+    padding: 5%;
     background-color: black;
     overflow-y: hidden;
 
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    height: 70%;
+    height: 100%;
     width: 70%;
 
     border: darkgray 5px solid;
