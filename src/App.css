@@ -23,6 +23,22 @@
     flex-direction: row;
 }
 
+.Clock {
+    border-radius: 3%;
+    background-color: lightgrey;
+    border: darkgray 5px solid;
+}
+
+.Clock form {
+    margin: 5%;
+}
+
+.Timer {
+    padding: 5%;
+    background-color: lightgrey;
+    border: darkgray 5px solid;
+}
+
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
@@ -57,7 +73,7 @@
     flex-direction: row;
 }
 
-#clock-time{
+#clock-time {
     font-size: xx-large;
 }
 

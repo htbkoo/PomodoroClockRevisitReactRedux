@@ -12,7 +12,7 @@ type Props = $ReadOnly<{
 
 // export const mapDispatchToProps = (state: State): DispatchProps => ({});
 export const ClockComponent = (props: Props): React$Element<any> => (
-    <div>
+    <div className="Clock">
         <Form horizontal>
             <FormGroup controlId="formHorizontalName" className="clocks-list-clock-name">
                 <Col componentClass={ControlLabel} sm={3}>
