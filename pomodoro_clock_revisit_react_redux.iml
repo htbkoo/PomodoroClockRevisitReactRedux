@@ -10,11 +10,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mocha-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="sinon-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="jasmine-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="@types/jest" level="application" />
-    <orderEntry type="library" name="@types/react" level="application" />
     <orderEntry type="library" name="@types/enzyme" level="application" />
-    <orderEntry type="library" name="@types/redux-mock-store" level="application" />
     <orderEntry type="library" name="jest-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="enzyme-DefinitelyTyped" level="application" />
   </component>
