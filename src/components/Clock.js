@@ -14,7 +14,7 @@ type Props = $ReadOnly<{
 export const ClockComponent = (props: Props): React$Element<any> => (
     <div className="Clock">
         <Form horizontal>
-            <FormGroup controlId="formHorizontalName" className="clocks-list-clock-name">
+            <FormGroup controlId="formHorizontalName" className="clocks-list-clockName">
                 <Col componentClass={ControlLabel} sm={1}/>
                 <Col sm={10}>
                     <FormControl
@@ -25,7 +25,7 @@ export const ClockComponent = (props: Props): React$Element<any> => (
                     />
                 </Col>
             </FormGroup>
-            <FormGroup controlId="formHorizontalDuration" className="clocks-list-clock-duration">
+            <FormGroup controlId="formHorizontalDuration" className="clocks-list-clockDuration">
                 <Col componentClass={ControlLabel} sm={3}>
                     Duration
                 </Col>
@@ -38,7 +38,7 @@ export const ClockComponent = (props: Props): React$Element<any> => (
                     />
                 </Col>
             </FormGroup>
-            <FormGroup controlId="formHorizontalDuration" className="clocks-list-clock-colour">
+            <FormGroup controlId="formHorizontalColour" className="clocks-list-clockColour">
                 <Col componentClass={ControlLabel} sm={3}>
                     Colour
                 </Col>
@@ -46,7 +46,7 @@ export const ClockComponent = (props: Props): React$Element<any> => (
                     <FormControl
                         type="text"
                         value={props.clock.colour}
-                        placeholder="Duration"
+                        placeholder="Colour"
                         onChange={NO_OP()}
                     />
                 </Col>
