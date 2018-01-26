@@ -15,10 +15,8 @@ export const ClockComponent = (props: Props): React$Element<any> => (
     <div className="Clock">
         <Form horizontal>
             <FormGroup controlId="formHorizontalName" className="clocks-list-clock-name">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Name
-                </Col>
-                <Col sm={9}>
+                <Col componentClass={ControlLabel} sm={1}/>
+                <Col sm={10}>
                     <FormControl
                         type="text"
                         value={props.clock.name}
