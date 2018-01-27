@@ -12,20 +12,29 @@ type Props = $ReadOnly<{
 
 // export const mapDispatchToProps = (state: State): DispatchProps => ({});
 export const ClockComponent = (props: Props): React$Element<any> => {
+    let formGroups = [
+        {key: "name", labelSize: 1, controlSize: 10}
+    ].map(({key, label, labelSize, controlSize}: { key: string, label?: string, labelSize: number, controlSize: number }, index) => {
+        let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
+        return (
+            <FormGroup controlId={`formHorizontal${capitalizedKey}`} className={`clocks-list-clock-${key}`} key={index}>
+                <Col componentClass={ControlLabel} sm={labelSize}>{label}</Col>
+                <Col sm={controlSize}>
+                    <FormControl
+                        type="text"
+                        value={props.clock[key]}
+                        placeholder={capitalizedKey}
+                        onChange={NO_OP}
+                    />
+                </Col>
+            </FormGroup>
+        )
+    });
+
     return (
         <div className="Clock">
             <Form horizontal>
-                <FormGroup controlId="formHorizontalName" className="clocks-list-clock-name">
-                    <Col componentClass={ControlLabel} sm={1}/>
-                    <Col sm={10}>
-                        <FormControl
-                            type="text"
-                            value={props.clock.name}
-                            placeholder="Name"
-                            onChange={NO_OP()}
-                        />
-                    </Col>
-                </FormGroup>
+                {formGroups}
                 <FormGroup controlId="formHorizontalDuration" className="clocks-list-clock-duration">
                     <Col componentClass={ControlLabel} sm={3}>
                         Duration
@@ -35,7 +44,7 @@ export const ClockComponent = (props: Props): React$Element<any> => {
                             type="text"
                             value={props.clock.duration}
                             placeholder="Duration"
-                            onChange={NO_OP()}
+                            onChange={NO_OP}
                         />
                     </Col>
                 </FormGroup>
@@ -48,7 +57,7 @@ export const ClockComponent = (props: Props): React$Element<any> => {
                             type="text"
                             value={props.clock.colour}
                             placeholder="Colour"
-                            onChange={NO_OP()}
+                            onChange={NO_OP}
                         />
                     </Col>
                 </FormGroup>
