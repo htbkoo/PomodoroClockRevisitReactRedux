@@ -21,7 +21,7 @@ describe('ClocksList', function () {
                     isCounting: true,
                     time: 0,
                     originalTime: 0,
-                    clockId: 0
+                    clockId: "0"
                 },
                 clocks: {
                     byId: {
