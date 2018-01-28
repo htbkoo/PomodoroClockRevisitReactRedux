@@ -3,7 +3,7 @@
 export type Session = $ReadOnly<{
     +time: number,
     +originalTime: number,
-    +clockId: number,
+    +clockId: ClockId,
     +isCounting: boolean,
 }>;
 
@@ -88,7 +88,7 @@ export class StateBuilder {
                 isCounting: this.getIsCounting(),
                 time: this.getTime(),
                 originalTime: this.getOriginalTime(),
-                clockId: 0
+                clockId: "0"
             },
             clocks: this.getClocks()
         }

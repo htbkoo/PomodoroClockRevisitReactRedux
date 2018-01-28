@@ -16,7 +16,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 0,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {},
@@ -33,7 +33,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 1000,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {},
@@ -50,7 +50,7 @@ describe('state', function () {
                         isCounting: true,
                         time: 0,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {},
@@ -67,7 +67,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 0,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {},
@@ -84,7 +84,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 0,
                         originalTime: 100,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {},
@@ -102,7 +102,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 0,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {
@@ -121,7 +121,7 @@ describe('state', function () {
                         isCounting: false,
                         time: 0,
                         originalTime: 0,
-                        clockId: 0
+                        clockId: "0"
                     },
                     clocks: {
                         byId: {
@@ -166,7 +166,7 @@ describe('state', function () {
                     isCounting: false,
                     time: 1500000,
                     originalTime: 1500000,
-                    clockId: 0
+                    clockId: "0"
                 },
                 clocks: {
                     byId: {
