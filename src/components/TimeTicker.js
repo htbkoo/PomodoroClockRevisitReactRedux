@@ -39,23 +39,27 @@ export class TimeTickerComponent extends Component<Props> {
     componentDidMount() {
         const interval = this.props.interval;
         // TODO: improve performance?
-        const intervalId = setInterval(() => {
-            if (this.props.isCounting) {
-                if (willTimeUp(this.props)) {
-                    this.props.onTimesUp();
-                } else {
-                    this.props.onTimeTick(interval)
+        if (interval > 0) {
+            const intervalId = setInterval(() => {
+                if (this.props.isCounting) {
+                    if (willTimeUp(this.props)) {
+                        this.props.onTimesUp();
+                    } else {
+                        this.props.onTimeTick(interval)
+                    }
                 }
-            }
-        }, interval);
+            }, interval);
 
-        // Untested
-        this.getIntervalId = () => intervalId;
+            // Untested
+            this.getIntervalId = () => intervalId;
+        }
     }
 
     // Untested
     componentWillUnmount() {
-        clearInterval(this.getIntervalId());
+        if (typeof this.getIntervalId !== "undefined") {
+            clearInterval(this.getIntervalId());
+        }
     }
 
     render() {
