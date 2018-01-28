@@ -18,6 +18,7 @@ export const ClockComponent = (props: Props): React$Element<any> => {
         {key: "colour", label: "Colour:", labelSize: 3, controlSize: 9}
     ].map(({key, label, labelSize, controlSize}: { key: string, label?: string, labelSize: number, controlSize: number }, index) => {
         let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
+        // Untested
         return (
             <FormGroup controlId={`formHorizontal${capitalizedKey}`} className={`clocks-list-clock-${key}`} key={index}>
                 <Col componentClass={ControlLabel} sm={labelSize}>{label}</Col>
