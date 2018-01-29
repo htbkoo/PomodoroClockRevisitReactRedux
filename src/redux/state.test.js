@@ -1,7 +1,7 @@
 // @flow
 
 import type {Clock, State} from "./state";
-import {newInitialStateBuilder, StateBuilder} from "./state";
+import {newInitialState, StateBuilder} from "./state";
 
 describe('state', function () {
     describe("StateBuilder", function () {
@@ -168,13 +168,12 @@ describe('state', function () {
         }
     });
 
-    describe('getInitialStateBuilder', function () {
-        it('should expose getInitialStateBuilder as the supplier to the initialStateBuilder', function () {
+    describe('getInitialState', function () {
+        it('should expose newInitialState as the supplier to a new instance of initialState', function () {
             //    given
-            const initialStateBuilder = newInitialStateBuilder();
 
             //    when
-            let nextState: State = initialStateBuilder.build();
+            const initialState = newInitialState();
 
             //    then
             const expectedInitialState: State = {
@@ -203,7 +202,7 @@ describe('state', function () {
                     allIds: ["1", "2"]
                 }
             };
-            expect(nextState).toEqual(expectedInitialState);
+            expect(initialState).toEqual(expectedInitialState);
         });
     });
 });

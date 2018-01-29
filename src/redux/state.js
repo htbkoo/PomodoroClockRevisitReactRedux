@@ -50,7 +50,8 @@ export class StateBuilder {
     +getClocks: () => Clocks;
 
     constructor() {
-        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _sessionClockId = "0", _clocks = {byId: {}, allIds: []};
+        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _sessionClockId = "0",
+            _clocks = {byId: {}, allIds: []};
         this.withTime = time => {
             _time = time;
             return this;
@@ -118,3 +119,30 @@ const pomodoroClock = {
 export const newInitialStateBuilder = (): StateBuilder => new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100)
     .addClock(pomodoroClock)
     .addClock(breakClock);
+
+export const newInitialState = (): State => ({
+    interval: 100,
+    session: {
+        isCounting: false,
+        time: 1500000,
+        originalTime: 1500000,
+        clockId: "0"
+    },
+    clocks: {
+        byId: {
+            "1": {
+                id: "1",
+                duration: 1500000,
+                name: "pomodoro",
+                colour: "red"
+            },
+            "2": {
+                id: "2",
+                duration: 300000,
+                name: "break",
+                colour: "green"
+            }
+        },
+        allIds: ["1", "2"]
+    }
+});
