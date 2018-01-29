@@ -4,11 +4,11 @@ import {createStore} from "redux";
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import type {State} from "./state";
-import {newInitialStateBuilder} from "./state";
+import {newInitialState} from "./state";
 import type {Action} from "./actions";
 import defaultReducers from "./reducers";
 
-const defaultInitialState = newInitialStateBuilder().build();
+const defaultInitialState = newInitialState();
 
 function newStore(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     if (typeof window !== 'undefined') {
