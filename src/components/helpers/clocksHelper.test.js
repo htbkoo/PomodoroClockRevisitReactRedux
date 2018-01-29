@@ -34,5 +34,19 @@ describe('clocksHelper', function () {
             // then
             expect(nextDuration).toEqual(expectedNextDuration);
         });
+
+        it('should return the first clockId if there is only one clock', function () {
+            // given
+            const sessionClockId = "1", expectedNextDuration = 100;
+            const clocks = new StateBuilder()
+                .addClock({id: sessionClockId, duration: expectedNextDuration})
+                .build().clocks;
+
+            // when
+            let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+
+            // then
+            expect(nextDuration).toEqual(expectedNextDuration);
+        });
     });
 });
