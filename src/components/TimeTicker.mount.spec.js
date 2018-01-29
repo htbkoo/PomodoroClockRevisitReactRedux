@@ -16,7 +16,7 @@ describe('TimeTicker - mount test', function () {
 
             //    when
             mount(<TimeTickerComponent isCounting={isCounting} interval={interval} time={someTime}
-                                       onTimeTick={spyOnTimeTick} onTimesUp={NO_OP}/>);
+                                       onTimeTick={spyOnTimeTick} onTimesUp={NO_OP} nextDuration={0}/>);
 
             //    then
             expect(spyOnTimeTick).toHaveBeenCalledTimes(0);
@@ -39,7 +39,7 @@ describe('TimeTicker - mount test', function () {
 
             //    when
             mount(<TimeTickerComponent isCounting={isCounting} interval={interval} time={someTime}
-                                       onTimeTick={spyOnTimeTick} onTimesUp={NO_OP}/>);
+                                       onTimeTick={spyOnTimeTick} onTimesUp={NO_OP} nextDuration={0}/>);
 
             //    then
             expect(spyOnTimeTick).toHaveBeenCalledTimes(0);
@@ -51,18 +51,21 @@ describe('TimeTicker - mount test', function () {
             expect(spyOnTimeTick).toHaveBeenCalledTimes(0);
         });
 
-        it('should call props.onTimesUp() when isCounting=true and props.time <= props.interval', function () {
+        it('should call props.onTimesUp(props.nextDuration) when isCounting=true and props.time <= props.interval', function () {
             //    given
-            const spyOnTimeTick = jest.fn(), spyOnTimesUp = jest.fn(), interval = 100, isCounting = true;
+            const spyOnTimeTick = jest.fn(), spyOnTimesUp = jest.fn(), interval = 100, isCounting = true,
+                nextDuration = 10000;
 
             //    when
             mount(<TimeTickerComponent isCounting={isCounting} interval={interval} time={interval}
-                                       onTimeTick={spyOnTimeTick} onTimesUp={spyOnTimesUp}/>);
+                                       onTimeTick={spyOnTimeTick} onTimesUp={spyOnTimesUp}
+                                       nextDuration={nextDuration}/>);
             expect(spyOnTimesUp).toHaveBeenCalledTimes(0);
             jest.runTimersToTime(interval);
 
             //    then
             expect(spyOnTimesUp).toHaveBeenCalledTimes(1);
+            expect(spyOnTimesUp).toHaveBeenCalledWith(nextDuration);
             expect(spyOnTimeTick).toHaveBeenCalledTimes(0);
         });
 
@@ -72,7 +75,7 @@ describe('TimeTicker - mount test', function () {
 
             //    when
             mount(<TimeTickerComponent isCounting={isCounting} interval={interval} time={interval}
-                                       onTimeTick={spyOnTimeTick} onTimesUp={spyOnTimesUp}/>);
+                                       onTimeTick={spyOnTimeTick} onTimesUp={spyOnTimesUp} nextDuration={0}/>);
             expect(spyOnTimesUp).toHaveBeenCalledTimes(0);
             jest.runTimersToTime(interval);
 

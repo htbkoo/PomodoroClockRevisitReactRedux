@@ -46,7 +46,7 @@ export class TimeTickerComponent extends Component<Props> {
             const intervalId = setInterval(() => {
                 if (this.props.isCounting) {
                     if (willTimeUp(this.props)) {
-                        this.props.onTimesUp();
+                        this.props.onTimesUp(this.props.nextDuration);
                     } else {
                         this.props.onTimeTick(interval)
                     }
