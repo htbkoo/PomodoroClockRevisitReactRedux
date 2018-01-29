@@ -93,6 +93,23 @@ describe('state', function () {
                 },
                 stateBuilder: new StateBuilder().withOriginalTime(100)
             },
+            {
+                testName: "withSessionClockId",
+                expectedState: {
+                    interval: 0,
+                    session: {
+                        isCounting: false,
+                        time: 0,
+                        originalTime: 0,
+                        clockId: "1"
+                    },
+                    clocks: {
+                        byId: {},
+                        allIds: []
+                    }
+                },
+                stateBuilder: new StateBuilder().withSessionClockId("1")
+            },
             // addClock
             {
                 testName: "addClock",
