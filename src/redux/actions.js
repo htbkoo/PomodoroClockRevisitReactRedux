@@ -5,7 +5,7 @@ export type StartCountingAction = { type: "StartCounting" };
 export type PauseCountingAction = { type: "PauseCounting" };
 export type StopCountingAction = { type: "StopCounting" };
 export type TickTimeAction = { type: "TickTime", lapse: number };
-export type TimesUpAction = { type: "TimesUp" };
+export type TimesUpAction = { type: "TimesUp", nextDuration: number };
 
 export type Action =
     | StartCountingAction
@@ -40,6 +40,6 @@ export function tickTime(lapse: number): TickTimeAction {
     return {type: actionTypes.TickTime, lapse};
 }
 
-export function timesUp(): TimesUpAction {
-    return {type: actionTypes.TimesUp};
+export function timesUp(nextDuration: number): TimesUpAction {
+    return {type: actionTypes.TimesUp, nextDuration};
 }
