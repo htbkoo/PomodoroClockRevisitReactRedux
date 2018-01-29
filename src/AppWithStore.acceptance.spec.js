@@ -115,7 +115,7 @@ describe('AppWithStore - acceptance test', function () {
         describe("clocks", function () {
             it('should have a list of two clocks with one for "pomodoro session" and one for "short break" by default', function () {
                 // given
-                const {store, app} = getStoreAndApp();
+                const {app} = getStoreAndApp();
 
                 // when
                 let clocksList = app.find(ClocksList);
