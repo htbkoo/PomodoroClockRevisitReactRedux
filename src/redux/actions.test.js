@@ -25,8 +25,8 @@ describe('actions', function () {
         },
         {
             testPurpose: "an action for times up",
-            expectedAction: {type: "TimesUp"},
-            actualAction: timesUp()
+            expectedAction: {type: "TimesUp", nextDuration: 100},
+            actualAction: timesUp(100)
         }
     ].forEach(({testPurpose, expectedAction, actualAction}) =>
         it(`should create ${testPurpose}`, function () {
