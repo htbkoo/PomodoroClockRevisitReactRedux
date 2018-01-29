@@ -39,14 +39,14 @@ describe('TimeTicker', function () {
 
         it(`should mapDispatchToProps and have onTimesUp`, function () {
             //    given
-            const spyDispatch = jest.fn();
+            const spyDispatch = jest.fn(), nextDuration = 100;
 
             //    when
             let props = mapDispatchToProps(spyDispatch);
-            props.onTimesUp();
+            props.onTimesUp(nextDuration);
 
             //    then
-            expect(spyDispatch).toHaveBeenCalledWith(timesUp());
+            expect(spyDispatch).toHaveBeenCalledWith(timesUp(nextDuration));
         });
     });
 });
