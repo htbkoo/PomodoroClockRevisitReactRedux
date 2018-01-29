@@ -13,7 +13,7 @@ type StateProps = {
 
 type DispatchProps = {
     +onTimeTick: (lapse: number) => void,
-    +onTimesUp: () => void,
+    +onTimesUp: (nextDuration: number) => void,
 }
 
 type Props = StateProps & DispatchProps;
@@ -28,8 +28,8 @@ export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));
     },
-    onTimesUp() {
-        dispatch(timesUp());
+    onTimesUp(nextDuration: number) {
+        dispatch(timesUp(nextDuration));
     },
 });
 
