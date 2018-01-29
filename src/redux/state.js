@@ -44,11 +44,13 @@ export class StateBuilder {
     +getInterval: () => Interval;
     +withOriginalTime: (originalTime: number) => StateBuilder;
     +getOriginalTime: () => number;
+    +withSessionClockId: (clockId: ClockId) => StateBuilder;
+    +getSessionClockId: () => ClockId;
     +addClock: (clock: WithClockId) => StateBuilder;
     +getClocks: () => Clocks;
 
     constructor() {
-        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _clocks = {byId: {}, allIds: []};
+        let _time = 0, _isCounting = false, _interval: number = 0, _originalTime = 0, _sessionClockId = "0", _clocks = {byId: {}, allIds: []};
         this.withTime = time => {
             _time = time;
             return this;
@@ -73,6 +75,12 @@ export class StateBuilder {
         };
         this.getOriginalTime = () => _originalTime;
 
+        this.withSessionClockId = sessionClockId => {
+            _sessionClockId = sessionClockId;
+            return this;
+        };
+        this.getSessionClockId = () => _sessionClockId;
+
         this.addClock = clock => {
             _clocks.byId[clock.id] = clock;
             _clocks.allIds.push(clock.id);
@@ -88,7 +96,7 @@ export class StateBuilder {
                 isCounting: this.getIsCounting(),
                 time: this.getTime(),
                 originalTime: this.getOriginalTime(),
-                clockId: "0"
+                clockId: this.getSessionClockId()
             },
             clocks: this.getClocks()
         }
