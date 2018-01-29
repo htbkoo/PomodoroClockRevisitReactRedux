@@ -1,8 +1,11 @@
 // @flow
+import {sinonTest} from "../testUtils/sinonWithTest";
 
 import {mapStateToProps, mapDispatchToProps} from "./TimeTicker";
+
 import {StateBuilder} from "../redux/state";
 import {tickTime, timesUp} from "../redux/actions";
+import clocksHelper from "./helpers/clocksHelper";
 
 describe('TimeTicker', function () {
     describe("mapStateToProps", function () {
@@ -10,17 +13,21 @@ describe('TimeTicker', function () {
             true,
             false
         ].forEach(isCounting =>
-            it(`should mapStateToProps which props={isCounting: ${String(isCounting)}, interval=100, time=1000}`, function () {
+            it(`should mapStateToProps which props={isCounting: ${String(isCounting)}, interval=100, time=1000}`, sinonTest(function () {
                 //    given
-                const interval = 100, time = 1000;
-                const state = new StateBuilder().withIsCounting(isCounting).withInterval(interval).withTime(time).build();
+                const interval = 100, time = 1000, sessionClockId = "someId", mockClock = {id: sessionClockId};
+                const state = new StateBuilder().withIsCounting(isCounting).withInterval(interval).withTime(time)
+                    .withSessionClockId(sessionClockId).addClock(mockClock)
+                    .build();
+                const nextDuration = 10000;
+                this.stub(clocksHelper, "getNextDuration").withArgs(state.clocks, sessionClockId).returns(nextDuration);
 
                 //    when
                 let props = mapStateToProps(state);
 
                 //    then
-                expect(props).toEqual({isCounting, interval, time});
-            })
+                expect(props).toEqual({isCounting, interval, time, nextDuration});
+            }))
         );
     });
 

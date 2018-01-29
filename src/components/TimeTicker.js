@@ -4,11 +4,13 @@ import {connect} from "react-redux";
 
 import type {State} from "../redux/state";
 import {tickTime, timesUp} from "../redux/actions";
+import clocksHelper from "./helpers/clocksHelper";
 
 type StateProps = {
     +isCounting: boolean,
     +interval: number,
     +time: number,
+    +nextDuration: number,
 }
 
 type DispatchProps = {
@@ -21,7 +23,8 @@ type Props = StateProps & DispatchProps;
 export const mapStateToProps = (state: State): StateProps => ({
     isCounting: state.session.isCounting,
     interval: state.interval,
-    time: state.session.time
+    time: state.session.time,
+    nextDuration: clocksHelper.getNextDuration(state.clocks, state.session.clockId)
 });
 
 export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
