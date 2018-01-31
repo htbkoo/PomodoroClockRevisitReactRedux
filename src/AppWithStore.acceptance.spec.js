@@ -9,6 +9,7 @@ import type {State} from "./redux/state";
 import {newInitialStateBuilder} from "./redux/state";
 import ClocksList from "./components/ClocksList";
 import Clock from "./components/Clock";
+import {isDefinedAndNotNull} from "./utils/objectUtil";
 
 jest.useFakeTimers();
 
@@ -161,9 +162,9 @@ describe('AppWithStore - acceptance test', function () {
     }
 
     function getStore(predefinedState: ?State) {
-        return ((typeof predefinedState === "undefined") || (predefinedState === null))
-            ? newStore()
-            : newStore(predefinedState);
+        return isDefinedAndNotNull(predefinedState)
+            ? newStore(predefinedState)
+            : newStore();
     }
 
     function assertStoreState(store) {
