@@ -6,7 +6,8 @@ import * as redux from "redux";
 import {newStore} from "./storeFactory";
 import reducers from "./reducers";
 import type {State} from "./state";
-import {newInitialState, StateBuilder} from "./state";
+import {newInitialState} from "./state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 
 describe('storeFactory', function () {
     describe("newStoreWithState", function () {

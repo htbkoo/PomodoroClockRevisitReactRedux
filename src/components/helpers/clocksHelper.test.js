@@ -1,6 +1,6 @@
 // @flow
 
-import {StateBuilder} from "../../redux/state";
+import {StateBuilder} from "../../testUtils/StateBuilder";
 import clocksHelper from "./clocksHelper";
 
 describe('clocksHelper', function () {

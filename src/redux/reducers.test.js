@@ -1,6 +1,6 @@
 // @flow
 import type {State} from "./state";
-import {StateBuilder} from "./state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 import type {Action} from "./actions";
 import * as actions from "./actions";
 

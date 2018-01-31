@@ -5,7 +5,7 @@ import {shallow} from "enzyme";
 
 import {ClocksListComponent, mapStateToProps} from "./ClocksList";
 import type {Clock as ClockState, Clocks} from "../redux/state";
-import {StateBuilder} from "../redux/state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 
 import Clock from "./Clock";
 
