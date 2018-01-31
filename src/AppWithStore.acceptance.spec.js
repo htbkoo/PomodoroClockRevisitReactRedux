@@ -163,6 +163,9 @@ describe('AppWithStore - acceptance test', function () {
 
     function getStore(predefinedState: ?State) {
         return isDefinedAndNotNull(predefinedState)
+            // Flow cannot handle this case - predefinedState is defined and not null here
+            // Reference: https://flow.org/en/docs/types/maybe/
+            //$FlowFixMe
             ? newStore(predefinedState)
             : newStore();
     }
