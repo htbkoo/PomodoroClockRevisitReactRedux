@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import type {State} from "../redux/state";
 import {tickTime, timesUp} from "../redux/actions";
 import clocksHelper from "./helpers/clocksHelper";
+import {isDefinedAndNotNull} from "../utils/objectUtil";
 
 type StateProps = {
     +isCounting: boolean,
@@ -60,7 +61,7 @@ export class TimeTickerComponent extends Component<Props> {
 
     // Untested
     componentWillUnmount() {
-        if (typeof this.getIntervalId !== "undefined") {
+        if (isDefinedAndNotNull(this.getIntervalId)) {
             clearInterval(this.getIntervalId());
         }
     }
