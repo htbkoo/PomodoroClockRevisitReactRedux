@@ -3,11 +3,11 @@
 import {combineReducers} from "redux";
 
 import type {Clocks, Session} from "./state";
-import {newInitialStateBuilder} from "./state";
+import {newInitialState} from "./state";
 import type {Action} from "./actions";
 import {actionTypes} from "./actions";
 
-const defaultInitialState = newInitialStateBuilder().build();
+const defaultInitialState = newInitialState();
 
 export default combineReducers({
     interval,
