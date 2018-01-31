@@ -48,5 +48,19 @@ describe('clocksHelper', function () {
             // then
             expect(nextDuration).toEqual(expectedNextDuration);
         });
+
+        describe('exception cases', function () {
+            it('should return 0 if there are no clocks', function () {
+                // given
+                const sessionClockId = "", expectedNextDuration = 0;
+                const clocks = new StateBuilder().build().clocks;
+
+                // when
+                let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+
+                // then
+                expect(nextDuration).toEqual(expectedNextDuration);
+            });
+        });
     });
 });
