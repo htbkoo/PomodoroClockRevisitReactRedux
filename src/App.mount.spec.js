@@ -4,7 +4,7 @@ import React from 'react';
 import {mount} from "enzyme";
 
 import App from './App';
-import {StateBuilder} from "./redux/state";
+import {StateBuilder} from "./testUtils/StateBuilder";
 import {createMockStore, getDefaultStore} from "./testUtils/mockStoreFactory";
 
 describe('App - mount test', function () {

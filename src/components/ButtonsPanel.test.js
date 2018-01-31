@@ -5,7 +5,7 @@ import {shallow} from "enzyme";
 
 import {mapStateToProps, ButtonsPanelComponent} from "./ButtonsPanel";
 
-import {StateBuilder} from "../redux/state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 import StartButton from "./StartButton";
 import PauseButton from "./PauseButton";
 import StopButton from "./StopButton";

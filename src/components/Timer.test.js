@@ -4,7 +4,7 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import {TimerComponent, mapStateToProps} from "./Timer";
-import {StateBuilder} from "../redux/state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 
 describe('Timer', function () {
     describe("mapStateToProps", function () {

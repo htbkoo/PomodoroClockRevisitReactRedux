@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 
-import {StateBuilder} from "../redux/state";
+import {StateBuilder} from "./StateBuilder";
 
 const middlewares = [];
 const createMockStore = configureMockStore(middlewares);

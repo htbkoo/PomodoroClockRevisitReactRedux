@@ -3,7 +3,7 @@ import {sinonTest} from "../testUtils/sinonWithTest";
 
 import {mapStateToProps, mapDispatchToProps} from "./TimeTicker";
 
-import {StateBuilder} from "../redux/state";
+import {StateBuilder} from "../testUtils/StateBuilder";
 import {tickTime, timesUp} from "../redux/actions";
 import clocksHelper from "./helpers/clocksHelper";
 
