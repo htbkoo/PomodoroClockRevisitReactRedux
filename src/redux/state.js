@@ -1,7 +1,5 @@
 // @flow
 
-import {StateBuilder} from "../testUtils/StateBuilder";
-
 export type Session = $ReadOnly<{
     +time: number,
     +originalTime: number,
@@ -36,22 +34,6 @@ export type State = $ReadOnly<{
     +session: Session,
     +clocks: Clocks
 }>;
-
-const pomodoroClock = {
-    id: "1",
-    duration: 1500000,
-    name: "pomodoro",
-    colour: "red"
-}, breakClock = {
-    id: "2",
-    duration: 300000,
-    name: "break",
-    colour: "green"
-};
-
-export const newInitialStateBuilder = (): StateBuilder => new StateBuilder().withTime(1500000).withOriginalTime(1500000).withInterval(100)
-    .addClock(pomodoroClock)
-    .addClock(breakClock);
 
 export const newInitialState = (): State => ({
     interval: 100,

@@ -6,14 +6,16 @@ import jsonpath from "jsonpath";
 import {newStore} from "./redux/storeFactory";
 import AppWithStore from "./components/AppWithStore";
 import type {State} from "./redux/state";
-import {newInitialStateBuilder} from "./redux/state";
 import ClocksList from "./components/ClocksList";
 import Clock from "./components/Clock";
 import {isDefinedAndNotNull} from "./utils/objectUtil";
+import {StateBuilder} from "./testUtils/StateBuilder";
+import {newInitialState} from "./redux/state";
 
 jest.useFakeTimers();
 
 describe('AppWithStore - acceptance test', function () {
+    const newInitialStateBuilder = (): StateBuilder => StateBuilder.baseOn(newInitialState());
     const isCountingState = newInitialStateBuilder().withIsCounting(true).build();
 
     describe("features", function () {
