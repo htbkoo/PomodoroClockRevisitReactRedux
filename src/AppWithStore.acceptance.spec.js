@@ -99,7 +99,7 @@ describe('AppWithStore - acceptance test', function () {
             it('should update state.isCounting to false when time = 0', function () {
                 //    given
                 const interval = 100,
-                    predefinedState = newInitialStateBuilder().withOriginalTime(interval).withTime(interval).withInterval(interval).withIsCounting(true).build();
+                    predefinedState = newInitialStateBuilder().withTime(interval).withInterval(interval).withSessionClockId("1").withIsCounting(true).build();
                 const {store} = getStoreAndApp(predefinedState);
                 assertStoreState(store)
                     .to.have("session.isCounting", true)
@@ -111,7 +111,7 @@ describe('AppWithStore - acceptance test', function () {
                 //    then
                 assertStoreState(store)
                     .to.have("session.isCounting", false)
-                    .and.have("session.time", 0);
+                    .and.have("session.time", 300000);
             });
         });
 
