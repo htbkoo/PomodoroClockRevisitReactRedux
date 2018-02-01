@@ -15,8 +15,8 @@ describe('actions', function () {
         },
         {
             testPurpose: "an action to stop counting",
-            expectedAction: {type: "StopCounting"},
-            actualAction: stopCounting()
+            expectedAction: {type: "StopCounting", originalTime: 300},
+            actualAction: stopCounting(300)
         },
         {
             testPurpose: "an action to tick Time",

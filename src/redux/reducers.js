@@ -26,7 +26,7 @@ function session(state: Session = defaultInitialState.session, action: Action): 
             return Object.assign({}, state, {isCounting});
         }
         case actionTypes.StopCounting: {
-            let time = state.originalTime;
+            let time = action.originalTime;
             let isCounting = false;
             return Object.assign({}, state, {time, isCounting});
         }
