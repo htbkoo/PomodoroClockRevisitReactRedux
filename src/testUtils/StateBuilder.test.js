@@ -1,4 +1,6 @@
 import {StateBuilder} from "./StateBuilder";
+import type {State} from "../redux/state";
+import {newInitialState} from "../redux/state";
 
 describe("StateBuilder", function () {
     const dummyClock: Clock = mockClock("dummyClock"), dummyClock2: Clock = mockClock("dummyClock2");
@@ -156,6 +158,19 @@ describe("StateBuilder", function () {
             expect(state).toEqual(expectedState);
         })
     );
+
+    describe("baseOn", function () {
+        it("should create a Builder when StateBuilder.baseOn(state)", function () {
+            //    given
+            const givenState = newInitialState();
+
+            //    when
+            let stateBuilder: StateBuilder = StateBuilder.baseOn(givenState);
+
+            //    then
+            expect(stateBuilder.build()).toEqual(givenState);
+        });
+    });
 
     // Simple mock clock so need to fake the flow type
     //$FlowFixMe
