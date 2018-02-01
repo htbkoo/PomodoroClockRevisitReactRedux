@@ -26,6 +26,7 @@
   "devDependencies": {
     "jest-enzyme": "^4.0.1",
     "jsonpath": "^1.0.0",
+    "merge-options": "^1.0.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.4.0",
     "sinon": "^4.1.3",
