@@ -32,8 +32,8 @@ export function pauseCounting(): PauseCountingAction {
     return {type: actionTypes.PauseCounting};
 }
 
-export function stopCounting(): StopCountingAction {
-    return {type: actionTypes.StopCounting};
+export function stopCounting(originalTime: number): StopCountingAction {
+    return {type: actionTypes.StopCounting, originalTime};
 }
 
 export function tickTime(lapse: number): TickTimeAction {

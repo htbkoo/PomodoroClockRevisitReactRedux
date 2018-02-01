@@ -43,9 +43,10 @@ describe('reducers', function () {
     describe('stopCounting', function () {
         it('should update state.session.isCounting to false and reset state.session.time by action.StopCountingAction', function () {
             //    given
-            const action: Action = actions.stopCounting();
-            const state: State = new StateBuilder().withIsCounting(true).withOriginalTime(1000).build();
-            const expectedNextState: State = new StateBuilder().withIsCounting(false).withOriginalTime(1000).withTime(1000).build();
+            const originalTime = 1000;
+            const action: Action = actions.stopCounting(originalTime);
+            const state: State = new StateBuilder().withIsCounting(true).build();
+            const expectedNextState: State = new StateBuilder().withIsCounting(false).withTime(originalTime).build();
 
             //    when
             let nextState: State = reducers(state, action);
