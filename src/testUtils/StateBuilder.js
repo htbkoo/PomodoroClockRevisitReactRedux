@@ -7,7 +7,6 @@ const emptyState = {
     session: {
         isCounting: false,
         time: 0,
-        originalTime: 0,
         clockId: "0"
     },
     clocks: {

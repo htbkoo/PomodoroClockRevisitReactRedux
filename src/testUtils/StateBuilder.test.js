@@ -1,5 +1,5 @@
 import {StateBuilder} from "./StateBuilder";
-import type {State} from "../redux/state";
+import type {Clock, State} from "../redux/state";
 import {newInitialState} from "../redux/state";
 
 describe("StateBuilder", function () {
@@ -13,7 +13,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: false,
                     time: 0,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {
@@ -30,7 +29,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: false,
                     time: 1000,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {
@@ -47,7 +45,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: true,
                     time: 0,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {
@@ -64,7 +61,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: false,
                     time: 0,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {
@@ -75,30 +71,12 @@ describe("StateBuilder", function () {
             stateBuilder: new StateBuilder().withInterval(100)
         },
         {
-            testName: "withOriginalTime",
-            expectedState: {
-                interval: 0,
-                session: {
-                    isCounting: false,
-                    time: 0,
-                    originalTime: 100,
-                    clockId: "0"
-                },
-                clocks: {
-                    byId: {},
-                    allIds: []
-                }
-            },
-            stateBuilder: new StateBuilder().withOriginalTime(100)
-        },
-        {
             testName: "withSessionClockId",
             expectedState: {
                 interval: 0,
                 session: {
                     isCounting: false,
                     time: 0,
-                    originalTime: 0,
                     clockId: "1"
                 },
                 clocks: {
@@ -116,7 +94,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: false,
                     time: 0,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {
@@ -135,7 +112,6 @@ describe("StateBuilder", function () {
                 session: {
                     isCounting: false,
                     time: 0,
-                    originalTime: 0,
                     clockId: "0"
                 },
                 clocks: {

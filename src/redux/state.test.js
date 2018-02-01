@@ -17,7 +17,6 @@ describe('state', function () {
                 session: {
                     isCounting: false,
                     time: 1500000,
-                    originalTime: 1500000,
                     clockId: "0"
                 },
                 clocks: {
