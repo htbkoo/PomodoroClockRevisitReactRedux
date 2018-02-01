@@ -4,8 +4,8 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import {ClocksListComponent, mapStateToProps} from "./ClocksList";
-import type {Clock as ClockState, Clocks} from "../redux/state";
-import {StateBuilder} from "../testUtils/StateBuilder";
+import type {Clocks} from "../redux/state";
+import {StateBuilder, mockClock} from "../testUtils/StateBuilder";
 
 import Clock from "./Clock";
 
@@ -75,12 +75,6 @@ describe('ClocksList', function () {
             })
         );
     });
-
-    // Simple mock clock so need to fake the flow type
-    //$FlowFixMe
-    function mockClock(id): ClockState {
-        return {id: id,};
-    }
 
     function clocks(...mockClocks) {
         const startWithNewBuilder = new StateBuilder();
