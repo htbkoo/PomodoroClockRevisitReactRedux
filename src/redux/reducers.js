@@ -35,7 +35,7 @@ function session(state: Session = defaultInitialState.session, action: Action): 
             return Object.assign({}, state, {time});
         }
         case actionTypes.TimesUp: {
-            let time = 0;
+            let time = action.nextDuration;
             let isCounting = false;
             return Object.assign({}, state, {time, isCounting});
         }

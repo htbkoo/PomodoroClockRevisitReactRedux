@@ -75,10 +75,10 @@ describe('reducers', function () {
     });
 
     describe('timesUp', function () {
-        it('should set state.session.time to 0 and state.session.isCounting to false when action.TimesUpAction()', function () {
+        it('should set state.session.time to nextDuration and state.session.isCounting to false when action.TimesUpAction()', function () {
             //    given
-            const startTime = 1000, expectedTIme = 0;
-            const action: Action = actions.timesUp();
+            const startTime = 1000, nextDuration = 1000, expectedTIme = nextDuration;
+            const action: Action = actions.timesUp(nextDuration);
             const state: State = new StateBuilder().withTime(startTime).build();
             const expectedNextState: State = new StateBuilder().withTime(expectedTIme).build();
             expect(state.session.time).toEqual(startTime);
