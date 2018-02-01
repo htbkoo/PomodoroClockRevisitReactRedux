@@ -1,4 +1,4 @@
-import type {ClockId, Interval, State, WithClockId} from "../redux/state";
+import type {Clock, ClockId, Interval, State, WithClockId} from "../redux/state";
 
 import mergeOptions from "merge-options";
 
@@ -63,4 +63,10 @@ export class StateBuilder {
 
         this.build = (): State => mergeOptions(_state);
     }
+}
+
+// Simple mock clock so need to fake the flow type
+//$FlowFixMe
+export function mockClock(id): Clock {
+    return {id: id,};
 }
