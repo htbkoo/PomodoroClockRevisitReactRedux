@@ -170,6 +170,19 @@ describe("StateBuilder", function () {
             //    then
             expect(stateBuilder.build()).toEqual(givenState);
         });
+
+        it("should not mutate the givenState", function () {
+            //    given
+            const givenState = newInitialState(), expectedGivenState = newInitialState();
+            expect(givenState).toEqual(expectedGivenState);
+
+            //    when
+            let stateBuilder: StateBuilder = StateBuilder.baseOn(givenState);
+            stateBuilder.withTime(1000);
+
+            //    then
+            expect(givenState).toEqual(expectedGivenState);
+        });
     });
 
     // Simple mock clock so need to fake the flow type
