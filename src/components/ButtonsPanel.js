@@ -8,7 +8,8 @@ import StopButton from "./StopButton";
 import {isDefinedAndNotNull} from "../utils/objectUtil";
 
 type Props = {
-    +isCounting: boolean
+    +isCounting: boolean,
+    +originalTime: number
 }
 
 export const mapStateToProps = (state: State): Props => {
@@ -26,7 +27,7 @@ export const ButtonsPanelComponent = (props: Props): React$Element<any> => {
     return (
         <div id="buttons-panel">
             {startOrPauseButton}
-            <StopButton/>
+            <StopButton originalTime={props.originalTime}/>
         </div>
     )
 };

@@ -31,7 +31,7 @@ describe('ButtonsPanel', function () {
             const isCounting = false;
 
             //    when
-            let buttonsPanel = shallow(<ButtonsPanelComponent isCounting={isCounting}/>);
+            let buttonsPanel = shallow(<ButtonsPanelComponent isCounting={isCounting} originalTime={0}/>);
 
             //    then
             expect(buttonsPanel.find(StartButton)).toHaveLength(1);
@@ -39,17 +39,18 @@ describe('ButtonsPanel', function () {
             expect(buttonsPanel.find(StopButton)).toHaveLength(1);
         });
 
-        it('should have no <StartButton/> but a <PauseButton/> and a <StopButton/> when props.isCounting=true', function () {
+        it('should have no <StartButton/> but a <PauseButton/> and a <StopButton originalTime={props.originalTime}/> when props.isCounting=true', function () {
             //    given
-            const isCounting = true;
+            const isCounting = true, originalTime = 10000;
 
             //    when
-            let buttonsPanel = shallow(<ButtonsPanelComponent isCounting={isCounting}/>);
+            let buttonsPanel = shallow(<ButtonsPanelComponent isCounting={isCounting} originalTime={originalTime}/>);
 
             //    then
             expect(buttonsPanel.find(StartButton)).toHaveLength(0);
             expect(buttonsPanel.find(PauseButton)).toHaveLength(1);
             expect(buttonsPanel.find(StopButton)).toHaveLength(1);
+            expect(buttonsPanel.find(StopButton)).toHaveProp("originalTime", originalTime);
         });
     });
 });
