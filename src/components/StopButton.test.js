@@ -11,14 +11,15 @@ describe('StopButton', function () {
     describe('StopButton', function () {
         it('should be a <Simplebutton/> with action={stopCounting()} buttonId="btn_stop"', function () {
             //    given
-            const expectedProps = {action: stopCounting(), buttonId: "btn_stop"};
+            const originalTime = 1000;
+            const expectedProps = {action: stopCounting(originalTime), buttonId: "btn_stop"};
 
             //    when
-            let startButton = shallow(<StopButton/>);
+            let startButton = shallow(<StopButton originalTime={originalTime}/>);
 
             //    then
             let button = startButton.find(SimpleButton);
-            expect(button).toHaveProp("action", expectedProps.action);
+            expect(button.prop("action")).toEqual(expectedProps.action);
             expect(button).toHaveProp("buttonId", expectedProps.buttonId);
         });
     });
