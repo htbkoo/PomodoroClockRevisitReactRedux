@@ -5,12 +5,22 @@ import {connect} from "react-redux";
 import StartButton from "./StartButton";
 import PauseButton from "./PauseButton";
 import StopButton from "./StopButton";
+import {isDefinedAndNotNull} from "../utils/objectUtil";
 
 type Props = {
     +isCounting: boolean
 }
 
-export const mapStateToProps = (state: State): Props => ({isCounting: state.session.isCounting});
+export const mapStateToProps = (state: State): Props => {
+    let sessionClockId = state.session.clockId;
+    let sessionClock = state.clocks.byId[sessionClockId];
+    let originalTime = isDefinedAndNotNull(sessionClock) ? sessionClock.duration : 0;
+    return {
+        isCounting: state.session.isCounting,
+        originalTime
+    };
+};
+
 export const ButtonsPanelComponent = (props: Props): React$Element<any> => {
     let startOrPauseButton = props.isCounting ? <PauseButton/> : <StartButton/>;
     return (

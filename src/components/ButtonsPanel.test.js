@@ -14,13 +14,14 @@ describe('ButtonsPanel', function () {
     describe('mapStateToProps', function () {
         it('should map state to props', function () {
             //    given
-            const state = new StateBuilder().build();
+            const originalTime = 100, id = "1";
+            const state = new StateBuilder().withSessionClockId(id).addClock({id, duration: originalTime}).build();
 
             //    when
             let props = mapStateToProps(state);
 
             //    then
-            expect(props).toEqual({isCounting: false});
+            expect(props).toEqual({isCounting: false, originalTime});
         });
     });
 
