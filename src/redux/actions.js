@@ -3,7 +3,7 @@
 // Reference: https://stackoverflow.com/a/42202467
 export type StartCountingAction = { type: "StartCounting" };
 export type PauseCountingAction = { type: "PauseCounting" };
-export type StopCountingAction = { type: "StopCounting" };
+export type StopCountingAction = { type: "StopCounting", originalTime: number };
 export type TickTimeAction = { type: "TickTime", lapse: number };
 export type TimesUpAction = { type: "TimesUp", nextDuration: number };
 
