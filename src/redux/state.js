@@ -1,12 +1,12 @@
 // @flow
 
+export type ClockId = string;
+
 export type Session = $ReadOnly<{
     +time: number,
     +clockId: ClockId,
     +isCounting: boolean,
 }>;
-
-export type ClockId = string;
 
 export type WithClockId = {
     +id: ClockId
