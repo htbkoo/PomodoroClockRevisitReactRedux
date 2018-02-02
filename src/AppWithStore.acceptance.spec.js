@@ -81,7 +81,8 @@ describe('AppWithStore - acceptance test', function () {
 
             it('should update state.isCounting to false and reset time when clicking stop button', function () {
                 //    given
-                const {store, app} = getStoreAndApp(isCountingState);
+                const state = newInitialStateBuilder().withSessionClockId("1").withIsCounting(true).build();
+                const {store, app} = getStoreAndApp(state);
                 const interval = store.getState().interval;
                 const startTime = getTime(store);
                 jest.runTimersToTime(interval);
