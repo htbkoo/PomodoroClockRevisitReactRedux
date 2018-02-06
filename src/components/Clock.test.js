@@ -23,13 +23,13 @@ describe('Clock', function () {
             let clock = shallow(<ClockComponent clock={clockProps}/>);
 
             //    then
-            let formControls = clock.find(FormControl);
+            let clockControlComponents = clock.find(ClockControlComponent);
             [
-                name,
-                duration,
-                colour,
+                "name",
+                "duration",
+                "colour",
             ].forEach((value, index) =>
-                expect(formControls.at(index)).toHaveProp("value", value)
+                expect(clockControlComponents.at(index).prop("controlProps").key).toEqual(value)
             );
         });
     });
@@ -52,7 +52,7 @@ describe('Clock', function () {
             //    then
             let cols = clock.find(Col);
             expect(cols.at(0)).toHaveProp("children", props.label);
-            expect(cols.find(FormControl)).toHaveProp("value",clockProps[props.key]);
+            expect(cols.find(FormControl)).toHaveProp("value", clockProps[props.key]);
         });
     });
 });
