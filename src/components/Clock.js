@@ -16,23 +16,8 @@ export const ClockComponent = (props: Props): React$Element<any> => {
         {key: "name", labelSize: 1, controlSize: 10},
         {key: "duration", label: "Duration:", labelSize: 3, controlSize: 9},
         {key: "colour", label: "Colour:", labelSize: 3, controlSize: 9}
-    ].map(({key, label, labelSize, controlSize}: { key: string, label?: string, labelSize: number, controlSize: number }, index) => {
-        let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
-        // Untested
-        return (
-            <FormGroup controlId={`formHorizontal${capitalizedKey}`} className={`clocks-list-clock-${key}`} key={index}>
-                <Col componentClass={ControlLabel} sm={labelSize}>{label}</Col>
-                <Col sm={controlSize}>
-                    <FormControl
-                        type="text"
-                        value={props.clock[key]}
-                        placeholder={capitalizedKey}
-                        onChange={NO_OP}
-                    />
-                </Col>
-            </FormGroup>
-        )
-    });
+    ].map((controlProps, index) => (
+        <ClockControlComponent controlProps={controlProps} clock={props.clock} key={index}/>));
 
     return (
         <div className="Clock">
@@ -41,6 +26,25 @@ export const ClockComponent = (props: Props): React$Element<any> => {
             </Form>
         </div>
     )
+};
+
+export const ClockControlComponent = (props: { +controlProps: { key: string, label?: string, labelSize: number, controlSize: number }, +clock: Clock }): React$Element<any> => {
+    let {key, label, labelSize, controlSize} = props.controlProps;
+
+    let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
+    return (
+        <FormGroup controlId={`formHorizontal${capitalizedKey}`} className={`clocks-list-clock-${key}`}>
+            <Col componentClass={ControlLabel} sm={labelSize}>{label}</Col>
+            <Col sm={controlSize}>
+                <FormControl
+                    type="text"
+                    value={props.clock[key]}
+                    placeholder={capitalizedKey}
+                    onChange={NO_OP}
+                />
+            </Col>
+        </FormGroup>
+    );
 };
 
 // Untested
