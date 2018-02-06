@@ -1,11 +1,13 @@
 // @flow
 // Unfortunately flow type canNOT refer to variable, even if they are constants, so duplication is inevitable
 // Reference: https://stackoverflow.com/a/42202467
+import type {Clock} from "./state";
+
 export type StartCountingAction = { type: "StartCounting" };
 export type PauseCountingAction = { type: "PauseCounting" };
 export type StopCountingAction = { type: "StopCounting", originalTime: number };
 export type TickTimeAction = { type: "TickTime", lapse: number };
-export type TimesUpAction = { type: "TimesUp", nextDuration: number };
+export type TimesUpAction = { type: "TimesUp", nextClock: Clock };
 
 export type Action =
     | StartCountingAction
@@ -40,6 +42,6 @@ export function tickTime(lapse: number): TickTimeAction {
     return {type: actionTypes.TickTime, lapse};
 }
 
-export function timesUp(nextDuration: number): TimesUpAction {
-    return {type: actionTypes.TimesUp, nextDuration};
+export function timesUp(nextClock: Clock): TimesUpAction {
+    return {type: actionTypes.TimesUp, nextClock};
 }

@@ -1,7 +1,9 @@
 // @flow
 import {startCounting, pauseCounting, stopCounting, tickTime, timesUp} from "./actions";
+import {mockClock} from "../testUtils/StateBuilder";
 
 describe('actions', function () {
+    const mockNextClock = mockClock("100");
     [
         {
             testPurpose: "an action to start counting",
@@ -25,8 +27,8 @@ describe('actions', function () {
         },
         {
             testPurpose: "an action for times up",
-            expectedAction: {type: "TimesUp", nextDuration: 100},
-            actualAction: timesUp(100)
+            expectedAction: {type: "TimesUp", nextClock: mockNextClock},
+            actualAction: timesUp(mockNextClock)
         }
     ].forEach(({testPurpose, expectedAction, actualAction}) =>
         it(`should create ${testPurpose}`, function () {
