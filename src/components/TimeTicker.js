@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 
-import type {State} from "../redux/state";
+import type {Clock, State} from "../redux/state";
 import {tickTime, timesUp} from "../redux/actions";
 import clocksHelper from "./helpers/clocksHelper";
 import {isDefinedAndNotNull} from "../utils/objectUtil";
@@ -11,12 +11,12 @@ type StateProps = {
     +isCounting: boolean,
     +interval: number,
     +time: number,
-    +nextDuration: number,
+    +nextClock: Clock,
 }
 
 type DispatchProps = {
     +onTimeTick: (lapse: number) => void,
-    +onTimesUp: (nextDuration: number) => void,
+    +onTimesUp: (nextClock: Clock) => void,
 }
 
 type Props = StateProps & DispatchProps;
@@ -25,15 +25,15 @@ export const mapStateToProps = (state: State): StateProps => ({
     isCounting: state.session.isCounting,
     interval: state.interval,
     time: state.session.time,
-    nextDuration: clocksHelper.getNextDuration(state.clocks, state.session.clockId)
+    nextClock: clocksHelper.getNextDuration(state.clocks, state.session.clockId)
 });
 
 export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
     onTimeTick(lapse: number) {
         dispatch(tickTime(lapse));
     },
-    onTimesUp(nextDuration: number) {
-        dispatch(timesUp(nextDuration));
+    onTimesUp(nextClock: Clock) {
+        dispatch(timesUp(nextClock));
     },
 });
 
@@ -47,7 +47,7 @@ export class TimeTickerComponent extends Component<Props> {
             const intervalId = setInterval(() => {
                 if (this.props.isCounting) {
                     if (willTimeUp(this.props)) {
-                        this.props.onTimesUp(this.props.nextDuration);
+                        this.props.onTimesUp(this.props.nextClock);
                     } else {
                         this.props.onTimeTick(interval)
                     }
