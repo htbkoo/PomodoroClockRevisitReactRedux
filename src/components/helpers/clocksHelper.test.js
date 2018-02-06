@@ -7,59 +7,63 @@ describe('clocksHelper', function () {
     describe('getNextDuration', function () {
         it('should return the next clockId if the sessionClockId is not the last', function () {
             // given
-            const sessionClockId = "1", expectedNextDuration = 200;
+            const sessionClockId = "1";
+            const nextClock = {id: "2", duration: 200};
             const clocks = new StateBuilder()
                 .addClock({id: sessionClockId, duration: 1})
-                .addClock({id: "2", duration: expectedNextDuration})
+                .addClock(nextClock)
                 .build().clocks;
 
             // when
-            let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+            let actualNextClock = clocksHelper.getNextDuration(clocks, sessionClockId);
 
             // then
-            expect(nextDuration).toEqual(expectedNextDuration);
+            expect(actualNextClock).toEqual(nextClock);
         });
 
         it('should return the first clockId if the sessionClockId is the last', function () {
             // given
-            const sessionClockId = "2", expectedNextDuration = 100;
+            const sessionClockId = "2";
+            const nextClock = {id: "1", duration: 100};
             const clocks = new StateBuilder()
-                .addClock({id: "1", duration: expectedNextDuration})
+                .addClock(nextClock)
                 .addClock({id: sessionClockId, duration: 2})
                 .build().clocks;
 
             // when
-            let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+            let actualNextClock = clocksHelper.getNextDuration(clocks, sessionClockId);
 
             // then
-            expect(nextDuration).toEqual(expectedNextDuration);
+            expect(actualNextClock).toEqual(nextClock);
         });
 
         it('should return the first clockId if there is only one clock', function () {
             // given
-            const sessionClockId = "1", expectedNextDuration = 100;
+            const sessionClockId = "1";
+            let nextClock = {id: sessionClockId, duration: 100};
             const clocks = new StateBuilder()
-                .addClock({id: sessionClockId, duration: expectedNextDuration})
+                .addClock(nextClock)
                 .build().clocks;
 
             // when
-            let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+            let actualNextClock = clocksHelper.getNextDuration(clocks, sessionClockId);
 
             // then
-            expect(nextDuration).toEqual(expectedNextDuration);
+            expect(actualNextClock).toEqual(nextClock);
         });
 
         describe('exception cases', function () {
-            it('should return 0 if there are no clocks', function () {
+            // Todo: improve
+            it('should return undefined if there are no clocks', function () {
                 // given
-                const sessionClockId = "", expectedNextDuration = 0;
+                const sessionClockId = "";
                 const clocks = new StateBuilder().build().clocks;
 
                 // when
-                let nextDuration = clocksHelper.getNextDuration(clocks, sessionClockId);
+                let actualNextClock = clocksHelper.getNextDuration(clocks, sessionClockId);
 
                 // then
-                expect(nextDuration).toEqual(expectedNextDuration);
+                expect(actualNextClock).toEqual(undefined);
             });
         });
     });
