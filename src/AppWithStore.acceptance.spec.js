@@ -112,7 +112,8 @@ describe('AppWithStore - acceptance test', function () {
                 //    then
                 assertStoreState(store)
                     .to.have("session.isCounting", false)
-                    .and.have("session.time", 300000);
+                    .and.have("session.time", 300000)
+                    .and.have("session.clockId", "2");
             });
         });
 

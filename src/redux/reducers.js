@@ -38,7 +38,7 @@ function session(state: Session = defaultInitialState.session, action: Action): 
             let time = action.nextClock.duration;
             let clockId = action.nextClock.id;
             let isCounting = false;
-            return Object.assign({}, state, {time, isCounting});
+            return Object.assign({}, state, {time, isCounting, clockId});
         }
         default:
             return state;
