@@ -1,6 +1,6 @@
 // @flow
 import type {State} from "./state";
-import {StateBuilder} from "../testUtils/StateBuilder";
+import {mockClock, StateBuilder} from "../testUtils/StateBuilder";
 import type {Action} from "./actions";
 import * as actions from "./actions";
 
@@ -78,10 +78,13 @@ describe('reducers', function () {
     describe('timesUp', function () {
         it('should set state.session.time to nextDuration and state.session.isCounting to false when action.TimesUpAction()', function () {
             //    given
-            const startTime = 1000, nextDuration = 1000, expectedTIme = nextDuration;
-            const action: Action = actions.timesUp(nextDuration);
+            const nextDuration = 100, nextClock = mockClock("10");
+            // TODO: improve
+            nextClock.duration = nextDuration;
+            const startTime = 1000, expectedTime = nextDuration;
+            const action: Action = actions.timesUp(nextClock);
             const state: State = new StateBuilder().withTime(startTime).build();
-            const expectedNextState: State = new StateBuilder().withTime(expectedTIme).build();
+            const expectedNextState: State = new StateBuilder().withTime(expectedTime).build();
             expect(state.session.time).toEqual(startTime);
 
             //    when
