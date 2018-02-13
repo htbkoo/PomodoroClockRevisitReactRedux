@@ -20,15 +20,21 @@ export const ClockComponent = (props: Props): React$Element<any> => {
     ].map((controlProps, index) => (
         <ClockControlComponent controlProps={controlProps} clock={props.clock} key={index}/>));
 
-    let divWrapperClassName = "Clock".concat(props.isCurrent ? " Clock-current" : "");
-
     return (
-        <div className={divWrapperClassName}>
+        <div className={getDivWrapperClasses().join(" ")}>
             <Form horizontal>
                 {formGroups}
             </Form>
         </div>
-    )
+    );
+
+    function getDivWrapperClasses() {
+        let array = ["Clock"];
+        if (props.isCurrent) {
+            array.push("Clock-current");
+        }
+        return array;
+    }
 };
 
 export const ClockControlComponent = (props: { +controlProps: { key: string, label?: string, labelSize: number, controlSize: number }, +clock: Clock }): React$Element<any> => {
