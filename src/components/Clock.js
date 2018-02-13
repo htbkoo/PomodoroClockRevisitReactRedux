@@ -7,7 +7,8 @@ import type {Clock} from "../redux/state";
 import {NO_OP} from "../utils/functionUtil";
 
 type Props = $ReadOnly<{
-    +clock: Clock
+    +clock: Clock,
+    +isCurrent: boolean
 }>
 
 // export const mapDispatchToProps = (state: State): DispatchProps => ({});
@@ -19,8 +20,10 @@ export const ClockComponent = (props: Props): React$Element<any> => {
     ].map((controlProps, index) => (
         <ClockControlComponent controlProps={controlProps} clock={props.clock} key={index}/>));
 
+    let divWrapperClassName = "Clock".concat(props.isCurrent ? " Clock-current" : "");
+
     return (
-        <div className="Clock">
+        <div className={divWrapperClassName}>
             <Form horizontal>
                 {formGroups}
             </Form>

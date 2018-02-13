@@ -20,7 +20,7 @@ describe('Clock', function () {
             };
 
             //    when
-            let clock = shallow(<ClockComponent clock={clockProps}/>);
+            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={false}/>);
 
             //    then
             let clockControlComponents = clock.find(ClockControlComponent);
@@ -31,6 +31,25 @@ describe('Clock', function () {
             ].forEach((value, index) =>
                 expect(clockControlComponents.at(index).prop("controlProps").key).toEqual(value)
             );
+        });
+
+        it("should have '.Clock-current' className in <div/> when props.isCurrent=true", function () {
+            //    given
+            const colour = "someColour", duration = 1000, name = "someName";
+            const clockProps: ClockState = {
+                colour,
+                duration,
+                name,
+                id: "1"
+            };
+            const isCurrent = true;
+
+            //    when
+            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
+
+            //    then
+            let divWrapperComponents = clock.find("div");
+            expect(divWrapperComponents).toHaveClassName("Clock-current");
         });
     });
 
