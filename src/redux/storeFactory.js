@@ -19,7 +19,7 @@ function newStore(predefinedState: State = defaultInitialState, reducers: Reduce
     }
 }
 
-// untested
+// Untested
 function newStoreWithReduxDevtoolsExtension(predefinedState: State = defaultInitialState, reducers: Reducer<State, Action> = defaultReducers): Store<State, Action> {
     return createStore(reducers, predefinedState, devToolsEnhancer());
 }
