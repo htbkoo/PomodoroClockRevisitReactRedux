@@ -15,7 +15,7 @@ type Props = StateProps;
 export const mapStateToProps = (state: State): StateProps => ({clocks: state.clocks});
 
 export const ClocksListComponent = (props: Props): React$Element<any> => {
-    let clocks = props.clocks.allIds.map((id: ClockId) => <Clock key={id} clock={props.clocks.byId[id]}/>);
+    let clocks = props.clocks.allIds.map((id: ClockId) => <Clock key={id} clock={props.clocks.byId[id]} isCurrent={false}/>);
     return (
         <div id="clocks-list" className="ClocksList">{clocks}</div>
     )
