@@ -8,6 +8,7 @@ type Props = {
 }
 
 // Untested
-export default (props: Props): React$Element<any> => (
+const StopButtonComponent = (props: Props): React$Element<any> => (
     <SimpleButton action={stopCounting(props.originalTime)} buttonId="btn_stop"/>
 );
+export default StopButtonComponent;

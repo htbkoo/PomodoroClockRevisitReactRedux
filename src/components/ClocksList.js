@@ -23,8 +23,3 @@ export const ClocksListComponent = (props: Props): React$Element<any> => {
 
 // Untested
 export default connect(mapStateToProps)(ClocksListComponent);
-
-// Untested
-ClocksListComponent.defaultProps = {
-    displayName: 'ClocksList'
-};

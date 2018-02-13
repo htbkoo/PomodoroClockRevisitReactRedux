@@ -16,11 +16,6 @@ export const TimerComponent = (props: Props): React$Element<any> => (
 // Untested
 export default connect(mapStateToProps)(TimerComponent);
 
-// Untested
-TimerComponent.defaultProps = {
-    displayName: 'Timer'
-};
-
 function formatTime(time: number): string {
     return moment(time).format(`mm[m] ss[s] SSS`);
 }

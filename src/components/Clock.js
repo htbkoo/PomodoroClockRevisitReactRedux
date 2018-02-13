@@ -49,8 +49,3 @@ export const ClockControlComponent = (props: { +controlProps: { key: string, lab
 
 // Untested
 export default connect()(ClockComponent);
-
-// Untested
-ClockComponent.defaultProps = {
-    displayName: 'Clock'
-};

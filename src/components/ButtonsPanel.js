@@ -33,9 +33,4 @@ export const ButtonsPanelComponent = (props: Props): React$Element<any> => {
 };
 
 // Untested
-ButtonsPanelComponent.defaultProps = {
-    displayName: 'ButtonsPanel'
-};
-
-// Untested
 export default connect(mapStateToProps)(ButtonsPanelComponent);
