@@ -51,6 +51,25 @@ describe('Clock', function () {
             let divWrapperComponents = clock.find("div");
             expect(divWrapperComponents).toHaveClassName("Clock-current");
         });
+
+        it("should not have '.Clock-current' className in <div/> when props.isCurrent=false", function () {
+            //    given
+            const colour = "someColour", duration = 1000, name = "someName";
+            const clockProps: ClockState = {
+                colour,
+                duration,
+                name,
+                id: "1"
+            };
+            const isCurrent = false;
+
+            //    when
+            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
+
+            //    then
+            let divWrapperComponents = clock.find("div");
+            expect(divWrapperComponents).not.toHaveClassName("Clock-current");
+        });
     });
 
     describe("ClockControlComponent", function () {
