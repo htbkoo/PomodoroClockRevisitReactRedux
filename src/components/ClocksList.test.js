@@ -15,13 +15,14 @@ describe('ClocksList', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
+            const currentClockId = "0";
             const state = {
                 interval: 0,
                 session: {
                     isCounting: true,
                     time: 0,
                     originalTime: 0,
-                    clockId: "0"
+                    clockId: currentClockId
                 },
                 clocks: {
                     byId: {
@@ -43,7 +44,8 @@ describe('ClocksList', function () {
                         "clock2": mockClock2
                     },
                     allIds: ["clock1", "clock2"]
-                }
+                },
+                currentClockId
             };
             expect(props).toEqual(expectedProps);
         });
@@ -64,7 +66,7 @@ describe('ClocksList', function () {
         ].forEach(({testName, clocks, expectedClocksPropsPassed}) =>
             it(testName, function () {
                 //    when
-                let clocksList = shallow(<ClocksListComponent clocks={clocks}/>);
+                let clocksList = shallow(<ClocksListComponent clocks={clocks} currentClockId="any"/>);
 
                 //    then
                 let clockComponents = clocksList.find(Clock);
