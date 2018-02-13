@@ -18,7 +18,9 @@ export const ClockComponent = (props: Props): React$Element<any> => {
         {key: "duration", label: "Duration:", labelSize: 3, controlSize: 9},
         {key: "colour", label: "Colour:", labelSize: 3, controlSize: 9}
     ].map((controlProps, index) => (
-        <ClockControlComponent controlProps={controlProps} clock={props.clock} key={index}/>));
+            <ClockControlComponent controlProps={controlProps} clock={props.clock} key={index}/>
+        )
+    );
 
     return (
         <div className={getDivWrapperClasses().join(" ")}>
