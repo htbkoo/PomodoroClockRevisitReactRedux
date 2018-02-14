@@ -5,7 +5,7 @@ import {shallow} from "enzyme";
 
 import {ClocksListComponent, mapStateToProps} from "./ClocksList";
 import type {Clocks} from "../redux/state";
-import {StateBuilder, mockClock} from "../testUtils/StateBuilder";
+import {mockClock, StateBuilder} from "../testUtils/StateBuilder";
 
 import Clock from "./Clock";
 
@@ -76,6 +76,25 @@ describe('ClocksList', function () {
                 );
             })
         );
+
+        it(`should pass props.isCurrent=true for current clock (and false otherwise) to <Clock/>`, function () {
+            //    given
+            const currentClock = mockClock1;
+            const clocksList = shallow(<ClocksListComponent clocks={clocks(currentClock, mockClock2)}
+                                                            currentClockId={currentClock.id}/>);
+
+            //    then
+            let clockComponents = clocksList.find(Clock);
+            clockComponents.forEach(
+                clockComponent => {
+                    if (clockComponent.prop("clock").id === currentClock.id) {
+                        expect(clockComponent).toHaveProp("isCurrent", true);
+                    } else {
+                        expect(clockComponent).toHaveProp("isCurrent", false);
+                    }
+                }
+            )
+        })
     });
 
     function clocks(...mockClocks) {

@@ -29,6 +29,10 @@
     border: darkgray 5px solid;
 }
 
+.Clock-current {
+    background-color: lemonchiffon !important;
+}
+
 .Clock form {
     margin: 5%;
 }

@@ -13,10 +13,14 @@ type StateProps = {
 
 type Props = StateProps;
 
-export const mapStateToProps = (state: State): StateProps => ({clocks: state.clocks, currentClockId: state.session.clockId});
+export const mapStateToProps = (state: State): StateProps => ({
+    clocks: state.clocks,
+    currentClockId: state.session.clockId
+});
 
 export const ClocksListComponent = (props: Props): React$Element<any> => {
-    let clocks = props.clocks.allIds.map((id: ClockId) => <Clock key={id} clock={props.clocks.byId[id]} isCurrent={false}/>);
+    let clocks = props.clocks.allIds.map((id: ClockId) => <Clock key={id} clock={props.clocks.byId[id]}
+                                                                 isCurrent={props.currentClockId === id}/>);
     return (
         <div id="clocks-list" className="ClocksList">{clocks}</div>
     )
