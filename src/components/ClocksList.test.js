@@ -98,9 +98,6 @@ describe('ClocksList', function () {
     });
 
     function clocks(...mockClocks) {
-        const startWithNewBuilder = new StateBuilder();
-        return mockClocks.reduce((builder, mockClock) => builder.addClock(mockClock), startWithNewBuilder)
-            .build()
-            .clocks;
+        return StateBuilder.builderWithClocks(mockClocks).build().clocks;
     }
 });

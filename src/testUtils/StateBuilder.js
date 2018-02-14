@@ -28,11 +28,9 @@ export class StateBuilder {
     }
 
     static builderWithClocks(clocks: $ReadOnlyArray<Clock>): StateBuilder {
-        console.log(clocks);
         const startWithNewBuilder = new StateBuilder();
         return clocks.reduce((builder, clock) => builder.addClock(clock), startWithNewBuilder);
     }
-
 
     constructor(state: State = emptyState) {
         let _state = mergeOptions(state);
