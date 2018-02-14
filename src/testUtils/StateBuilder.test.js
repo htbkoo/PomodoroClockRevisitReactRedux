@@ -161,6 +161,25 @@ describe("StateBuilder", function () {
         });
     });
 
+    describe("builderWithClocks", function () {
+        it("should create a Builder with list of Clocks from StateBuilder.builderWithClocks", function () {
+            //    given
+            const clocks = [dummyClock2, dummyClock];
+
+            //    when
+            let stateBuilder: StateBuilder = StateBuilder.builderWithClocks(clocks);
+
+            //    then
+            expect(stateBuilder.build().clocks).toEqual({
+                byId: {
+                    "dummyClock2": dummyClock2,
+                    "dummyClock": dummyClock
+                },
+                allIds: ["dummyClock2", "dummyClock"]
+            });
+        });
+    });
+
     // Simple mock clock so need to fake the flow type
     //$FlowFixMe
     function mockClock(id): Clock {

@@ -27,6 +27,13 @@ export class StateBuilder {
         return new StateBuilder(state);
     }
 
+    static builderWithClocks(clocks: $ReadOnlyArray<Clock>): StateBuilder {
+        console.log(clocks);
+        const startWithNewBuilder = new StateBuilder();
+        return clocks.reduce((builder, clock) => builder.addClock(clock), startWithNewBuilder);
+    }
+
+
     constructor(state: State = emptyState) {
         let _state = mergeOptions(state);
         this.withTime = time => {
@@ -66,6 +73,8 @@ export class StateBuilder {
 
 // Simple mock clock so need to fake the flow type
 //$FlowFixMe
+// IntelliJ bug - for sure this function is in use (e.g. ClocksList.test.js) but it failed to detect this
+// noinspection JSUnusedGlobalSymbols
 export function mockClock(id): Clock {
     return {id: id,};
 }
