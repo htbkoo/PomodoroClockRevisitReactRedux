@@ -11,16 +11,7 @@ describe('Clock', function () {
     describe("ClockComponent", function () {
         it("should display the props.name, props.duration and props.colour in <Clock/>", function () {
             //    given
-            const colour = "someColour", duration = 1000, name = "someName";
-            const clockProps: ClockState = {
-                colour,
-                duration,
-                name,
-                id: "1"
-            };
-
-            //    when
-            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={false}/>);
+            let clock = getShallowClockComponent();
 
             //    then
             let clockControlComponents = clock.find(ClockControlComponent);
@@ -35,17 +26,7 @@ describe('Clock', function () {
 
         it("should have '.Clock-current' className in <div/> when props.isCurrent=true", function () {
             //    given
-            const colour = "someColour", duration = 1000, name = "someName";
-            const clockProps: ClockState = {
-                colour,
-                duration,
-                name,
-                id: "1"
-            };
-            const isCurrent = true;
-
-            //    when
-            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
+            let clock = getShallowClockComponent(true);
 
             //    then
             let divWrapperComponents = clock.find("div");
@@ -54,6 +35,14 @@ describe('Clock', function () {
 
         it("should not have '.Clock-current' className in <div/> when props.isCurrent=false", function () {
             //    given
+            let clock = getShallowClockComponent(false);
+
+            //    then
+            let divWrapperComponents = clock.find("div");
+            expect(divWrapperComponents).not.toHaveClassName("Clock-current");
+        });
+
+        function getShallowClockComponent(isCurrent = false) {
             const colour = "someColour", duration = 1000, name = "someName";
             const clockProps: ClockState = {
                 colour,
@@ -61,15 +50,9 @@ describe('Clock', function () {
                 name,
                 id: "1"
             };
-            const isCurrent = false;
 
-            //    when
-            let clock = shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
-
-            //    then
-            let divWrapperComponents = clock.find("div");
-            expect(divWrapperComponents).not.toHaveClassName("Clock-current");
-        });
+            return shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
+        }
     });
 
     describe("ClockControlComponent", function () {
