@@ -130,6 +130,23 @@ describe('AppWithStore - acceptance test', function () {
                 let clocks = clocksList.find(Clock);
                 expect(clocks).toHaveLength(2);
             });
+
+            it("should have .Clock-current on the current clock (i.e. clock that has id equals to state.session.clockId)", function () {
+                // given
+                const {app, store} = getStoreAndApp();
+                let state = store.getState();
+                const clockIds = state.clocks.allIds;
+                const currentClockPosition = clockIds.indexOf(state.session.clockId);
+
+                // when
+                let clocks = app.find(Clock);
+
+                // then
+                for (let i = 0; i < clocks.length; ++i) {
+                    let expectedNumberOfClockCurrent = (currentClockPosition === i) ? 1 : 0;
+                    expect(clocks.at(i).find(".Clock-current").length).toBe(expectedNumberOfClockCurrent);
+                }
+            });
         });
     });
 
