@@ -134,7 +134,7 @@ describe('AppWithStore - acceptance test', function () {
             it("should have .Clock-current on the current clock (i.e. clock that has id equals to state.session.clockId)", function () {
                 // given
                 const {app, store} = getStoreAndApp();
-                let state = store.getState();
+                const state = store.getState();
                 const clockIds = state.clocks.allIds;
                 const currentClockPosition = clockIds.indexOf(state.session.clockId);
 
