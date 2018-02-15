@@ -142,10 +142,10 @@ describe('AppWithStore - acceptance test', function () {
                 let clocks = app.find(Clock);
 
                 // then
-                for (let i = 0; i < clocks.length; ++i) {
+                clocks.forEach((clock, i) => {
                     let expectedNumberOfClockCurrent = (currentClockPosition === i) ? 1 : 0;
                     expect(clocks.at(i).find(".Clock-current").length).toBe(expectedNumberOfClockCurrent);
-                }
+                });
             });
         });
     });
