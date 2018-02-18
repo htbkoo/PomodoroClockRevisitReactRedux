@@ -40,6 +40,7 @@ describe('App', function () {
                 expect(app.find(ClocksList)).toHaveLength(1);
             });
         });
+
         describe('Session', function () {
             it('should have a <Timer/> when rendered', function () {
                 //    given
@@ -59,10 +60,10 @@ describe('App', function () {
                 expect(app.find(ButtonsPanel)).toHaveLength(1);
             });
 
-            it('should have a <TimeTicker/> when rendered', function () {
+            it('should have a <TimeTicker/> when props.isCounting=true', function () {
                 //    given
                 //    when
-                let app = shallow(<App isCounting={false}/>);
+                let app = shallow(<App isCounting={true}/>);
 
                 //    then
                 expect(app.find(TimeTicker)).toHaveLength(1);
