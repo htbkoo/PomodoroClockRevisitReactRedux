@@ -5,8 +5,11 @@ import Timer from "./components/Timer";
 import ButtonsPanel from "./components/ButtonsPanel";
 import TimeTicker from "./components/TimeTicker";
 import ClocksList from "./components/ClocksList";
+import type {State} from "./redux/state";
 
-type Props = {};
+type Props = { +isCounting: boolean };
+
+export const mapStateToProps = (state: State): Props => ({isCounting: state.session.isCounting});
 
 class App extends Component<Props> {
     render() {
