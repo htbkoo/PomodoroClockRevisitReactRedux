@@ -6,13 +6,16 @@ import ButtonsPanel from "./components/ButtonsPanel";
 import TimeTicker from "./components/TimeTicker";
 import ClocksList from "./components/ClocksList";
 import type {State} from "./redux/state";
+import {connect} from "react-redux";
 
 type Props = { +isCounting: boolean };
 
 export const mapStateToProps = (state: State): Props => ({isCounting: state.session.isCounting});
 
-class App extends Component<Props> {
+export class AppComponent extends Component<Props> {
     render() {
+        let optionalTimeTicker = this.props.isCounting ? <TimeTicker/> : "";
+
         return (
             <div className="App">
                 <div className="container-clocksList">
@@ -20,7 +23,7 @@ class App extends Component<Props> {
                 </div>
                 <div className="container-session">
                     <Timer/>
-                    <TimeTicker/>
+                    {optionalTimeTicker}
                     <ButtonsPanel/>
                 </div>
             </div>
@@ -28,4 +31,5 @@ class App extends Component<Props> {
     }
 }
 
-export default App;
+// Untested
+export default connect(mapStateToProps)(AppComponent);

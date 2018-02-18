@@ -3,7 +3,7 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import App, {mapStateToProps} from "./App";
+import {AppComponent, mapStateToProps} from "./App";
 
 import Timer from "./components/Timer";
 import ButtonsPanel from "./components/ButtonsPanel";
@@ -34,7 +34,7 @@ describe('App', function () {
             it('should have a <ClocksList/> when rendered', function () {
                 //    given
                 //    when
-                let app = shallow(<App isCounting={false}/>);
+                let app = shallow(<AppComponent isCounting={false}/>);
 
                 //    then
                 expect(app.find(ClocksList)).toHaveLength(1);
@@ -45,7 +45,7 @@ describe('App', function () {
             it('should have a <Timer/> when rendered', function () {
                 //    given
                 //    when
-                let app = shallow(<App isCounting={false}/>);
+                let app = shallow(<AppComponent isCounting={false}/>);
 
                 //    then
                 expect(app.find(Timer)).toHaveLength(1);
@@ -54,7 +54,7 @@ describe('App', function () {
             it('should have a <ButtonsPanel/> when rendered', function () {
                 //    given
                 //    when
-                let app = shallow(<App isCounting={false}/>);
+                let app = shallow(<AppComponent isCounting={false}/>);
 
                 //    then
                 expect(app.find(ButtonsPanel)).toHaveLength(1);
@@ -63,10 +63,19 @@ describe('App', function () {
             it('should have a <TimeTicker/> when props.isCounting=true', function () {
                 //    given
                 //    when
-                let app = shallow(<App isCounting={true}/>);
+                let app = shallow(<AppComponent isCounting={true}/>);
 
                 //    then
                 expect(app.find(TimeTicker)).toHaveLength(1);
+            });
+
+            it('should have no <TimeTicker/> when props.isCounting=false', function () {
+                //    given
+                //    when
+                let app = shallow(<AppComponent isCounting={false}/>);
+
+                //    then
+                expect(app.find(TimeTicker)).toHaveLength(0);
             });
         });
     });
