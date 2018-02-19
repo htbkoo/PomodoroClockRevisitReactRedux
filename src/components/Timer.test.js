@@ -1,9 +1,8 @@
 // @flow
 
 import React from "react";
-import {shallow} from "enzyme";
 
-import {TimerComponent, mapStateToProps} from "./Timer";
+import {formatTime, mapStateToProps} from "./Timer";
 import {StateBuilder} from "../testUtils/StateBuilder";
 
 describe('Timer', function () {
@@ -21,7 +20,7 @@ describe('Timer', function () {
         });
     });
 
-    describe("TimerComponent", function () {
+    describe("formatTime", function () {
         [
             {time: 0, expectedText: "00m 00s 000"},
             {time: 99, expectedText: "00m 00s 099"},
@@ -40,10 +39,10 @@ describe('Timer', function () {
             it(`should render props.time=${time} as ${expectedText}`, function () {
                 //    given
                 //    when
-                let clock = shallow(<TimerComponent time={time} clockId={0}/>);
+                let formattedText = formatTime(time);
 
                 //    then
-                expect(clock).toHaveText(expectedText);
+                expect(formattedText).toEqual(expectedText);
             })
         );
     });

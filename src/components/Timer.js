@@ -13,9 +13,9 @@ export const TimerComponent = (props: Props): React$Element<any> => (
     <div id="clock-time" className="Timer">{formatTime(props.time)}</div>
 );
 
-// Untested
-export default connect(mapStateToProps)(TimerComponent);
-
-function formatTime(time: number): string {
+export function formatTime(time: number): string {
     return moment(time).format(`mm[m] ss[s] SSS`);
 }
+
+// Untested
+export default connect(mapStateToProps)(TimerComponent);
