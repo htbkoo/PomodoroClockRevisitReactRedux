@@ -1,9 +1,11 @@
 // @flow
 
 import React from "react";
+import {shallow} from "enzyme";
 
-import {formatTime, mapStateToProps} from "./Timer";
+import {formatTime, mapStateToProps, TimerComponent} from "./Timer";
 import {StateBuilder} from "../testUtils/StateBuilder";
+import CircularProgressbar from "react-circular-progressbar";
 
 describe('Timer', function () {
     describe("mapStateToProps", function () {
@@ -45,5 +47,20 @@ describe('Timer', function () {
                 expect(formattedText).toEqual(expectedText);
             })
         );
+    });
+
+    describe("TimerComponent", function () {
+        it(`should have a <CircularProgressbar percentage={props.percentage}/> in <Timer/>`, function () {
+            //    given
+            const expectedText = "00m 01s 999", expectedPercentage = 75;
+            const timer = shallow(<TimerComponent time={1999} percentage={expectedPercentage}/>);
+
+            //    when
+            let progressbar = timer.find(CircularProgressbar);
+
+            //    then
+            expect(progressbar).toHaveProp("percentage", expectedPercentage);
+            expect(progressbar.prop("textForPercentage")()).toEqual(expectedText);
+        })
     });
 });
