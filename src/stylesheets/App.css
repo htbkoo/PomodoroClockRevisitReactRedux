@@ -1,5 +1,6 @@
 .container-session {
-    padding: 10%;
+    padding: 3%;
+    max-height: 70vh;
 
     text-align: center;
     display: flex;
@@ -41,6 +42,11 @@
     padding: 5%;
     background-color: lightgrey;
     border: darkgray 5px solid;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
 }
 
 .App-logo {

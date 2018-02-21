@@ -1,0 +1,11 @@
+#clock-time{
+    max-height: 50%;
+}
+
+.CircularProgressbar{
+    max-height: 100%;
+}
+
+.CircularProgressbar text{
+    font-size: small !important;
+}

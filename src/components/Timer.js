@@ -2,11 +2,13 @@
 import React from "react";
 import moment from "moment";
 import {connect} from "react-redux";
-import type {State} from "../redux/state";
 import CircularProgressbar from "react-circular-progressbar";
 
-import 'react-circular-progressbar/dist/styles.css';
+import type {State} from "../redux/state";
 import {isDefinedAndNotNull} from "../utils/objectUtil";
+
+import 'react-circular-progressbar/dist/styles.css';
+import '../stylesheets/Timer.css';
 
 type Props = {
     +time: number,
