@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import './App.css';
+import './stylesheets/App.css';
 import Timer from "./components/Timer";
 import ButtonsPanel from "./components/ButtonsPanel";
 import TimeTicker from "./components/TimeTicker";

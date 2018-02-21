@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import AppWithStore from "./components/AppWithStore";
 import documentUtil from "./utils/documentUtil";
 
-import './index.css';
+import './stylesheets/index.css';
 
 const ROOT_CONTAINER_SELECTOR = 'root';
 
