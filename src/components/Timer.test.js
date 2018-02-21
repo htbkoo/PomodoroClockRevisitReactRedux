@@ -4,21 +4,24 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import {formatTime, mapStateToProps, TimerComponent} from "./Timer";
-import {StateBuilder} from "../testUtils/StateBuilder";
+import {mockClock, StateBuilder} from "../testUtils/StateBuilder";
 import CircularProgressbar from "react-circular-progressbar";
 
 describe('Timer', function () {
     describe("mapStateToProps", function () {
         it("should mapStateToProps", function () {
             //    given
-            const time = 1000;
-            const state = new StateBuilder().withTime(time).build();
+            const time = 1000, sessionClockId = "someId", clock = mockClock(sessionClockId);
+            clock.duration = 10000;
+
+            const state = new StateBuilder().withTime(time).withSessionClockId(sessionClockId).addClock(clock).build();
 
             //    when
             let props = mapStateToProps(state);
 
             //    then
-            expect(props).toEqual({time});
+            const percentage = 10; // time / duration * 100
+            expect(props).toEqual({time, percentage});
         });
     });
 
