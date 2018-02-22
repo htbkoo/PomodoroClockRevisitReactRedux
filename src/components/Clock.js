@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import {connect} from "react-redux";
 import {Col, ControlLabel, Form, FormControl, FormGroup} from "react-bootstrap";
 
 import type {Clock} from "../redux/state";
@@ -11,7 +10,6 @@ type Props = $ReadOnly<{
     +isCurrent: boolean
 }>
 
-// export const mapDispatchToProps = (state: State): DispatchProps => ({});
 export const ClockComponent = (props: Props): React$Element<any> => {
     let formGroups = [
         {key: "name", labelSize: 1, controlSize: 10},
@@ -58,5 +56,4 @@ export const ClockControlComponent = (props: { +controlProps: { key: string, lab
     );
 };
 
-// Untested
-export default connect()(ClockComponent);
+export default ClockComponent;
