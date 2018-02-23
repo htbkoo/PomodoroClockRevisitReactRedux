@@ -2,20 +2,31 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import type {ClockId, Clocks, State} from "../redux/state";
+import type {ClockConfig, ClockId, Clocks, State} from "../redux/state";
 
 import Clock from "./Clock";
+import {updateClockConfig} from "../redux/actions";
 
 type StateProps = {
     +clocks: Clocks,
     +currentClockId: ClockId
 };
 
-type Props = StateProps;
+type DispatchProps = {
+    +onClockConfigUpdate: (id: ClockId, updatedConfig: ClockConfig) => void
+};
+
+type Props = StateProps & DispatchProps;
 
 export const mapStateToProps = (state: State): StateProps => ({
     clocks: state.clocks,
     currentClockId: state.session.clockId
+});
+
+export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
+    onClockConfigUpdate: (id: ClockId, updatedConfig: ClockConfig) => {
+        dispatch(updateClockConfig(id, updatedConfig));
+    }
 });
 
 export const ClocksListComponent = (props: Props): React$Element<any> => {
@@ -27,4 +38,4 @@ export const ClocksListComponent = (props: Props): React$Element<any> => {
 };
 
 // Untested
-export default connect(mapStateToProps)(ClocksListComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ClocksListComponent);

@@ -3,11 +3,12 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {ClocksListComponent, mapStateToProps} from "./ClocksList";
+import {ClocksListComponent, mapDispatchToProps, mapStateToProps} from "./ClocksList";
 import type {Clocks} from "../redux/state";
 import {mockClock, StateBuilder} from "../testUtils/StateBuilder";
 
 import Clock from "./Clock";
+import {updateClockConfig} from "../redux/actions";
 
 describe('ClocksList', function () {
     const mockClock1 = mockClock("clock1"), mockClock2 = mockClock("clock2");
@@ -48,6 +49,21 @@ describe('ClocksList', function () {
                 currentClockId
             };
             expect(props).toEqual(expectedProps);
+        });
+    });
+
+    describe("mapDispatchToProps", function () {
+        it("should mapDispatchToProps", function () {
+            //    given
+            const spyDispatch = jest.fn();
+            const id = "1", updatedConfig = {duration: 10};
+
+            //    when
+            let props = mapDispatchToProps(spyDispatch);
+            props.onClockConfigUpdate(id, updatedConfig);
+
+            //    then
+            expect(spyDispatch).toHaveBeenCalledWith(updateClockConfig(id, updatedConfig));
         });
     });
 
