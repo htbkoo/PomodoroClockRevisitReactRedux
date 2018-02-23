@@ -9,6 +9,7 @@ import {mockClock, StateBuilder} from "../testUtils/StateBuilder";
 
 import Clock from "./Clock";
 import {updateClockConfig} from "../redux/actions";
+import {NO_OP} from "../utils/functionUtil";
 
 describe('ClocksList', function () {
     const mockClock1 = mockClock("clock1"), mockClock2 = mockClock("clock2");
@@ -82,7 +83,9 @@ describe('ClocksList', function () {
         ].forEach(({testName, clocks, expectedClocksPropsPassed}) =>
             it(testName, function () {
                 //    when
-                let clocksList = shallow(<ClocksListComponent clocks={clocks} currentClockId="any"/>);
+                let clocksList = shallow(<ClocksListComponent clocks={clocks}
+                                                              currentClockId="any"
+                                                              onClockConfigUpdate={NO_OP}/>);
 
                 //    then
                 let clockComponents = clocksList.find(Clock);
@@ -97,7 +100,8 @@ describe('ClocksList', function () {
             //    given
             const currentClock = mockClock1;
             const clocksList = shallow(<ClocksListComponent clocks={clocks(currentClock, mockClock2)}
-                                                            currentClockId={currentClock.id}/>);
+                                                            currentClockId={currentClock.id}
+                                                            onClockConfigUpdate={NO_OP}/>);
 
             //    then
             let clockComponents = clocksList.find(Clock);
