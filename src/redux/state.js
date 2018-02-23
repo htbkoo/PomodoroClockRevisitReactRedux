@@ -12,12 +12,22 @@ export type WithClockId = {
     +id: ClockId
 };
 
-export type Clock = $ReadOnly<{
-    +id: ClockId,
-    +duration: number,
+type WithDuration = {
+    +duration: number
+}
+
+type WithName = {
     +name: string,
+}
+
+type WithColour = {
     +colour: string
-}>;
+}
+
+export type Clock = $ReadOnly<WithClockId
+    & WithDuration
+    & WithName
+    & WithColour>;
 
 export type Clocks = $ReadOnly<{
     +byId: $ReadOnly<{
