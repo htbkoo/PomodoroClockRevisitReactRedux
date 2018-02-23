@@ -1,20 +1,24 @@
 // @flow
-// Unfortunately flow type canNOT refer to variable, even if they are constants, so duplication is inevitable
-// Reference: https://stackoverflow.com/a/42202467
-import type {Clock} from "./state";
+import type {Clock, ClockId} from "./state";
 
+type ClockConfig = {};
+
+// Unfortunately flow type canNOT refer to variable, even if they are constants, so duplication is inevitable (cannot refer to actionTypes)
+// Reference: https://stackoverflow.com/a/42202467
 export type StartCountingAction = { type: "StartCounting" };
 export type PauseCountingAction = { type: "PauseCounting" };
 export type StopCountingAction = { type: "StopCounting", originalTime: number };
 export type TickTimeAction = { type: "TickTime", lapse: number };
 export type TimesUpAction = { type: "TimesUp", nextClock: Clock };
+export type UpdateClockConfigAction = { type: "UpdateClockConfig", id: ClockId, updatedConfig: ClockConfig };
 
 export type Action =
     | StartCountingAction
     | PauseCountingAction
     | StopCountingAction
     | TickTimeAction
-    | TimesUpAction;
+    | TimesUpAction
+    | UpdateClockConfigAction;
 
 export type Dispatch = (Action) => void;
 
@@ -24,6 +28,7 @@ export const actionTypes = {
     StopCounting: "StopCounting",
     TickTime: "TickTime",
     TimesUp: "TimesUp",
+    UpdateClockConfig: "UpdateClockConfig",
 };
 
 export function startCounting(): StartCountingAction {
@@ -44,4 +49,8 @@ export function tickTime(lapse: number): TickTimeAction {
 
 export function timesUp(nextClock: Clock): TimesUpAction {
     return {type: actionTypes.TimesUp, nextClock};
+}
+
+export function updateClockConfig(id: ClockId, updatedConfig: ClockConfig): UpdateClockConfigAction {
+    return {type: actionTypes.UpdateClockConfig, id, updatedConfig};
 }

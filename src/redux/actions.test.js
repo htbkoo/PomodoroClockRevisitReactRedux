@@ -1,5 +1,5 @@
 // @flow
-import {startCounting, pauseCounting, stopCounting, tickTime, timesUp} from "./actions";
+import {actionTypes, startCounting, pauseCounting, stopCounting, tickTime, timesUp, updateClockConfig} from "./actions";
 import {mockClock} from "../testUtils/StateBuilder";
 
 describe('actions', function () {
@@ -29,6 +29,11 @@ describe('actions', function () {
             testPurpose: "an action for times up",
             expectedAction: {type: "TimesUp", nextClock: mockNextClock},
             actualAction: timesUp(mockNextClock)
+        },
+        {
+            testPurpose: "an action for updating clock config",
+            expectedAction: {type: actionTypes.UpdateClockConfig, id: "1", updatedConfig: {duration: 10}},
+            actualAction: updateClockConfig("1", {duration: 10})
         }
     ].forEach(({testPurpose, expectedAction, actualAction}) =>
         it(`should create ${testPurpose}`, function () {
