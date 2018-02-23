@@ -29,6 +29,11 @@ export type Clock = $ReadOnly<WithClockId
     & WithName
     & WithColour>;
 
+export type ClockConfig =
+    | WithDuration
+    | WithName
+    | WithColour;
+
 export type Clocks = $ReadOnly<{
     +byId: $ReadOnly<{
         [ClockId]: Clock

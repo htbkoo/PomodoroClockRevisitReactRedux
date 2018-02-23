@@ -1,7 +1,5 @@
 // @flow
-import type {Clock, ClockId} from "./state";
-
-type ClockConfig = {};
+import type {Clock, ClockConfig, ClockId} from "./state";
 
 // Unfortunately flow type canNOT refer to variable, even if they are constants, so duplication is inevitable (cannot refer to actionTypes)
 // Reference: https://stackoverflow.com/a/42202467
