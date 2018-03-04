@@ -114,7 +114,24 @@ describe('ClocksList', function () {
                     }
                 }
             )
-        })
+        });
+
+        it(`should pass props.onClockConfigUpdate to <Clock/>`, function () {
+            //    given
+            const someClocks = clocks(mockClock1), someId = "id";
+            const mockFn = jest.fn();
+            const clocksList = shallow(<ClocksListComponent clocks={someClocks}
+                                                            currentClockId={someId}
+                                                            onClockConfigUpdate={mockFn}/>);
+
+            //    when
+            let clockComponent = clocksList.find(Clock);
+            let actualFn = clockComponent.prop("onClockConfigUpdate");
+            actualFn();
+
+            //    then
+            expect(mockFn).toHaveBeenCalledTimes(1);
+        });
     });
 
     function clocks(...mockClocks) {
