@@ -89,7 +89,7 @@ describe('Clock', function () {
             };
 
             //    when
-            let clock = shallow(<ClockControlComponent clock={clockProps} controlProps={props}/>);
+            let clock = shallow(<ClockControlComponent clock={clockProps} controlProps={props} onClockConfigUpdate={NO_OP}/>);
 
             //    then
             let cols = clock.find(Col);

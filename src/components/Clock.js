@@ -41,7 +41,13 @@ export const ClockComponent = (props: Props): React$Element<any> => {
     }
 };
 
-export const ClockControlComponent = (props: { +controlProps: { key: string, label?: string, labelSize: number, controlSize: number }, +clock: Clock }): React$Element<any> => {
+type ClockControlComponentProps = {
+    +controlProps: { key: string, label?: string, labelSize: number, controlSize: number },
+    +clock: Clock,
+    +onClockConfigUpdate: onClockConfigUpdateType
+};
+
+export const ClockControlComponent = (props: ClockControlComponentProps): React$Element<any> => {
     let {key, label, labelSize, controlSize} = props.controlProps;
 
     let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
