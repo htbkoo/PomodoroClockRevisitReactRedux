@@ -43,7 +43,26 @@ describe('Clock', function () {
             expect(divWrapperComponents).not.toHaveClassName("Clock-current");
         });
 
-        function getShallowClockComponent(isCurrent = false) {
+        it("should not have '.Clock-current' className in <div/> when props.isCurrent=false", function () {
+            //    given
+            const mockOnClockConfigUpdate = jest.fn();
+            let clock = getShallowClockComponent(false, mockOnClockConfigUpdate);
+
+            //    when
+            let clockControlComponents = clock.find(ClockControlComponent);
+
+            //    then
+            clockControlComponents.forEach(component => {
+                let actualFn = component.prop("onClockConfigUpdate");
+                actualFn();
+
+                expect(mockOnClockConfigUpdate).toHaveBeenCalledTimes(1);
+                mockOnClockConfigUpdate.mockClear();
+            });
+
+        });
+
+        function getShallowClockComponent(isCurrent = false, onClockConfigUpdate = NO_OP) {
             const colour = "someColour", duration = 1000, name = "someName";
             const clockProps: ClockState = {
                 colour,
@@ -52,7 +71,8 @@ describe('Clock', function () {
                 id: "1"
             };
 
-            return shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent} onClockConfigUpdate={NO_OP}/>);
+            return shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}
+                                           onClockConfigUpdate={onClockConfigUpdate}/>);
         }
     });
 
