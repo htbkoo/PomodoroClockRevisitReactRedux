@@ -1,10 +1,9 @@
 .container-session {
     padding: 3%;
-    max-height: 70vh;
+    max-height: 55vh;
 
     text-align: center;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -36,12 +35,6 @@
 
 .Clock form {
     margin: 5%;
-}
-
-.Timer {
-    padding: 5%;
-    background-color: lightgrey;
-    border: darkgray 5px solid;
 }
 
 .App {
