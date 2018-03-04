@@ -4,10 +4,12 @@ import {Col, ControlLabel, Form, FormControl, FormGroup} from "react-bootstrap";
 
 import type {Clock} from "../redux/state";
 import {NO_OP} from "../utils/functionUtil";
+import type {onClockConfigUpdateType} from "./ClocksList";
 
 type Props = $ReadOnly<{
     +clock: Clock,
-    +isCurrent: boolean
+    +isCurrent: boolean,
+    +onClockConfigUpdate: onClockConfigUpdateType
 }>
 
 export const ClockComponent = (props: Props): React$Element<any> => {

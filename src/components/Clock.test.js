@@ -6,6 +6,7 @@ import {FormControl, Col} from "react-bootstrap";
 
 import Clock, {ClockComponent, ClockControlComponent} from "./Clock";
 import type {Clock as ClockState} from "../redux/state";
+import {NO_OP} from "../utils/functionUtil";
 
 describe('Clock', function () {
     describe("ClockComponent", function () {
@@ -51,7 +52,7 @@ describe('Clock', function () {
                 id: "1"
             };
 
-            return shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent}/>);
+            return shallow(<ClockComponent clock={clockProps} isCurrent={isCurrent} onClockConfigUpdate={NO_OP}/>);
         }
     });
 

@@ -7,13 +7,15 @@ import type {ClockConfig, ClockId, Clocks, State} from "../redux/state";
 import Clock from "./Clock";
 import {updateClockConfig} from "../redux/actions";
 
+export type onClockConfigUpdateType = (id: ClockId, updatedConfig: ClockConfig) => void
+
 type StateProps = {
     +clocks: Clocks,
     +currentClockId: ClockId
 };
 
 type DispatchProps = {
-    +onClockConfigUpdate: (id: ClockId, updatedConfig: ClockConfig) => void
+    +onClockConfigUpdate: onClockConfigUpdateType
 };
 
 type Props = StateProps & DispatchProps;
@@ -24,7 +26,7 @@ export const mapStateToProps = (state: State): StateProps => ({
 });
 
 export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
-    onClockConfigUpdate: (id: ClockId, updatedConfig: ClockConfig) => {
+    onClockConfigUpdate: (id, updatedConfig) => {
         dispatch(updateClockConfig(id, updatedConfig));
     }
 });
