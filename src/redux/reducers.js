@@ -1,6 +1,7 @@
 // @flow
 
 import {combineReducers} from "redux";
+import { reducer as formReducer } from 'redux-form';
 
 import type {Clocks, Session} from "./state";
 import {newInitialState} from "./state";
@@ -12,7 +13,8 @@ const defaultInitialState = newInitialState();
 export default combineReducers({
     interval,
     session,
-    clocks
+    clocks,
+    form: formReducer
 });
 
 function session(state: Session = defaultInitialState.session, action: Action): Session {
