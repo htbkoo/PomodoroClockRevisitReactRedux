@@ -97,6 +97,8 @@ const FieldArraysForm = props => {
 }
 
 export const ClockComponent = (props: Props): React$Element<any> => {
+    let {fields, meta: {error, submitFailed}} = props;
+
     return (
         <div>
             {
@@ -105,9 +107,8 @@ export const ClockComponent = (props: Props): React$Element<any> => {
                     {key: "duration", label: "Duration:", labelSize: 3, controlSize: 9},
                     {key: "colour", label: "Colour:", labelSize: 3, controlSize: 9}
                 ].map((controlProps, index) => (
-                        <Field clock={props.clock}
+                        <Field props={props}
                                controlProps={controlProps}
-                               onClockConfigUpdate={props.onClockConfigUpdate}
                                key={index}
                                name={`byId[${index}]`}
                                component={ClockControlComponent}/>
@@ -138,9 +139,6 @@ export const ClockControlComponent = (props: ClockControlComponentProps): React$
     let {input, clock, controlProps, meta: {touched, error}} = props;
     let {key, label, labelSize, controlSize} = controlProps;
 
-    console.log(JSON.stringify(props));
-
-
     let capitalizedKey = key.substring(0, 1).toUpperCase().concat(key.substring(1));
     // return (
     //     <div>
@@ -156,10 +154,10 @@ export const ClockControlComponent = (props: ClockControlComponentProps): React$
             <Col componentClass={ControlLabel} sm={labelSize}>{label}</Col>
             <Col sm={controlSize}>
                 <FormControl
+                    {...input}
                     type="text"
-                    value={props.clock[key]}
+                    // value={props.clock[key]}
                     placeholder={capitalizedKey}
-                    onChange={NO_OP}
                 />
             </Col>
         </FormGroup>
@@ -187,11 +185,16 @@ export const BackupClockControlComponent = (props: ClockControlComponentProps): 
 
 // export const ClockWrapperFormComponent = ({isCurrent, pristine, reset, submitting}: Props): React$Element<any> => {
 export const ClockWrapperFormComponent = (props: Props): React$Element<any> => {
+    let {fields, meta: {error, submitFailed}} = props;
+    console.log(`ClockWrapperFormComponent.props.fields: ${JSON.stringify(fields)}`);
+
+    let array = fields.map((clock, index) => (
+        <FieldArray name={`clock[${clock.id}]`} component={ClockComponent} props={props} key={index}/>
+    ));
+
     return (
         <div className={getDivWrapperClasses().join(" ")}>
-            <form>
-                <FieldArray name="clocks" component={ClockComponent} props={props}/>
-            </form>
+            {array}
         </div>
     );
 
@@ -204,6 +207,8 @@ export const ClockWrapperFormComponent = (props: Props): React$Element<any> => {
     }
 };
 
-export default reduxForm({
-    form: 'clocksForm', // a unique identifier for this form
-})(ClockWrapperFormComponent);
+// export default reduxForm({
+//     form: 'clocksForm', // a unique identifier for this form
+// })(ClockWrapperFormComponent);
+
+export default ClockWrapperFormComponent;
