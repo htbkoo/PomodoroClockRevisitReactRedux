@@ -183,32 +183,9 @@ export const BackupClockControlComponent = (props: ClockControlComponentProps): 
     );
 };
 
-// export const ClockWrapperFormComponent = ({isCurrent, pristine, reset, submitting}: Props): React$Element<any> => {
-export const ClockWrapperFormComponent = (props: Props): React$Element<any> => {
-    let {fields, meta: {error, submitFailed}} = props;
-    console.log(`ClockWrapperFormComponent.props.fields: ${JSON.stringify(fields)}`);
-
-    let array = fields.map((clock, index) => (
-        <FieldArray name={`clock[${clock.id}]`} component={ClockComponent} props={props} key={index}/>
-    ));
-
-    return (
-        <div className={getDivWrapperClasses().join(" ")}>
-            {array}
-        </div>
-    );
-
-    function getDivWrapperClasses() {
-        let array = ["Clock"];
-        if (props.isCurrent) {
-            array.push("Clock-current");
-        }
-        return array;
-    }
-};
 
 // export default reduxForm({
 //     form: 'clocksForm', // a unique identifier for this form
 // })(ClockWrapperFormComponent);
 
-export default ClockWrapperFormComponent;
+export default ClockComponent;

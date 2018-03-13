@@ -1,11 +1,11 @@
 // @flow
 import React from "react";
 import {connect} from "react-redux";
-import {reduxForm, Field, FieldArray} from "redux-form";
+import {FieldArray, reduxForm} from "redux-form";
 
 import type {ClockConfig, ClockId, Clocks, State} from "../redux/state";
 
-import Clock from "./Clock";
+import Clock, {ClockComponent} from "./Clock";
 import {updateClockConfig} from "../redux/actions";
 
 export type onClockConfigUpdateType = (id: ClockId, updatedConfig: ClockConfig) => void
@@ -13,7 +13,7 @@ export type onClockConfigUpdateType = (id: ClockId, updatedConfig: ClockConfig) 
 type StateProps = {
     +currentClockId: ClockId,
     +initialValues: {
-        +clocks: Clocks
+        +clocks: any
     }
 };
 
@@ -26,7 +26,7 @@ type Props = StateProps & DispatchProps;
 export const mapStateToProps = (state: State): StateProps => ({
     currentClockId: state.session.clockId,
     initialValues: {
-        clocks: state.clocks
+        clocks: state.clocks.allIds.map(id => state.clocks.byId[id])
     }
 });
 
@@ -36,23 +36,37 @@ export const mapDispatchToProps = (dispatch: Function): DispatchProps => ({
     }
 });
 
-export let ClocksListComponent = (props: Props): React$Element<any> => {
+// export const ClockWrapperFormComponent = ({isCurrent, pristine, reset, submitting}: Props): React$Element<any> => {
+export const ClocksListComponent = (props: Props): React$Element<any> => {
+    let {fields, meta: {error, submitFailed}} = props;
+    console.log(`ClockWrapperFormComponent.props.fields: ${JSON.stringify(fields)}`);
+
+    let array = fields.map((clock, index) => (
+        <FieldArray name={`clocks[${clock.id}].controls`} component={ClockComponent} props={props} key={index}/>
+    ));
+
     return (
-        <FieldArray name="clocks" component={Clock}
+        <div className={getDivWrapperClasses().join(" ")}>
+            {array}
+        </div>
+    );
+
+    function getDivWrapperClasses() {
+        let array = ["Clock"];
+        let isCurrent = false;
+        if (isCurrent) {
+            array.push("Clock-current");
+        }
+        return array;
+    }
+};
+
+export let ClocksListWrapperComponent = (props: Props): React$Element<any> => {
+    return (
+        <FieldArray name="clocks" component={ClocksListComponent}
                     currentClockId={props.currentClockId}
                     onClockConfigUpdate={props.onClockConfigUpdate}/>
     );
-};
-
-export let BackupClocksListComponent = (props: Props): React$Element<any> => {
-    let clocks = props.clocks.allIds.map((id: ClockId) =>
-        <Clock key={id}
-               clock={props.clocks.byId[id]}
-               isCurrent={props.currentClockId === id}
-               onClockConfigUpdate={props.onClockConfigUpdate}/>);
-    return (
-        <div id="clocks-list" className="ClocksList">{clocks}</div>
-    )
 };
 
 // Untested
@@ -61,15 +75,4 @@ export let BackupClocksListComponent = (props: Props): React$Element<any> => {
 export default connect(mapStateToProps, mapDispatchToProps)
 (reduxForm({ // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
     form: 'clocksForm', // a unique identifier for this form
-})(ClocksListComponent))
-
-/*
-export default connect(
-    state => ({
-        initialValues: state.clocks.allIds.map(id => state.clocks.byId[id]) // pull initial values from account reducer
-    }),
-    {}
-)(reduxForm({ // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-    form: 'clocksForm', // a unique identifier for this form
-})(ClocksListComponent))
-*/
+})(ClocksListWrapperComponent))
